@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 // import Logo from "@/components/Global/Logo";
+import { header } from "@/data/nav";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
@@ -30,12 +31,12 @@ const Header = () => {
             className="object-contain"
           />
         </Link>
-        {/* <div className="flex items-center justify-center gap-4 text-sm font-medium">
+        <div className="flex items-center justify-center gap-4 text-sm font-medium">
           {header.map((item, i) => {
             return (
               <Link
                 className={cn("", {
-                  "text-EgostixBlue": basePath === item.route,
+                  "text-blue-600": basePath === item.route,
                 })}
                 key={i}
                 href={item.route}
@@ -44,10 +45,10 @@ const Header = () => {
               </Link>
             );
           })}
-        </div> */}
-        <div className="cursor-pointer">
-          <Menu />
         </div>
+        {/* <div className="cursor-pointer">
+          <Menu />
+        </div> */}
       </div>
     </div>
   );

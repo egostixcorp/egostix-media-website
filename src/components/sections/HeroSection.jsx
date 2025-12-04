@@ -1,5 +1,5 @@
 import React from "react";
-
+import PartnersMarquee from "../sections/PartnersMarquee";
 const HeroSection = () => {
   return (
     <div className="w-full relative min-h-screen flex flex-col items-center justify-center text-center px-6">
@@ -19,6 +19,9 @@ const HeroSection = () => {
       {/* <div class="relative h-full w-full bg-white"> */}
       <div class="absolute h-full -z-10  w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
       {/* </div> */}
+      {/* <div className="absolute bottom-2">
+        <PartnersMarquee />
+      </div> */}
     </div>
   );
 };
