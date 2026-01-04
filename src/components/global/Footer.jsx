@@ -1,18 +1,67 @@
-import Link from "next/link";
 import React from "react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <div className="flex h-80 relative redd mt-5 w-full items-center justify-between">
-      <div className="px-[15%] text-xs flex items-center justify-center w-full">
-        <p className="absolute bottom-0 p-1">
-          <Link href={"https://egostix.com/"} target="_blank">
-            Copyright © {new Date().getFullYear()} Egostix Engineering Pvt. Ltd.
-            All rights reserved.
-          </Link>
-        </p>
+    <footer className="w-full border-t bg-white px-6 py-5">
+      <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-3">
+        {/* Brand */}
+        <div className="space-y-3">
+          <h3 className="font-mono text-lg font-semibold">
+            <span className="text-blue-600">Egostix</span> <span className="font-light font-inter">Media</span>
+          </h3>
+          <p className="text-sm font-inter text-neutral-600 leading-relaxed">
+            A results-driven media and intelligence studio. We combine
+            creativity, engineering, and AI to ship measurable outcomes — not
+            campaigns.
+          </p>
+        </div>
+
+        {/* Navigation */}
+        <div className="space-y-3">
+          <h4 className="font-mono text-sm font-semibold text-neutral-800">
+            Company
+          </h4>
+          <ul className="space-y-2 text-sm font-inter text-neutral-600">
+            <li>
+              <Link href="/about" className="hover:text-black">
+                About
+              </Link>
+            </li>
+            <li>
+              <Link href="/approach" className="hover:text-black">
+                Approach
+              </Link>
+            </li>
+            <li>
+              <Link href="/contact" className="hover:text-black">
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div className="space-y-3">
+          <h4 className="font-mono text-sm font-semibold text-neutral-800">
+            Contact
+          </h4>
+          <div className="text-sm font-inter text-neutral-600 space-y-1">
+            <p>contact@egostix.com</p>
+            <p>+91 73192 74817</p>
+            <p className="text-xs text-neutral-500">
+              Badkulla, West Bengal, India
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
+
+      {/* Bottom */}
+      <div className="mt-5 pt-5 border-t  text-center text-xs font-inter text-neutral-500">
+        © {new Date().getFullYear()} Egostix Engineering Pvt. Ltd. All rights
+        reserved.
+      </div>
+    </footer>
   );
 };
 

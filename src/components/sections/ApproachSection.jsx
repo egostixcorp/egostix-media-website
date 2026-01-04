@@ -62,7 +62,7 @@ const ApproachSection = () => {
         {STEPS.map((step) => (
           <article
             key={step.id}
-            className="relative flex flex-col gap-5 h-80 w-72 p-6 rounded border bg-white shadow-sm hover:shadow-md transition"
+            className="relative flex flex-col gap-5 hover:z-50 h-80 w-72 p-6 rounded border bg-white shadow-sm hover:shadow-md transition"
             aria-labelledby={`step-${step.id}-title`}
           >
             <div className="flex items-center gap-4">

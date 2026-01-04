@@ -35,8 +35,8 @@ const Header = () => {
           {header.map((item, i) => {
             return (
               <Link
-                className={cn("", {
-                  "text-blue-600": basePath === item.route,
+                className={cn("hover:text-blue-600", {
+                  "text-blue-600 ": basePath === item.route,
                 })}
                 key={i}
                 href={item.route}

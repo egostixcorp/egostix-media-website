@@ -1,5 +1,5 @@
 export const header = [
   { label: "About", route: "/about" },
-  //   { label: "Build", route: "/build" },
+  { label: "Approach", route: "/approach" },
   { label: "Contact", route: "/contact" },
 ];
