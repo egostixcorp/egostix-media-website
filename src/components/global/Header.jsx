@@ -17,7 +17,7 @@ const Header = () => {
     >
       <div
         id="content"
-        className="redd flex h-full w-full items-center justify-between  bg-white/10 px-4  backdrop-blur-sm tablet:px-5"
+        className="redd flex h-full w-full items-center justify-between shadow bg-white/10 px-4  backdrop-blur-sm tablet:px-5"
       >
         <Link
           href={"/"}
