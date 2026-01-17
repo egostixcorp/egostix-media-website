@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Header from "@/components/global/Header";
-import Footer from "@/components/global/Footer";
+// import Header from "@/components/global/Header";
+// import Footer from "@/components/global/Footer";
 import { Inter, Playfair_Display, Space_Mono } from "next/font/google";
 import { IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
@@ -37,11 +37,7 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${serif.variable} ${mono.variable}`}
     >
-      <body className=" bg-white text-black font-inter">
-        <Header />
-        {children}
-        <Footer />
-      </body>
+      <body className=" bg-white text-black font-inter">{children}</body>
     </html>
   );
 }
