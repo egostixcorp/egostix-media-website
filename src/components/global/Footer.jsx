@@ -3,12 +3,13 @@ import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="w-full border-t bg-white px-6 py-5">
-      <div className="mx-auto max-w-6xl grid gap-10 md:grid-cols-3">
+    <footer className="w-full border-t bg-white px-6 pt-5">
+      <div className="mx-auto pb-5 max-w-6xl grid gap-10 md:grid-cols-3">
         {/* Brand */}
         <div className="space-y-3">
           <h3 className="font-mono text-lg font-semibold">
-            <span className="text-blue-600">Egostix</span> <span className="font-light font-inter">Media</span>
+            <span className="text-blue-600">Egostix</span>{" "}
+            <span className="font-light font-inter">Media</span>
           </h3>
           <p className="text-sm font-inter text-neutral-600 leading-relaxed">
             A results-driven media and intelligence studio. We combine
@@ -57,7 +58,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom */}
-      <div className="mt-5 pt-5 border-t  text-center text-xs font-inter text-neutral-500">
+      <div className=" border-t h-10 resd  text-center flex items-center justify-center text-xs font-inter text-neutral-500">
         © {new Date().getFullYear()} Egostix Engineering Pvt. Ltd. All rights
         reserved.
       </div>
