@@ -1,3 +1,4 @@
+import { Input } from "@/components/ui/input";
 import React from "react";
 
 const ContactPage = () => {
@@ -16,9 +17,9 @@ const ContactPage = () => {
         </p>
 
         {/* Grid */}
-        <div className="mt-16 grid gap-12 md:grid-cols-2">
+        <div className="mt-16 grid gap-12 md:grid-cols-2 ">
           {/* Contact Info */}
-          <div className="space-y-6">
+          <div className="space-y-6 ">
             <div>
               <h3 className="font-mono text-sm font-semibold text-neutral-800">
                 Email
@@ -55,12 +56,12 @@ const ContactPage = () => {
           </div>
 
           {/* Contact Form (UI only) */}
-          <form className="space-y-2 border p-6 rounded">
+          <form className="space-y-2  p-6 rounded border border-neutral-300">
             <div>
               <label className="block text-xs font-mono text-neutral-700">
                 Name
               </label>
-              <input
+              <Input
                 type="text"
                 required
                 name="name"
@@ -71,7 +72,7 @@ const ContactPage = () => {
               <label className="block text-xs font-mono text-neutral-700">
                 Organization
               </label>
-              <input
+              <Input
                 type="text"
                 required
                 name="org"
@@ -83,7 +84,7 @@ const ContactPage = () => {
               <label className="block text-xs font-mono text-neutral-700">
                 Email
               </label>
-              <input
+              <Input
                 type="email"
                 required
                 name="email"

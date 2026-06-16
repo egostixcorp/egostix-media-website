@@ -4,19 +4,21 @@ import React from "react";
 const HeroSection = () => {
   return (
     <div className="w-full relative h-[65vh] pt-28 laptop:pt-44 group flex flex-col items-center justify-center text-center px-6">
-      <h1 className="text-3xl tablet:text-4xl laptop:text-7xl  tracking-tight">
-        We Deliver{" "}
-        <span className="font-serif laptop:text-8xl text-5xl font-bold text-blue-700 italic">
-          Results
+      <h1 className="text-3xl tablet:text-4xl laptop:text-7xl tracking-tight">
+        We Engineer{" "}
+        <span className="font-mono font-bold text-blue-700">Software</span>{" "}
+        <br /> & Modern{" "}
+        <span className="font-serif  font-bold text-blue-700 italic">
+          Media
         </span>{" "}
-        <br /> as a <span className="font-mono">Service</span>
+        technology
       </h1>
 
       <p className="mt-4 max-w-xl text-sm tablet:text-base text-neutral-600 font-inter">
         <span
           className="font-serif
     transition-colors duration-300
-    group-has-[creativity]:text-blue-600"
+    group-has-[creativity]:text-blue-600 italic"
         >
           Creativity
         </span>
