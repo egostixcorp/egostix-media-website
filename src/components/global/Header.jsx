@@ -6,22 +6,21 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
-import { Menu } from "lucide-react";
 const Header = () => {
   const path = usePathname();
   const basePath = "/" + path.split("/").filter(Boolean).slice(0, 2).join("/");
   return (
     <div
       id="wrapper"
-      className="redd fixed top-0 h-16 z-[9999] w-full p-2 tablet:px-[15%]"
+      className="fixed top-0 h-16 z-[9999] w-full border-b border-neutral-200 bg-white/90 px-2 backdrop-blur tablet:px-[10%] laptop:px-[15%]"
     >
       <div
         id="content"
-        className="redd flex h-full w-full items-center justify-between shadow bg-white/10 px-4  backdrop-blur-sm tablet:px-5"
+        className="flex h-full w-full items-center justify-between px-4 tablet:px-5"
       >
         <Link
           href={"/"}
-          className="redd h-16 w-32 overflow-hidden flex items-center justify-center p-5"
+          className="flex h-16 w-28 items-center justify-center overflow-hidden p-4 tablet:w-32 tablet:p-5"
         >
           <Image
             src={"/egostix-media-trans.png"}
@@ -31,21 +30,27 @@ const Header = () => {
             className="object-contain"
           />
         </Link>
-        <div className="flex items-center justify-center gap-4 text-sm font-medium">
+        <nav
+          aria-label="Primary navigation"
+          className="flex items-center justify-center gap-3 text-xs font-medium tablet:gap-4 tablet:text-sm"
+        >
           {header.map((item, i) => {
+            const isActive = basePath === item.route;
+
             return (
               <Link
                 className={cn("hover:text-blue-600", {
-                  "text-blue-600 ": basePath === item.route,
+                  "text-blue-600 ": isActive,
                 })}
                 key={i}
                 href={item.route}
+                aria-current={isActive ? "page" : undefined}
               >
                 {item.label}
               </Link>
             );
           })}
-        </div>
+        </nav>
         {/* <div className="cursor-pointer">
           <Menu />
         </div> */}

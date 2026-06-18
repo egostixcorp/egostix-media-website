@@ -5,16 +5,11 @@ import AboutSection from "@/components/sections/AboutSection";
 import PartnersMarquee from "@/components/sections/PartnersMarquee";
 const Home = () => {
   return (
-    <div className="reds flex min-h-screen w-full flex-col items-center justify-center tablet:px-[10%] laptop:px-[15%] px-2 font-inter dark:bg-black">
+    <main className="flex min-h-screen w-full flex-col items-center px-2 font-inter tablet:px-[10%] laptop:px-[15%]">
       <HeroSection />
-      {/* <div className="absolute bottom-2"> */}
-      {/* <div>
-        <PartnersMarquee />
-      </div> */}
       <AboutSection />
-  
       <ApproachSection />
-    </div>
+    </main>
   );
 };
 

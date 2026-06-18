@@ -4,7 +4,7 @@ import React from "react";
 
 const MarketingLayout = ({ children }) => {
   return (
-    <div>
+    <div className="min-h-screen bg-white text-neutral-900">
       <Header />
       {children}
       <Footer />

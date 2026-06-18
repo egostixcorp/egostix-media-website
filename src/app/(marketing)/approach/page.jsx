@@ -1,134 +1,77 @@
 import React from "react";
 
+const steps = [
+  {
+    title: "Discover",
+    body: "We define the actual business problem, constraints, stakeholders, and measurable outcomes before execution starts.",
+  },
+  {
+    title: "Prototype",
+    body: "We ship focused demos, workflows, and MVPs quickly so assumptions are tested against real usage.",
+  },
+  {
+    title: "Integrate",
+    body: "We connect the solution to existing tools, teams, data, and operational environments with reliability in mind.",
+  },
+  {
+    title: "Scale",
+    body: "We automate, optimize, and improve the system so intelligence compounds with feedback.",
+  },
+];
+
 const ApproachPage = () => {
   return (
     <main className="w-full px-6 py-24">
-      <div className="mx-auto max-w-5xl space-y-24">
-        {/* 1. Hero */}
-        <section className="space-y-6">
-          <h1 className="text-3xl tablet:text-4xl laptop:text-6xl font-mono tracking-tight">
-            Engineering Outcomes,
-            <br />
-            Not Outputs
+      <div className="mx-auto max-w-6xl space-y-20">
+        <section className="space-y-6 pt-10">
+          <p className="text-xs font-mono uppercase tracking-normal text-blue-600">
+            Approach
+          </p>
+          <h1 className="max-w-4xl text-3xl font-mono tracking-tight tablet:text-4xl laptop:text-6xl">
+            Engineering outcomes, not output.
           </h1>
-
-          <p className="max-w-3xl text-sm tablet:text-base font-inter text-neutral-600 leading-relaxed">
-            Most teams ship features. Some ship content. We engineer systems
-            that reliably produce results — across media, software, data, and
-            intelligence workflows.
+          <p className="max-w-3xl text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
+            We do not sell hours, decks, or disconnected deliverables. We work
+            through a repeatable operating model that turns operational problems
+            into systems with measurable results.
           </p>
         </section>
 
-        {/* 2. What We Don’t Do */}
-        <section className="space-y-6">
-          <h2 className="text-2xl tablet:text-3xl font-mono">
-            What We Explicitly Don&apos;t Do
-          </h2>
-
-          <ul className="grid gap-4 md:grid-cols-2 text-sm font-inter text-neutral-700">
-            <li>✕ Long decks without execution</li>
-            <li>✕ Campaigns without measurable outcomes</li>
-            <li>✕ Tools without ownership or accountability</li>
-            <li>✕ One-off creative with no system behind it</li>
-          </ul>
-
-          <p className="text-sm font-inter text-neutral-600 max-w-3xl">
-            If you&apos;re looking for “just marketing” or “just development”, we are
-            not a fit. If you want outcomes that compound, keep reading.
-          </p>
+        <section className="grid gap-6 md:grid-cols-4">
+          {steps.map((step, index) => (
+            <article
+              key={step.title}
+              className="rounded border border-neutral-300 bg-white p-6"
+            >
+              <div className="flex size-12 items-center justify-center rounded bg-blue-50 font-mono text-lg font-semibold text-blue-600">
+                {index + 1}
+              </div>
+              <h2 className="mt-6 font-mono text-xl text-neutral-900">
+                {step.title}
+              </h2>
+              <p className="mt-3 text-sm font-inter leading-relaxed text-neutral-600">
+                {step.body}
+              </p>
+            </article>
+          ))}
         </section>
 
-        {/* 3. The Operating Model */}
-        <section className="space-y-12">
-          <h2 className="text-2xl tablet:text-3xl font-mono">
-            Our Operating Model
+        <section className="grid gap-10 border-t border-neutral-200 pt-12 md:grid-cols-[0.8fr_1fr]">
+          <h2 className="text-2xl font-mono tracking-tight tablet:text-3xl">
+            Discover → Prototype → Integrate → Scale
           </h2>
-
-          <div className="grid gap-10 md:grid-cols-2">
-            <div>
-              <h3 className="font-mono text-lg text-blue-600">1. Discover</h3>
-              <p className="mt-2 text-sm font-inter text-neutral-700">
-                We start by defining the *actual* problem — not the symptom.
-                This includes stakeholders, incentives, constraints, and what
-                success means in numbers, not opinions.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-mono text-lg text-blue-600">2. Prototype</h3>
-              <p className="mt-2 text-sm font-inter text-neutral-700">
-                Instead of long specifications, we ship focused prototypes:
-                workflows, demos, or live systems that validate assumptions
-                early.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-mono text-lg text-blue-600">3. Integrate</h3>
-              <p className="mt-2 text-sm font-inter text-neutral-700">
-                We plug solutions into real environments — existing tools,
-                teams, and data. Reliability, observability, and security are
-                non-negotiable.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="font-mono text-lg text-blue-600">
-                4. Scale & Learn
-              </h3>
-              <p className="mt-2 text-sm font-inter text-neutral-700">
-                Once outcomes are repeatable, we automate, optimize, and
-                generalize. Intelligence compounds when systems learn from real
-                usage.
-              </p>
-            </div>
+          <div className="space-y-5 text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
+            <p>
+              The model stays intentionally simple because execution should not
+              get buried under process. We discover what matters, prototype the
+              highest-risk parts, integrate into the real environment, then
+              scale what works.
+            </p>
+            <p>
+              This is how websites, tools, automation, and creator systems stay
+              connected to outcomes instead of becoming isolated assets.
+            </p>
           </div>
-        </section>
-
-        {/* 4. How Engagements Work */}
-        <section className="space-y-6">
-          <h2 className="text-2xl tablet:text-3xl font-mono">
-            How Engagements Actually Work
-          </h2>
-
-          <p className="max-w-3xl text-sm font-inter text-neutral-600">
-            We don&apos;t sell hours. We don&apos;t sell slides. We engage on clearly
-            defined outcomes.
-          </p>
-
-          <ul className="space-y-3 text-sm font-inter text-neutral-700">
-            <li>• Clear success metrics defined upfront</li>
-            <li>• Short feedback loops with real-world data</li>
-            <li>• Tight collaboration with decision-makers</li>
-            <li>• Ownership until the system works in practice</li>
-          </ul>
-        </section>
-
-        {/* 5. Cross-Vertical Logic */}
-        <section className="space-y-6">
-          <h2 className="text-2xl tablet:text-3xl font-mono">
-            Why This Works Across Industries
-          </h2>
-
-          <p className="max-w-4xl text-sm font-inter text-neutral-600 leading-relaxed">
-            Healthcare, media, robotics, and infrastructure look different on
-            the surface — but underneath, they share the same problems:
-            fragmented data, slow decisions, and brittle workflows.
-            <br />
-            <br />
-            Our approach focuses on those invariants, allowing intelligence and
-            systems to transfer across domains instead of being rebuilt every
-            time.
-          </p>
-        </section>
-
-        {/* 6. CTA */}
-        <section className="border-t pt-12 space-y-4">
-          <h3 className="text-xl font-mono">If This Resonates</h3>
-          <p className="text-sm font-inter text-neutral-600">
-            We work with a small number of teams at a time. If you have a real
-            problem with real stakes, reach out.
-          </p>
         </section>
       </div>
     </main>

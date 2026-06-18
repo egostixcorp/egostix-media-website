@@ -1,62 +1,58 @@
 import React from "react";
 
+const principles = [
+  {
+    title: "Systems, Not Campaigns",
+    body: "We build frameworks that scale, learn, and evolve with use.",
+  },
+  {
+    title: "Outcomes Over Output",
+    body: "Deliverables are meaningless unless something changes in reality.",
+  },
+  {
+    title: "Intelligence at the Core",
+    body: "Data, automation, and feedback loops are designed in from day one.",
+  },
+];
+
 const AboutSection = () => {
   return (
-    <section className="w-full px-6 py-24">
-      <div className="mx-auto max-w-5xl grid gap-12 md:grid-cols-2 items-start">
-        {/* Left: Statement */}
+    <section className="w-full  px-6 py-24">
+      <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:items-start">
         <div className="space-y-6">
-          <h2 className="text-2xl tablet:text-3xl laptop:text-4xl font-mono tracking-tight">
-            About|<span className="text-blue-600">Egostix</span>{" "}
-            <span className="font-light font-inter">Media</span>
+          <p className="text-xs font-mono uppercase tracking-normal text-blue-600">
+            About
+          </p>
+          <h2 className="text-2xl font-mono tracking-tight tablet:text-3xl laptop:text-4xl">
+            Egostix Media builds systems that survive real use.
           </h2>
 
-          <p className="text-sm tablet:text-base font-inter text-neutral-600 leading-relaxed">
-            <span className="border-b">
-              <span className="text-blue-600 font-bold">Egostix</span>{" "}
-              <span className="font-light font-inter">Media</span>
-            </span>{" "}
-            {""}
-            is a systems-driven media and engineering studio. We design and
-            build intelligence-backed systems that turn ideas into repeatable,
-            measurable outcomes.
+          <p className="text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
+            We design and build intelligence-backed systems that turn ideas into
+            repeatable, measurable outcomes across media, software, and
+            operations.
           </p>
 
-          <p className="text-sm tablet:text-base font-inter text-neutral-600 leading-relaxed">
+          <p className="text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
             Where traditional media stops at content and software stops at
-            features, we focus on what happens after — adoption, performance,
-            and real-world impact.
+            features, we focus on adoption, performance, and measurable impact.
           </p>
         </div>
 
-        {/* Right: Principles */}
         <div className="space-y-6">
-          <div>
-            <h3 className="font-mono text-sm font-semibold text-blue-600">
-              Systems, Not Campaigns
-            </h3>
-            <p className="mt-1 text-sm font-inter text-neutral-600">
-              We build frameworks that scale, learn, and evolve with use.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-sm font-semibold text-blue-600">
-              Outcomes Over Output
-            </h3>
-            <p className="mt-1 text-sm font-inter text-neutral-600">
-              Deliverables are meaningless unless something changes in reality.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="font-mono text-sm font-semibold text-blue-600">
-              Intelligence at the Core
-            </h3>
-            <p className="mt-1 text-sm font-inter text-neutral-600">
-              Data, automation, and feedback loops are designed in from day one.
-            </p>
-          </div>
+          {principles.map((principle) => (
+            <article
+              key={principle.title}
+              className="rounded border border-neutral-300 bg-white p-5"
+            >
+              <h3 className="font-mono text-sm font-semibold text-blue-600">
+                {principle.title}
+              </h3>
+              <p className="mt-2 text-sm font-inter leading-relaxed text-neutral-600">
+                {principle.body}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

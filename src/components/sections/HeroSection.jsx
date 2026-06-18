@@ -1,65 +1,52 @@
 import Image from "next/image";
 import React from "react";
-// import PartnersMarquee from "../sections/PartnersMarquee";
+
 const HeroSection = () => {
   return (
-    <div className="w-full relative h-[65vh] pt-28 laptop:pt-44 group flex flex-col items-center justify-center text-center px-6">
-      <h1 className="text-3xl tablet:text-4xl laptop:text-7xl tracking-tight">
-        We Engineer{" "}
-        <span className="font-mono font-bold text-blue-700">Software</span>{" "}
-        <br /> & Modern{" "}
-        <span className="font-serif  font-bold text-blue-700 italic">
+    <section className="relative flex min-h-[620px] w-full flex-col items-center justify-center px-6 pt-24 text-center">
+      <h1 className="max-w-5xl text-3xl font-mono tracking-tight tablet:text-4xl laptop:text-6xl">
+        We Engineer <span className="font-bold text-blue-700">Software</span>
+        <br /> & Modern <span className="font-bold text-blue-700">
           Media
         </span>{" "}
         technology
       </h1>
 
-      <p className="mt-4 max-w-xl text-sm tablet:text-base text-neutral-600 font-inter">
-        <span
-          className="font-serif
-    transition-colors duration-300
-    group-has-[creativity]:text-blue-600 italic"
-        >
-          Creativity
-        </span>
-        , <span className="font-mono">engineering</span>, and
-        intelligence—merged into one seamless service that transforms ideas into
-        real outcomes.
+      <p className="mt-6 max-w-2xl text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
+        Creativity, engineering, and intelligence merged into one system that
+        transforms ideas into measurable outcomes.
       </p>
-      {/* <div class="relative h-full w-full bg-white"> */}
-      <div class="absolute h-full -z-10  w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]"></div>
-      {/* </div> */}
-      {/* <div className="absolute bottom-2">
-        <PartnersMarquee />
-      </div> */}
-      <div className="size-32 overflow-hidden absolute top-[20%] left-1 desktop:top-[50%] desktop:left-[5%] group-[creativity]">
+
+      <div className="absolute -z-10 h-full w-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)]" />
+
+      <div className="absolute left-1 top-[20%] size-24 overflow-hidden rounded border border-neutral-200 bg-white tablet:size-32 desktop:left-[5%] desktop:top-[50%]">
         <Image
-          src={"/c.png"}
+          src="/c.png"
           width={500}
           height={500}
-          alt="create"
-          className="size-full object-cover "
-        />
-      </div>
-      <div className="size-32 overflow-hidden absolute top-[20%] right-1 desktop:top-[90%] desktop:left-[45%] group/[create]">
-        <Image
-          src={"/e.png"}
-          width={500}
-          height={500}
-          alt="create"
+          alt="Creativity system"
           className="size-full object-cover"
         />
       </div>
-      <div className="size-32 overflow-hidden absolute top-[80%] right-[30%] laptop:-right-10   desktop:top-[50%] desktop:right-[5%] group/[create]">
+      <div className="absolute right-1 top-[20%] size-24 overflow-hidden rounded border border-neutral-200 bg-white tablet:size-32 desktop:left-[45%] desktop:top-[90%]">
         <Image
-          src={"/i.png"}
+          src="/e.png"
           width={500}
           height={500}
-          alt="create"
+          alt="Engineering system"
           className="size-full object-cover"
         />
       </div>
-    </div>
+      <div className="absolute right-[30%] top-[80%] size-24 overflow-hidden rounded border border-neutral-200 bg-white tablet:size-32 laptop:-right-10 desktop:right-[5%] desktop:top-[50%]">
+        <Image
+          src="/i.png"
+          width={500}
+          height={500}
+          alt="Intelligence system"
+          className="size-full object-cover"
+        />
+      </div>
+    </section>
   );
 };
 

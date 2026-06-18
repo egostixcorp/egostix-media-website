@@ -1,132 +1,96 @@
 import Image from "next/image";
 import React from "react";
 
-const page = () => {
+const principles = [
+  {
+    title: "Systems, Not Campaigns",
+    body: "We build frameworks that scale, learn, and evolve with use.",
+  },
+  {
+    title: "Outcomes Over Output",
+    body: "Deliverables are meaningless unless something changes in reality.",
+  },
+  {
+    title: "Intelligence Compounds",
+    body: "Data, automation, and feedback loops are designed in from day one.",
+  },
+];
+
+const AboutPage = () => {
   return (
-    <main className="w-full">
-      {/* HERO — unchanged */}
-      <section className="w-full h-screen flex items-center justify-center pb-20 relative">
-        <div className="w-full mt-20 h-full flex items-center justify-center">
-          <div className="w-full h-full overflow-hidden">
-            <Image
-              src={"/arun.png"}
-              alt="Egostix founder portrait"
-              width={1000}
-              height={1000}
-              className="size-full object-cover select-none"
-            />
-          </div>
-
-          <div className="absolute select-none">
-            <h1 className="laptop:text-6xl text-4xl font-bold">
-              We&apos;re <span className="text-blue-600">Egostix.</span>
+    <main className="w-full px-6 py-24">
+      <div className="mx-auto max-w-6xl space-y-20">
+        <section className="flex flex-col items-center gap-10 pt-10 text-center">
+          <div className="flex max-w-4xl flex-col items-center space-y-6">
+            <p className="text-xs w-full redd font-mono uppercase text-left tracking-normal text-blue-600">
+              About
+            </p>
+            <h1 className="text-3xl font-mono tracking-tight tablet:text-4xl laptop:text-6xl">
+              Egostix Media builds systems where creativity, engineering, and
+              intelligence meet.
             </h1>
+            <p className="max-w-3xl text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
+              We are an AI-native productized software and media studio under
+              Egostix Engineering. We help modern businesses, creators, and
+              organizations move faster with automation, rapid software
+              development, and scalable digital infrastructure.
+            </p>
           </div>
 
-          <div className="w-full h-full overflow-hidden">
+          <div className="grid min-h-80 w-full max-w-3xl grid-cols-2 overflow-hidden rounded border border-neutral-300 bg-neutral-50">
             <Image
-              src={"/titas.png"}
+              src="/arun.png"
               alt="Egostix founder portrait"
-              width={1000}
-              height={1000}
-              className="size-full object-cover select-none"
+              width={800}
+              height={900}
+              className="h-full w-full object-cover"
+            />
+            <Image
+              src="/titas.png"
+              alt="Egostix founder portrait"
+              width={800}
+              height={900}
+              className="h-full w-full object-cover"
             />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* SECTION 1 — Who We Are */}
-      <section className="w-full px-6 py-24">
-        <div className="mx-auto max-w-4xl space-y-6">
-          <h2 className="text-2xl laptop:text-4xl font-mono tracking-tight">
-            Not a Media Company. Not a Software Studio.
+        <section className="grid gap-10 border-t border-neutral-200 pt-12 md:grid-cols-[0.8fr_1fr]">
+          <h2 className="text-2xl font-mono tracking-tight tablet:text-3xl">
+            Why Egostix Media exists
           </h2>
-
-          <p className="text-sm tablet:text-base font-inter text-neutral-600 leading-relaxed">
-            Egostix exists to solve problems that sit between creativity,
-            engineering, and intelligence. Problems where content alone fails,
-            and software alone is not enough.
-          </p>
-
-          <p className="text-sm tablet:text-base font-inter text-neutral-600 leading-relaxed">
-            We build systems — not campaigns. Systems that think, adapt, and
-            produce outcomes across media, technology, and operations.
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION 2 — Why We Exist */}
-      <section className="w-full bg-neutral-50 px-6 py-24">
-        <div className="mx-auto max-w-4xl space-y-8">
-          <h3 className="text-xl laptop:text-3xl font-mono">
-            Why Egostix Was Built
-          </h3>
-
-          <p className="text-sm tablet:text-base font-inter text-neutral-600 leading-relaxed">
-            Most organizations struggle not because of a lack of ideas, but
-            because their tools don’t talk, their data stays fragmented, and
-            decisions happen too late.
-          </p>
-
-          <p className="text-sm tablet:text-base font-inter text-neutral-600 leading-relaxed">
-            Egostix was built to bridge those gaps — to combine intelligence,
-            execution, and real-world feedback into one loop.
-          </p>
-        </div>
-      </section>
-
-      {/* SECTION 3 — How We Think */}
-      <section className="w-full px-6 py-24">
-        <div className="mx-auto max-w-5xl grid gap-12 md:grid-cols-3">
-          <div>
-            <h4 className="font-mono text-lg text-blue-600">Systems First</h4>
-            <p className="mt-2 text-sm font-inter text-neutral-600">
-              We design systems that survive scale, not one-off solutions that
-              collapse under real usage.
+          <div className="space-y-5 text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
+            <p>
+              Most businesses operate with disconnected tools, manual workflows,
+              and weak digital infrastructure. AI has changed how software,
+              content, automation, and digital experiences can be engineered.
+            </p>
+            <p>
+              Egostix Media bridges that gap by helping teams build systems that
+              reduce operational friction, improve customer acquisition, and
+              adapt as the business grows.
             </p>
           </div>
+        </section>
 
-          <div>
-            <h4 className="font-mono text-lg text-blue-600">
-              Outcomes Over Output
-            </h4>
-            <p className="mt-2 text-sm font-inter text-neutral-600">
-              Deliverables don’t matter. What matters is whether something
-              actually changes in the real world.
-            </p>
-          </div>
-
-          <div>
-            <h4 className="font-mono text-lg text-blue-600">
-              Intelligence Compounds
-            </h4>
-            <p className="mt-2 text-sm font-inter text-neutral-600">
-              The best systems get better with use. We design for learning, not
-              static execution.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4 — What We Work On */}
-      <section className="w-full border-t px-6 py-24">
-        <div className="mx-auto max-w-4xl space-y-6">
-          <h3 className="text-xl laptop:text-3xl font-mono">What We Work On</h3>
-
-          <ul className="space-y-3 text-sm tablet:text-base font-inter text-neutral-600">
-            <li>• Media systems powered by intelligence</li>
-            <li>• AI-assisted creative and operational workflows</li>
-            <li>• Cross-platform software and automation</li>
-            <li>• Infrastructure for real-time decision making</li>
-          </ul>
-
-          <p className="text-sm font-inter text-neutral-500 pt-4">
-            We work with a small number of teams at a time. Depth beats volume.
-          </p>
-        </div>
-      </section>
+        <section className="grid gap-6 md:grid-cols-3">
+          {principles.map((principle) => (
+            <article
+              key={principle.title}
+              className="rounded border border-neutral-300 bg-white p-6"
+            >
+              <h3 className="font-mono text-lg text-blue-600">
+                {principle.title}
+              </h3>
+              <p className="mt-3 text-sm font-inter leading-relaxed text-neutral-600">
+                {principle.body}
+              </p>
+            </article>
+          ))}
+        </section>
+      </div>
     </main>
   );
 };
 
-export default page;
+export default AboutPage;
