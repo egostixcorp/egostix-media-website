@@ -7,15 +7,21 @@ const ALL_MODES = ["default", "creativity", "engineering", "intelligence"];
 const CustomCursor = () => {
   const canvasRef = useRef(null);
   const modeRef = useRef("default");
-  
-  const mouseRef = useRef({ x: -100, y: -100, lastX: -100, lastY: -100, active: false });
+
+  const mouseRef = useRef({
+    x: -100,
+    y: -100,
+    lastX: -100,
+    lastY: -100,
+    active: false,
+  });
   const smoothRef = useRef({ x: -100, y: -100 });
   const particlesRef = useRef([]);
 
   useEffect(() => {
     // Hide default cursor globally
     document.body.style.cursor = "none";
-    
+
     // Prevent default cursors on interactive tags
     const style = document.createElement("style");
     style.innerHTML = `
@@ -60,13 +66,24 @@ const CustomCursor = () => {
               alpha: Math.random() * 0.35 + 0.15,
               life: 0,
               maxLife: 20 + Math.random() * 15,
-              type: "creativity"
+              type: "creativity",
             });
           }
         } else if (mode === "engineering") {
           // Code symbols floating up
           if (Math.random() < 0.35) {
-            const symbols = ["{", "}", "</>", "=>", "[]", "const", "&&", "||", "++", "=>"];
+            const symbols = [
+              "{",
+              "}",
+              "</>",
+              "=>",
+              "[]",
+              "const",
+              "&&",
+              "||",
+              "++",
+              "=>",
+            ];
             particles.push({
               x: mouse.x + (Math.random() - 0.5) * 10,
               y: mouse.y + (Math.random() - 0.5) * 10,
@@ -80,7 +97,7 @@ const CustomCursor = () => {
               alpha: Math.random() * 0.4 + 0.3,
               life: 0,
               maxLife: 35 + Math.random() * 20,
-              type: "engineering"
+              type: "engineering",
             });
           }
         } else if (mode === "intelligence") {
@@ -98,7 +115,7 @@ const CustomCursor = () => {
               alpha: Math.random() * 0.4 + 0.3,
               life: 0,
               maxLife: 25 + Math.random() * 15,
-              type: "intelligence"
+              type: "intelligence",
             });
           }
         }
@@ -194,7 +211,7 @@ const CustomCursor = () => {
         } else if (p.type === "intelligence") {
           // Pixels: draw small falling squares
           ctx.beginPath();
-          ctx.rect(p.x - p.size/2, p.y - p.size/2, p.size, p.size);
+          ctx.rect(p.x - p.size / 2, p.y - p.size / 2, p.size, p.size);
           ctx.fillStyle = `rgba(${p.r}, ${p.g}, ${p.b}, ${p.alpha * opacity * 0.7})`;
           ctx.fill();
         }
@@ -219,7 +236,14 @@ const CustomCursor = () => {
           ctx.fill();
         } else if (mode === "creativity") {
           // Big soft glowing brush
-          const grad = ctx.createRadialGradient(smooth.x, smooth.y, 2, smooth.x, smooth.y, 24);
+          const grad = ctx.createRadialGradient(
+            smooth.x,
+            smooth.y,
+            2,
+            smooth.x,
+            smooth.y,
+            24,
+          );
           grad.addColorStop(0, "rgba(29, 78, 216, 0.55)");
           grad.addColorStop(0.3, "rgba(29, 78, 216, 0.25)");
           grad.addColorStop(1, "rgba(29, 78, 216, 0)");
@@ -244,8 +268,8 @@ const CustomCursor = () => {
           // Small tag symbol next to the cursor
           ctx.font = "bold 9px ui-monospace, SFMono-Regular, monospace";
           ctx.fillStyle = "#0f172a";
-          ctx.fillText("</>", smooth.x + 18, smooth.y + 3);
-          
+          ctx.fillText("</>", smooth.x + 10, smooth.y + 3);
+
           // Core dot
           ctx.beginPath();
           ctx.arc(mouse.x, mouse.y, 3, 0, Math.PI * 2);
@@ -255,7 +279,7 @@ const CustomCursor = () => {
           // Pixel crosshair
           ctx.strokeStyle = "#1d4ed8";
           ctx.lineWidth = 1.5;
-          
+
           // Outer square box
           ctx.beginPath();
           ctx.rect(smooth.x - 8, smooth.y - 8, 16, 16);
