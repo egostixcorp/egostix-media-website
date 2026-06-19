@@ -268,7 +268,7 @@ const CustomCursor = () => {
           // Small tag symbol next to the cursor
           ctx.font = "bold 9px ui-monospace, SFMono-Regular, monospace";
           ctx.fillStyle = "#0f172a";
-          ctx.fillText("</>", smooth.x - 2, smooth.y + 3);
+          ctx.fillText("</>", smooth.x + 2, smooth.y + 3);
 
           // Core dot
           ctx.beginPath();
