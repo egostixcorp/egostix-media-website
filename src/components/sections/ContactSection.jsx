@@ -32,7 +32,7 @@ const ContactSection = () => {
               Coordinates
             </p>
             <h2 id="contact-heading" className="text-2xl font-mono tracking-tight tablet:text-3xl laptop:text-4xl text-slate-900">
-              Let's engineer your operational infrastructure.
+              Let&apos;s engineer your operational infrastructure.
             </h2>
             <p className="text-sm font-inter leading-relaxed text-slate-700 tablet:text-base">
               Every system starts with a discovery query. Get in touch to outline your workflow inefficiencies and map out a prototype.
