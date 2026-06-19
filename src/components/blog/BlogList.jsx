@@ -4,69 +4,100 @@ import { useMemo, useState } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 
-const UNIVERSAL = "universal";
+const ALL = "all";
 
 function normalizeLabel(value) {
+  if (typeof value !== "string") return "";
   return value
+    .trim()
     .split("-")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => {
+      const lower = word.toLowerCase();
+      if (lower === "ai") return "AI";
+      if (lower === "smb" || lower === "smbs") return "SMBs";
+      return word.charAt(0).toUpperCase() + word.slice(1);
+    })
     .join(" ");
 }
 
-export default function BlogList({ posts }) {
-  const [activeCategory, setActiveCategory] = useState(UNIVERSAL);
+export default function BlogList({ posts = [] }) {
+  const [activeFilter, setActiveFilter] = useState(ALL);
 
-  const categories = useMemo(() => {
-    const categoryCounts = new Map();
+  const availableFilters = useMemo(() => {
+    const counts = new Map();
 
     posts.forEach((post) => {
+      // Categories
       if (post.category) {
-        categoryCounts.set(
-          post.category,
-          (categoryCounts.get(post.category) || 0) + 1,
-        );
+        const cat =
+          typeof post.category === "string"
+            ? post.category.trim()
+            : post.category;
+        counts.set(cat, (counts.get(cat) || 0) + 1);
+      }
+      // Tags
+      if (Array.isArray(post.tags)) {
+        post.tags.forEach((tag) => {
+          const t = typeof tag === "string" ? tag.trim() : tag;
+          counts.set(t, (counts.get(t) || 0) + 1);
+        });
       }
     });
 
-    return Array.from(categoryCounts.entries())
-      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-      .slice(0, 5)
+    return Array.from(counts.entries())
+      .sort((a, b) => {
+        if (b[1] !== a[1]) {
+          return b[1] - a[1];
+        }
+        return a[0] < b[0] ? -1 : a[0] > b[0] ? 1 : 0;
+      })
+      .slice(0, 6)
       .map(([value, count]) => ({ value, count }));
   }, [posts]);
 
   const filteredPosts = useMemo(() => {
-    if (activeCategory === UNIVERSAL) return posts;
+    if (activeFilter === ALL) return posts;
 
-    return posts.filter((post) => post.category === activeCategory);
-  }, [activeCategory, posts]);
+    return posts.filter((post) => {
+      const cat =
+        typeof post.category === "string"
+          ? post.category.trim()
+          : post.category;
+      const tags = Array.isArray(post.tags)
+        ? post.tags.map((t) => (typeof t === "string" ? t.trim() : t))
+        : [];
+      return cat === activeFilter || tags.includes(activeFilter);
+    });
+  }, [activeFilter, posts]);
 
-  const filters = [{ value: UNIVERSAL, count: posts.length }, ...categories];
+  const filters = [{ value: ALL, count: posts.length }, ...availableFilters];
 
   return (
     <section className="space-y-8">
       <div className="flex flex-col gap-4 border-y border-neutral-200 py-5 tablet:flex-row tablet:items-center tablet:justify-between">
-        <p className="font-mono text-xs uppercase tracking-normal text-neutral-600">
-          Top categories
+        <p className="font-mono text-xs uppercase tracking-normal text-slate-700 font-medium">
+          Filter posts
         </p>
 
         <div className="flex flex-wrap gap-2">
           {filters.map((filter) => {
-            const isActive = activeCategory === filter.value;
+            const isActive = activeFilter === filter.value;
 
             return (
               <button
                 key={filter.value}
                 type="button"
-                onClick={() => setActiveCategory(filter.value)}
+                onClick={() => {
+                  console.log("Blog filter changed to:", filter.value);
+                  setActiveFilter(filter.value);
+                }}
                 className={
                   isActive
-                    ? "rounded border border-blue-600 bg-blue-600 px-3 py-2 font-mono text-xs text-white transition"
-                    : "rounded border border-neutral-300 bg-white px-3 py-2 font-mono text-xs text-neutral-700 transition hover:border-blue-600 hover:text-blue-700"
-                  }
+                    ? "rounded border border-blue-700 bg-blue-700 px-3 py-2 font-mono text-xs text-white transition duration-150"
+                    : "rounded border border-neutral-300 bg-white px-3 py-2 font-mono text-xs text-slate-700 transition duration-150 hover:border-blue-700 hover:text-blue-700"
+                }
               >
-                {filter.value === UNIVERSAL
-                  ? "Universal"
-                  : normalizeLabel(filter.value)}
+                {filter.value === ALL ? "All" : normalizeLabel(filter.value)}
                 <span className="ml-2 opacity-70">{filter.count}</span>
               </button>
             );
@@ -104,21 +135,21 @@ export default function BlogList({ posts }) {
                 <div className="flex flex-1 flex-col gap-6 p-6">
                   <div className="space-y-3 border-b border-neutral-200 pb-5">
                     <p className="font-mono text-xs text-neutral-600">{date}</p>
-                    {/* <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 pt-2">
                       {category ? (
-                        <span className="rounded border border-blue-200 bg-blue-50 px-2 py-1 text-[11px] text-blue-700">
+                        <span className="rounded border border-blue-100 bg-blue-50/50 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-blue-700 uppercase tracking-wider">
                           {normalizeLabel(category)}
                         </span>
                       ) : null}
                       {tags?.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="rounded border border-neutral-200 px-2 py-1 text-[11px] text-neutral-600"
+                          className="rounded border border-neutral-200 bg-neutral-50 px-2 py-0.5 font-mono text-[10px] text-slate-700"
                         >
-                          {tag}
+                          #{normalizeLabel(tag).replace(/\s+/g, "")}
                         </span>
                       ))}
-                    </div> */}
+                    </div>
                   </div>
 
                   <div className="space-y-3">

@@ -29,7 +29,7 @@ const ApproachSection = () => {
       aria-labelledby="approach-heading"
       className="w-full border-t border-neutral-200 px-6 py-24"
     >
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto ">
         <div className=" redd">
           <p className="text-xs font-mono uppercase tracking-normal text-blue-600">
             Approach

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 const Header = () => {
   const path = usePathname();
-  const basePath = "/" + path.split("/").filter(Boolean).slice(0, 2).join("/");
+  const basePath = path ? "/" + path.split("/").filter(Boolean).slice(0, 2).join("/") : "/";
   return (
     <div
       id="wrapper"

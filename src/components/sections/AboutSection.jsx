@@ -18,7 +18,7 @@ const principles = [
 const AboutSection = () => {
   return (
     <section className="w-full  px-6 py-24">
-      <div className="mx-auto grid max-w-5xl gap-12 md:grid-cols-2 md:items-start">
+      <div className="mx-auto grid  gap-12 md:grid-cols-2 md:items-start">
         <div className="space-y-6">
           <p className="text-xs font-mono uppercase tracking-normal text-blue-600">
             About
