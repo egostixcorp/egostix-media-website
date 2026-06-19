@@ -6,170 +6,163 @@ import Image from "next/image";
 import React, { useRef, useEffect } from "react";
 
 const HeroSection = () => {
-  const canvasRef = useRef(null);
+  // const canvasRef = useRef(null);
 
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
+  // useEffect(() => {
+  //   const canvas = canvasRef.current;
+  //   if (!canvas) return;
+  //   const ctx = canvas.getContext("2d");
+  //   if (!ctx) return;
 
-    let animationFrameId;
-    let width = 0;
-    let height = 0;
+  //   let animationFrameId;
+  //   let width = 0;
+  //   let height = 0;
 
-    const mouse = { x: -1000, y: -1000, active: false };
+  //   const mouse = { x: -1000, y: -1000, active: false };
 
-    const handleMouseMove = (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouse.x = e.clientX - rect.left;
-      mouse.y = e.clientY - rect.top;
-      mouse.active = true;
-    };
+  //   const handleMouseMove = (e) => {
+  //     const rect = canvas.getBoundingClientRect();
+  //     mouse.x = e.clientX - rect.left;
+  //     mouse.y = e.clientY - rect.top;
+  //     mouse.active = true;
+  //   };
 
-    const handleMouseLeave = () => {
-      mouse.x = -1000;
-      mouse.y = -1000;
-      mouse.active = false;
-    };
+  //   const handleMouseLeave = () => {
+  //     mouse.x = -1000;
+  //     mouse.y = -1000;
+  //     mouse.active = false;
+  //   };
 
-    window.addEventListener("mousemove", handleMouseMove);
-    canvas.addEventListener("mouseleave", handleMouseLeave);
+  //   window.addEventListener("mousemove", handleMouseMove);
+  //   canvas.addEventListener("mouseleave", handleMouseLeave);
 
-    // Grid properties
-    const fontSize = 12;
-    const charWidth = 9;
-    const charHeight = 18;
-    const chars = [
-      ".",
-      "+",
-      "*",
-      "x",
-      "o",
-      "a",
-      "i",
-      "e",
-      "g",
-      "o",
-      "s",
-      "t",
-      "i",
-      "x",
-    ];
+  //   // Grid properties
+  //   const fontSize = 13;
+  //   const charWidth = 10;
+  //   const charHeight = 20;
+  //   const chars = [".", "+", "*", "x", "o", "a", "i", "e", "g", "o", "s", "t", "i", "x"];
 
-    let cells = [];
+  //   let cells = [];
 
-    const initGrid = () => {
-      cells = [];
-      const cols = Math.floor(width / charWidth);
-      const rows = Math.floor(height / charHeight);
+  //   const initGrid = () => {
+  //     cells = [];
+  //     const cols = Math.floor(width / charWidth);
+  //     const rows = Math.floor(height / charHeight);
 
-      for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-          const x0 = c * charWidth + charWidth / 2;
-          const y0 = r * charHeight + charHeight;
-          const char = chars[Math.floor(Math.random() * chars.length)];
-          cells.push({
-            x: x0,
-            y: y0,
-            x0: x0,
-            y0: y0,
-            vx: 0,
-            vy: 0,
-            char: char,
-          });
-        }
-      }
-    };
+  //     for (let r = 0; r < rows; r++) {
+  //       for (let c = 0; c < cols; c++) {
+  //         const x0 = c * charWidth + charWidth / 2;
+  //         const y0 = r * charHeight + charHeight;
+  //         const char = chars[Math.floor(Math.random() * chars.length)];
+  //         cells.push({
+  //           x: x0,
+  //           y: y0,
+  //           x0: x0,
+  //           y0: y0,
+  //           vx: 0,
+  //           vy: 0,
+  //           char: char,
+  //         });
+  //       }
+  //     }
+  //   };
 
-    const handleResize = () => {
-      const rect = canvas.getBoundingClientRect();
-      const scale = window.devicePixelRatio || 1;
-      canvas.width = rect.width * scale;
-      canvas.height = rect.height * scale;
+  //   const handleResize = () => {
+  //     const rect = canvas.getBoundingClientRect();
+  //     const scale = window.devicePixelRatio || 1;
+  //     canvas.width = rect.width * scale;
+  //     canvas.height = rect.height * scale;
 
-      width = rect.width;
-      height = rect.height;
+  //     width = rect.width;
+  //     height = rect.height;
 
-      ctx.setTransform(1, 0, 0, 1, 0, 0);
-      ctx.scale(scale, scale);
+  //     ctx.setTransform(1, 0, 0, 1, 0, 0);
+  //     ctx.scale(scale, scale);
 
-      initGrid();
-    };
+  //     initGrid();
+  //   };
 
-    window.addEventListener("resize", handleResize);
-    // Initial size configuration
-    handleResize();
+  //   window.addEventListener("resize", handleResize);
+  //   // Initial size configuration
+  //   handleResize();
 
-    // Physics parameters
-    const repelRadius = 120;
-    const repelForce = 3.5;
-    const springK = 0.04;
-    const friction = 0.82;
+  //   // Physics parameters
+  //   const repelRadius = 120;
+  //   const repelForce = 3.5;
+  //   const springK = 0.04;
+  //   const friction = 0.82;
 
-    const loop = () => {
-      ctx.clearRect(0, 0, width, height);
-      ctx.font = `${fontSize}px var(--font-mono), monospace`;
-      ctx.textAlign = "center";
+  //   const loop = () => {
+  //     // Guard to auto-initialize grid if mounted with 0 dimensions
+  //     if (cells.length === 0 && width === 0) {
+  //       const rect = canvas.getBoundingClientRect();
+  //       if (rect.width > 0 && rect.height > 0) {
+  //         handleResize();
+  //       }
+  //     }
 
-      for (let i = 0; i < cells.length; i++) {
-        const cell = cells[i];
+  //     ctx.clearRect(0, 0, width, height);
+  //     ctx.font = `${fontSize}px ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace`;
+  //     ctx.textAlign = "center";
 
-        // Repulsion from mouse
-        if (mouse.active) {
-          const dx = cell.x - mouse.x;
-          const dy = cell.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+  //     for (let i = 0; i < cells.length; i++) {
+  //       const cell = cells[i];
 
-          if (dist < repelRadius) {
-            const force = (repelRadius - dist) / repelRadius; // 0 to 1
-            const angle = Math.atan2(dy, dx);
-            const targetVx = Math.cos(angle) * force * repelForce;
-            const targetVy = Math.sin(angle) * force * repelForce;
-            cell.vx += targetVx;
-            cell.vy += targetVy;
-          }
-        }
+  //       // Repulsion from mouse
+  //       if (mouse.active) {
+  //         const dx = cell.x - mouse.x;
+  //         const dy = cell.y - mouse.y;
+  //         const dist = Math.sqrt(dx * dx + dy * dy);
 
-        // Spring force to home anchor
-        const ax = (cell.x0 - cell.x) * springK;
-        const ay = (cell.y0 - cell.y) * springK;
-        cell.vx += ax;
-        cell.vy += ay;
+  //         if (dist < repelRadius) {
+  //           const force = (repelRadius - dist) / repelRadius; // 0 to 1
+  //           const angle = Math.atan2(dy, dx);
+  //           const targetVx = Math.cos(angle) * force * repelForce;
+  //           const targetVy = Math.sin(angle) * force * repelForce;
+  //           cell.vx += targetVx;
+  //           cell.vy += targetVy;
+  //         }
+  //       }
 
-        // Apply friction and update pos
-        cell.vx *= friction;
-        cell.vy *= friction;
-        cell.x += cell.vx;
-        cell.y += cell.vy;
+  //       // Spring force to home anchor
+  //       const ax = (cell.x0 - cell.x) * springK;
+  //       const ay = (cell.y0 - cell.y) * springK;
+  //       cell.vx += ax;
+  //       cell.vy += ay;
 
-        // Calculate opacity and color based on mouse distance or deflection
-        const dx = cell.x - cell.x0;
-        const dy = cell.y - cell.y0;
-        const offset = Math.sqrt(dx * dx + dy * dy);
+  //       // Apply friction and update pos
+  //       cell.vx *= friction;
+  //       cell.vy *= friction;
+  //       cell.x += cell.vx;
+  //       cell.y += cell.vy;
 
-        if (offset > 1.2) {
-          const factor = Math.min(offset / 8, 1);
-          ctx.fillStyle = `rgba(29, 78, 216, ${0.12 + factor * 0.38})`;
-        } else {
-          ctx.fillStyle = "rgba(148, 163, 184, 0.12)";
-        }
+  //       // Calculate opacity and color based on mouse distance or deflection
+  //       const dx = cell.x - cell.x0;
+  //       const dy = cell.y - cell.y0;
+  //       const offset = Math.sqrt(dx * dx + dy * dy);
 
-        ctx.fillText(cell.char, cell.x, cell.y);
-      }
+  //       if (offset > 1.2) {
+  //         const factor = Math.min(offset / 8, 1);
+  //         ctx.fillStyle = `rgba(29, 78, 216, ${0.12 + factor * 0.38})`;
+  //       } else {
+  //         ctx.fillStyle = "rgba(148, 163, 184, 0.16)";
+  //       }
 
-      animationFrameId = requestAnimationFrame(loop);
-    };
+  //       ctx.fillText(cell.char, cell.x, cell.y);
+  //     }
 
-    loop();
+  //     animationFrameId = requestAnimationFrame(loop);
+  //   };
 
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      canvas.removeEventListener("mouseleave", handleMouseLeave);
-      window.removeEventListener("resize", handleResize);
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, []);
+  //   loop();
+
+  //   return () => {
+  //     window.removeEventListener("mousemove", handleMouseMove);
+  //     canvas.removeEventListener("mouseleave", handleMouseLeave);
+  //     window.removeEventListener("resize", handleResize);
+  //     cancelAnimationFrame(animationFrameId);
+  //   };
+  // }, []);
 
   return (
     <section className="relative flex min-h-[680px] w-full items-center justify-center px-6 py-24 overflow-hidden bg-white">
@@ -252,6 +245,7 @@ const HeroSection = () => {
               {/* Image C (Creativity) at top */}
               <div
                 className="absolute w-16 h-16 md:w-20 md:h-20 group"
+                data-cursor="creativity"
                 style={{
                   left: "50%",
                   top: "0%",
@@ -278,6 +272,7 @@ const HeroSection = () => {
               {/* Image E (Engineering) at bottom right */}
               <div
                 className="absolute w-16 h-16 md:w-20 md:h-20 group"
+                data-cursor="engineering"
                 style={{
                   left: "93.3%",
                   top: "75%",
@@ -304,6 +299,7 @@ const HeroSection = () => {
               {/* Image I (Intelligence) at bottom left */}
               <div
                 className="absolute w-16 h-16 md:w-20 md:h-20 group"
+                data-cursor="intelligence"
                 style={{
                   left: "6.7%",
                   top: "75%",
@@ -332,10 +328,14 @@ const HeroSection = () => {
       </div>
 
       {/* Dynamic ASCII Canvas Background */}
-      <canvas
+      {/* <canvas
         ref={canvasRef}
-        className="absolute inset-0 -z-10 pointer-events-none w-full h-full [mask-image:radial-gradient(ellipse_60%_60%_at_50%_50%,#000_70%,transparent_100%)]"
-      />
+        className="absolute inset-0 z-0 pointer-events-none w-full h-full"
+        style={{
+          maskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, #000 70%, transparent 100%)",
+          WebkitMaskImage: "radial-gradient(ellipse 60% 60% at 50% 50%, #000 70%, transparent 100%)"
+        }}
+      /> */}
     </section>
   );
 };

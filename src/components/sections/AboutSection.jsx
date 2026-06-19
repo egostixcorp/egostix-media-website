@@ -4,14 +4,17 @@ const principles = [
   {
     title: "Systems, Not Campaigns",
     body: "We build frameworks that scale, learn, and evolve with use.",
+    cursor: "engineering",
   },
   {
     title: "Outcomes Over Output",
     body: "Deliverables are meaningless unless something changes in reality.",
+    cursor: "creativity",
   },
   {
     title: "Intelligence at the Core",
     body: "Data, automation, and feedback loops are designed in from day one.",
+    cursor: "intelligence",
   },
 ];
 
@@ -44,6 +47,7 @@ const AboutSection = () => {
             <article
               key={principle.title}
               className="rounded border border-neutral-300 bg-white p-5"
+              data-cursor={principle.cursor}
             >
               <h3 className="font-mono text-sm font-semibold text-blue-600">
                 {principle.title}
