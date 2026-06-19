@@ -345,7 +345,7 @@ const HeroSection = () => {
       {/* Dynamic ASCII Canvas Background */}
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 z-0 pointer-events-none w-full h-full"
+        className="fixed top-0 redd inset-0 z-0 pointer-events-none w-full min-h-[680px]"
         style={{
           maskImage:
             "radial-gradient(ellipse 60% 60% at 50% 50%, #000 70%, transparent 100%)",
