@@ -30,17 +30,17 @@ const ApproachSection = () => {
       className="w-full border-t border-neutral-200 px-6 py-24"
     >
       <div className="mx-auto max-w-5xl">
-        <div className="max-w-3xl">
+        <div className=" redd">
           <p className="text-xs font-mono uppercase tracking-normal text-blue-600">
             Approach
           </p>
           <h2
             id="approach-heading"
-            className="mt-4 text-2xl font-mono tracking-tight tablet:text-3xl laptop:text-4xl"
+            className="mt-4 text-2xl font-mono  tablet:text-3xl laptop:text-4xl"
           >
             Discover → Prototype → Integrate → Scale
           </h2>
-          <p className="mt-4 text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
+          <p className="mt-4 text-sm max-w-3xl font-inter leading-relaxed text-neutral-600 tablet:text-base">
             A repeatable system to turn complex problems into measurable
             outcomes without burying execution under process.
           </p>
