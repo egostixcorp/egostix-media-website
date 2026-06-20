@@ -23,7 +23,7 @@ const WorkPage = () => {
                 Ready to build your system?
               </h2>
               <p className="max-w-3xl text-sm font-inter text-neutral-600 leading-relaxed">
-                Let's discuss how we can automate your operations, launch your custom creator platform, 
+                Let&apos;s discuss how we can automate your operations, launch your custom creator platform, 
                 or build internal intelligence tooling. We deliver functional prototypes in weeks.
               </p>
             </div>

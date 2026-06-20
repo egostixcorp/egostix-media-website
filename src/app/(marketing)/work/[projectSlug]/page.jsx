@@ -379,7 +379,7 @@ const MockupShell = ({ type, project, title }) => {
             OmniFlow Bot: Matching documents... Cosmic-DB docs matched.
           </div>
           <div className="bg-neutral-900 border border-neutral-850 p-1.5 rounded max-w-[85%] self-start text-[6px] text-neutral-300 leading-tight">
-            OmniFlow Bot: Draft reply: "v2.4 contains the API patch."
+            OmniFlow Bot: Draft reply: &quot;v2.4 contains the API patch.&quot;
           </div>
         </div>
       );
@@ -407,7 +407,7 @@ const MockupShell = ({ type, project, title }) => {
             IP match: Berlin, Germany. Trigger localization.
           </div>
           <div className="bg-neutral-900 border border-neutral-850 p-1.5 rounded max-w-[85%] self-start text-[6px] text-neutral-300 leading-tight">
-            Copy translated: "Moderne Schnittstellen für Skalierung."
+            Copy translated: &quot;Moderne Schnittstellen für Skalierung.&quot;
           </div>
         </div>
       );
@@ -496,7 +496,7 @@ const MockupShell = ({ type, project, title }) => {
           <span className="text-blue-400">SELECT</span> email, subscription_tier, paid
         </div>
         <div>
-          <span className="text-blue-400">FROM</span> subscriber_invoices <span className="text-blue-400">WHERE</span> status = <span className="text-emerald-400">'paid'</span>;
+          <span className="text-blue-400">FROM</span> subscriber_invoices <span className="text-blue-400">WHERE</span> status = <span className="text-emerald-400">&apos;paid&apos;</span>;
         </div>
         <div className="text-slate-500 mt-2 border-t border-slate-900 pt-1 text-[7px] leading-normal font-sans">
           {`art_student@domain.com | premium | true`}
@@ -530,7 +530,7 @@ const MockupShell = ({ type, project, title }) => {
           <span className="text-blue-400">SELECT</span> SUM(deal_value), target_percent
         </div>
         <div>
-          <span className="text-blue-400">FROM</span> crm_closed_deals <span className="text-blue-400">WHERE</span> month = <span className="text-emerald-400">'June'</span>;
+          <span className="text-blue-400">FROM</span> crm_closed_deals <span className="text-blue-400">WHERE</span> month = <span className="text-emerald-400">&apos;June&apos;</span>;
         </div>
         <div className="text-slate-500 mt-2 border-t border-slate-900 pt-1 text-[7px] leading-normal font-sans">
           {`$248,500 | 104.5% target achieved`}
@@ -544,10 +544,13 @@ const MockupShell = ({ type, project, title }) => {
       <>
         <div className="text-slate-500">{`# Edge node caching audit telemetry`}</div>
         <div>
-          <span className="text-blue-400">SELECT</span> page_url, cache_status, delay_ms
+          <span className="text-blue-400">SELECT</span> page_url, cache_status,
+          delay_ms
         </div>
         <div>
-          <span className="text-blue-400">FROM</span> edge_logs <span className="text-blue-400">WHERE</span> country = <span className="text-emerald-400">'DE'</span>;
+          <span className="text-blue-400">FROM</span> edge_logs{" "}
+          <span className="text-blue-400">WHERE</span> country ={" "}
+          <span className="text-emerald-400">&apos;DE&apos;</span>;
         </div>
         <div className="text-slate-500 mt-2 border-t border-slate-900 pt-1 text-[7px] leading-normal font-sans">
           {`/de/about   | CACHE_HIT  | 12ms`}
@@ -826,7 +829,7 @@ const ProjectCaseStudy = ({ params }) => {
                 Have a similar challenge?
               </h4>
               <p className="text-xs font-inter text-neutral-600 leading-relaxed">
-                Let's scope a custom business system built specifically for your operations. We can build it in weeks.
+                Let&apos;s scope a custom business system built specifically for your operations. We can build it in weeks.
               </p>
             </div>
             <Link
