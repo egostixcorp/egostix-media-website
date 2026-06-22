@@ -8,6 +8,7 @@ import ApproachSection from "@/components/sections/ApproachSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ServiceSection from "@/components/sections/ServiceSection";
 // import BlogSection from "@/components/sections/BlogSection";
+import FaqSection from "@/components/sections/FaqSection";
 import ContactSection from "@/components/sections/ContactSection";
 
 const Home = async () => {
@@ -53,6 +54,7 @@ const Home = async () => {
       <ApproachSection />
       <ServiceSection />
       {/* <BlogSection posts={posts} /> */}
+      <FaqSection />
       <ContactSection />
     </main>
   );
