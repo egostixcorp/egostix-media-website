@@ -203,9 +203,9 @@ const HeroSection = () => {
         }
       `}</style>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center w-full max-w-7xl z-10 px-4 py-8">
-        {/* Left Column: Left-aligned content */}
-        <div className="space-y-6 flex flex-col items-start text-left">
+      <div className="grid grid-cols-1 gap-12 items-center justify-items-center w-full max-w-7xl z-10 px-4 py-8">
+        {/* Left Column: Center-aligned content */}
+        <div className="space-y-6 flex flex-col items-center text-center">
           <h1 className="text-3xl font-mono tracking-tight tablet:text-4xl laptop:text-6xl text-slate-900 leading-tight">
             We Engineer{" "}
             <span className="font-bold text-blue-700">Software</span>
@@ -221,7 +221,7 @@ const HeroSection = () => {
             that transforms ideas into measurable outcomes.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-start gap-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto">
             <Link
               href="#contact"
               className="group inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded bg-blue-700 px-6 py-3 font-mono text-sm font-semibold text-white transition-all duration-200 hover:bg-blue-800 hover:scale-[1.02] hover:-translate-y-0.5 active:translate-y-0 active:scale-100 shadow-sm"
@@ -239,9 +239,9 @@ const HeroSection = () => {
         </div>
 
         {/* Right Column: Orbiting system around central logo */}
-        <div className="flex items-center justify-center relative py-12 md:py-0 orbiting-system">
+        {/* <div className="flex items-center justify-center relative py-12 md:py-0 orbiting-system">
           <div className="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
-            {/* Center Logo Piece */}
+           
             <div className="relative z-20 w-24 h-24 md:w-28 md:h-28 rounded-full border border-neutral-200 bg-white flex items-center justify-center p-3 shadow-md transition-all duration-300 hover:scale-[1.03]">
               <Image
                 src="/egostix-media-trans.png"
@@ -252,12 +252,11 @@ const HeroSection = () => {
               />
             </div>
 
-            {/* Orbit dotted circle background line */}
             <div className="absolute w-52 h-52 md:w-68 md:h-68 rounded-full border-2 border-dashed border-neutral-200/80 -z-10" />
 
-            {/* Orbit container */}
+        
             <div className="absolute w-52 h-52 md:w-68 md:h-68 orbiting-container">
-              {/* Image C (Creativity) at top */}
+           
               <div
                 className="absolute w-16 h-16 md:w-20 md:h-20 group"
                 data-cursor="creativity"
@@ -277,14 +276,14 @@ const HeroSection = () => {
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
-                  {/* Tooltip positioned ABOVE the top circle (pointing outwards) */}
+                
                   <div className="absolute bottom-[115%] left-1/2 -translate-x-1/2 bg-slate-900 text-white font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-sm z-30">
                     Creativity
                   </div>
                 </div>
               </div>
 
-              {/* Image E (Engineering) at bottom right */}
+            
               <div
                 className="absolute w-16 h-16 md:w-20 md:h-20 group"
                 data-cursor="engineering"
@@ -304,14 +303,14 @@ const HeroSection = () => {
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
-                  {/* Tooltip positioned BELOW the bottom-right circle (pointing outwards) */}
+                 
                   <div className="absolute top-[115%] left-1/2 -translate-x-1/2 bg-slate-900 text-white font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-sm z-30">
                     Engineering
                   </div>
                 </div>
               </div>
 
-              {/* Image I (Intelligence) at bottom left */}
+
               <div
                 className="absolute w-16 h-16 md:w-20 md:h-20 group"
                 data-cursor="intelligence"
@@ -331,7 +330,7 @@ const HeroSection = () => {
                       className="w-full h-full object-cover rounded-full"
                     />
                   </div>
-                  {/* Tooltip positioned BELOW the bottom-left circle (pointing outwards) */}
+                 
                   <div className="absolute top-[115%] left-1/2 -translate-x-1/2 bg-slate-900 text-white font-mono text-[9px] uppercase tracking-wider px-2 py-0.5 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap shadow-sm z-30">
                     Intelligence
                   </div>
@@ -339,7 +338,7 @@ const HeroSection = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
 
       {/* Dynamic ASCII Canvas Background */}
