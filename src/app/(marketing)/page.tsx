@@ -7,6 +7,7 @@ import HeroSection from "@/components/sections/HeroSection";
 import ApproachSection from "@/components/sections/ApproachSection";
 import AboutSection from "@/components/sections/AboutSection";
 import ServiceSection from "@/components/sections/ServiceSection";
+import HomeWorkSection from "@/components/sections/HomeWorkSection";
 // import BlogSection from "@/components/sections/BlogSection";
 import FaqSection from "@/components/sections/FaqSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -53,6 +54,7 @@ const Home = async () => {
       <AboutSection />
       <ApproachSection />
       <ServiceSection />
+      <HomeWorkSection />
       {/* <BlogSection posts={posts} /> */}
       <FaqSection />
       <ContactSection />
