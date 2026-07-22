@@ -1,15 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, LayoutGrid, List } from "lucide-react";
 
 const WorkSection = ({ projects }) => {
   const [viewMode, setViewMode] = useState("grid"); // "grid" or "list"
+  const [allProjects, setAllProjects] = useState(projects);
 
-  const realWorldProjects = projects.filter((p) => p.category === "real-world");
-  const skillProjects = projects.filter((p) => p.category === "skill-display");
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedCustom = sessionStorage.getItem("egostix_session_custom_projects");
+      if (savedCustom) {
+        const parsedCustom = JSON.parse(savedCustom);
+        // Merge without duplicates (using slug as unique identifier)
+        const merged = [...projects];
+        parsedCustom.forEach((customProj) => {
+          if (!merged.some((p) => p.slug === customProj.slug)) {
+            merged.unshift(customProj); // Prepend custom/dynamic projects
+          }
+        });
+        setAllProjects(merged);
+      }
+    }
+  }, [projects]);
+
+  const realWorldProjects = allProjects.filter((p) => p.category === "real-world");
+  const skillProjects = allProjects.filter((p) => p.category === "skill-display");
 
   // Render a project card in Grid Layout
   const renderGridCard = (project) => (

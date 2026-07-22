@@ -750,7 +750,7 @@ const ProjectCaseStudy = ({ params }) => {
             {project.mockups?.map((mockup, index) => (
               <div key={index} className="group flex flex-col justify-between bg-neutral-50/50 border border-neutral-200 rounded-lg p-5 hover:bg-neutral-50 transition-all">
                 {/* Image Mockup or CSS Drawn Vector Mockup Component */}
-                <div className="relative flex-1 flex items-center justify-center bg-neutral-900/5 rounded border border-neutral-200/40 mb-4 h-[230px] overflow-hidden">
+                <div className="relative w-full flex items-center justify-center bg-neutral-900/5 rounded border border-neutral-200/40 mb-4 h-[230px] overflow-hidden">
                   {mockup.image ? (
                     <Image
                       src={mockup.image}

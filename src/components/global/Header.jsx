@@ -1,14 +1,26 @@
 "use client";
-import React from "react";
+import React, { useState, useEffect } from "react";
 // import Logo from "@/components/Global/Logo";
 import { header } from "@/data/nav";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+
 const Header = () => {
   const path = usePathname();
   const basePath = path ? "/" + path.split("/").filter(Boolean).slice(0, 2).join("/") : "/";
+  
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Monitor login status via storage on mount/refresh
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const savedUser = sessionStorage.getItem("egostix_session_user");
+      setIsLoggedIn(!!savedUser);
+    }
+  }, [path]); // Trigger re-check whenever the path changes to reflect login/logout updates
+
   return (
     <div
       id="wrapper"
@@ -51,9 +63,44 @@ const Header = () => {
             );
           })}
         </nav>
-        {/* <div className="cursor-pointer">
-          <Menu />
-        </div> */}
+        {/* Dynamic Auth Buttons Container */}
+        {process.env.NODE_ENV === "development" && (
+          <div className="flex items-center gap-2 sm:gap-3">
+            {isLoggedIn ? (
+              <Link
+                href="/dashboard"
+                className="inline-flex items-center justify-center rounded bg-blue-700 px-4 py-2 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 hover:scale-[1.02] active:scale-100 shadow-sm"
+              >
+                Dashboard
+              </Link>
+            ) : (
+              <>
+                <Link
+                  href="/dashboard"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      sessionStorage.setItem("egostix_auth_tab", "login");
+                    }
+                  }}
+                  className="text-xs font-mono font-semibold text-slate-700 hover:text-blue-700 px-2 py-2 transition"
+                >
+                  Login
+                </Link>
+                <Link
+                  href="/dashboard"
+                  onClick={() => {
+                    if (typeof window !== "undefined") {
+                      sessionStorage.setItem("egostix_auth_tab", "signup");
+                    }
+                  }}
+                  className="inline-flex items-center justify-center rounded bg-blue-700 px-3.5 py-1.5 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 hover:scale-[1.02] active:scale-100 shadow-sm"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

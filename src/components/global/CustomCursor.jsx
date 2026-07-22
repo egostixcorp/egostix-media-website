@@ -366,6 +366,7 @@ const CustomCursor = () => {
       window.removeEventListener("resize", handleResize);
       cancelAnimationFrame(animationFrameId);
       document.body.style.cursor = "default";
+      style.remove();
     };
   }, []);
 

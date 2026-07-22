@@ -1,4 +1,3 @@
-import Image from "next/image";
 import React from "react";
 
 const principles = [
@@ -35,23 +34,6 @@ const AboutPage = () => {
               organizations move faster with automation, rapid software
               development, and scalable digital infrastructure.
             </p>
-          </div>
-
-          <div className="grid min-h-80 w-full max-w-3xl grid-cols-2 overflow-hidden rounded border border-neutral-300 bg-neutral-50">
-            <Image
-              src="/arun.png"
-              alt="Egostix founder portrait"
-              width={800}
-              height={900}
-              className="h-full w-full object-cover"
-            />
-            <Image
-              src="/titas.png"
-              alt="Egostix founder portrait"
-              width={800}
-              height={900}
-              className="h-full w-full object-cover"
-            />
           </div>
         </section>
 
