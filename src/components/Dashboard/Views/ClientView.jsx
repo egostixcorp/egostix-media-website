@@ -27,7 +27,9 @@ import {
   Globe,
   Activity,
   MousePointerClick,
-  Eye
+  Eye,
+  Shield,
+  Briefcase
 } from "lucide-react";
 
 const analyticsData = {
