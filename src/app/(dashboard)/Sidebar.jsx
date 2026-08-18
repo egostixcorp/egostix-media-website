@@ -18,21 +18,21 @@ import Link from "next/link";
 import Image from "next/image";
 
 const serviceNavMap = {
-  "AI-Powered Business Website": { id: "client-listings", label: "listings", icon: Shield },
-  "SEO Pipeline": { id: "client-seo", label: "SEO Compounder", icon: TrendingUp },
-  "CRM Sync (HubSpot)": { id: "client-crm", label: "HubSpot CRM Sync", icon: Layers },
+  "AI-Powered Business Website": { id: "service-websites", label: "AI Business Websites", icon: Shield },
+  "SEO Pipeline": { id: "service-websites", label: "AI Business Websites", icon: Shield },
+  "CRM Sync (HubSpot)": { id: "service-websites", label: "AI Business Websites", icon: Shield },
   
-  "AI Internal Tools (PulseOps ERP)": { id: "client-erp", label: "ERP SKU Terminal", icon: Shield },
-  "Database Ops (PostgreSQL)": { id: "client-db", label: "Postgres Analytics", icon: Layers },
-  "GPS Fleet Analytics Routing": { id: "client-fleet", label: "GPS Fleet Map", icon: Users },
+  "AI Internal Tools (PulseOps ERP)": { id: "service-tools", label: "AI Internal Tools", icon: Layers },
+  "Database Ops (PostgreSQL)": { id: "service-tools", label: "AI Internal Tools", icon: Layers },
+  "GPS Fleet Analytics Routing": { id: "service-tools", label: "AI Internal Tools", icon: Layers },
   
-  "AI Workflow Automation": { id: "client-triggers", label: "Workflow Triggers", icon: TrendingUp },
-  "WhatsApp API Integration": { id: "client-whatsapp", label: "WhatsApp API Hub", icon: Shield },
-  "EHR Database Synchronization": { id: "client-ehr", label: "EHR Sync Gateway", icon: Layers },
+  "AI Workflow Automation": { id: "service-automation", label: "Workflow Automation", icon: TrendingUp },
+  "WhatsApp API Integration": { id: "service-automation", label: "Workflow Automation", icon: TrendingUp },
+  "EHR Database Synchronization": { id: "service-automation", label: "Workflow Automation", icon: TrendingUp },
   
-  "Creator Infrastructure": { id: "client-creator", label: "Creator Portal Hub", icon: Shield },
-  "Stripe Membership Billing": { id: "client-stripe", label: "Stripe Subscription", icon: Layers },
-  "Mux Video Streaming CDN": { id: "client-mux", label: "Mux CDN Streamer", icon: TrendingUp }
+  "Creator Infrastructure": { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase },
+  "Stripe Membership Billing": { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase },
+  "Mux Video Streaming CDN": { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase }
 };
 
 const Sidebar = () => {
@@ -48,20 +48,43 @@ const Sidebar = () => {
     logout,
   } = useDashboard();
 
-  // Navigation configurations based on selected user role
-  const clientNav = [
+  // Base client navigation items
+  const baseClientNav = [
     { id: "overview", label: "Analytics Overview", icon: LayoutDashboard },
-    { id: "kanban", label: "Project Kanban", icon: Trello },
-    { id: "leads", label: "My Capture Leads", icon: Inbox },
-    { id: "files", label: "Sync File System", icon: FileText },
-    { id: "upgrades", label: "Scale Services", icon: TrendingUp },
+    { id: "analytics", label: "Traffic Analytics", icon: TrendingUp },
   ];
+
+  // Dynamic modules inlined based on active services
+  const customModuleNav = [];
+  if (activeClient && activeClient.activeServices) {
+    const seenIds = new Set();
+    activeClient.activeServices.forEach((serviceName) => {
+      const moduleConf = serviceNavMap[serviceName];
+      if (moduleConf && !seenIds.has(moduleConf.id)) {
+        seenIds.add(moduleConf.id);
+        customModuleNav.push({
+          id: moduleConf.id,
+          label: moduleConf.label,
+          icon: moduleConf.icon,
+        });
+      }
+    });
+  }
+
+  const trailingClientNav = [
+    { id: "kanban", label: "Project Board", icon: Trello },
+    { id: "leads", label: "Captured Leads", icon: Inbox },
+    { id: "files", label: "Shared Files", icon: FileText },
+    { id: "upgrades", label: "Request Upgrades", icon: Layers },
+  ];
+
+  const clientNav = [...baseClientNav, ...customModuleNav, ...trailingClientNav];
 
   const staffNav = [
     { id: "overview", label: "System Monitor", icon: LayoutDashboard },
     { id: "kanban", label: "Board Manager", icon: Trello },
     { id: "files", label: "Client Files Sync", icon: FileText },
-    { id: "settings", label: "Internal Settings", icon: Settings },
+    { id: "settings", label: "Publish Case Study", icon: Settings },
   ];
 
   const ownerNav = [
@@ -70,7 +93,8 @@ const Sidebar = () => {
     { id: "upgrades", label: "Service Requests", icon: Layers },
     { id: "leads", label: "Global Lead Hub", icon: Inbox },
     { id: "kanban", label: "Pipeline Review", icon: Trello },
-    { id: "settings", label: "Internal Settings", icon: Settings },
+    { id: "settings", label: "Publish Case Study", icon: Settings },
+    { id: "client-settings", label: "Client Profile Manager", icon: Users },
   ];
 
   const activeNav =
@@ -181,16 +205,24 @@ const Sidebar = () => {
           );
         })}
 
-        {/* Dynamic Client workspace modules */}
-        {role !== "client" && activeClient && activeClient.activeServices && (
+        {/* Service Control Commands for Staff/Owners */}
+        {role !== "client" && (
           <div className="pt-4 border-t border-neutral-100 mt-4 space-y-1">
             <p className="px-3 text-[9px] font-mono font-semibold uppercase tracking-wider text-slate-400 mb-2">
-              {activeClient.shortName} Modules
+              Service Control Commands
             </p>
-            {activeClient.activeServices.map((serviceName) => {
-              const moduleConf = serviceNavMap[serviceName];
-              if (!moduleConf) return null;
-
+            {[
+              { id: "service-websites", label: "AI Business Websites", icon: Shield },
+              { id: "service-tools", label: "AI Internal Tools", icon: Layers },
+              { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase },
+              { id: "service-automation", label: "Workflow Automation", icon: TrendingUp }
+            ].filter((moduleConf) => {
+              if (!activeClient || !activeClient.activeServices) return false;
+              return activeClient.activeServices.some((serviceName) => {
+                const mapConf = serviceNavMap[serviceName];
+                return mapConf && mapConf.id === moduleConf.id;
+              });
+            }).map((moduleConf) => {
               const Icon = moduleConf.icon;
               const isActive = activeTab === moduleConf.id;
 

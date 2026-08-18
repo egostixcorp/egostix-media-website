@@ -35,6 +35,7 @@ export const DashboardProvider = ({ children }) => {
       ownerName: "Titas (Owner)",
       ownerEmail: "contact@egostix.com",
       status: "Internal",
+      gaPropertyId: "412345678",
       activeServices: [],
       metrics: {
         traffic: "45,200",
@@ -55,6 +56,7 @@ export const DashboardProvider = ({ children }) => {
       ownerName: "Sarah Jenkins",
       ownerEmail: "sarah@apexrealty.com",
       status: "Active",
+      gaPropertyId: null,
       activeServices: [
         "AI-Powered Business Website",
         "SEO Pipeline",
@@ -79,6 +81,7 @@ export const DashboardProvider = ({ children }) => {
       ownerName: "David Chen",
       ownerEmail: "dchen@pulselogistics.com",
       status: "Active",
+      gaPropertyId: null,
       activeServices: [
         "AI Internal Tools (PulseOps ERP)",
         "Database Ops (PostgreSQL)",
@@ -103,6 +106,7 @@ export const DashboardProvider = ({ children }) => {
       ownerName: "Dr. Amanda Ross",
       ownerEmail: "dr.ross@chronoshealth.com",
       status: "Active",
+      gaPropertyId: null,
       activeServices: [
         "AI Workflow Automation",
         "WhatsApp API Integration",
@@ -127,6 +131,7 @@ export const DashboardProvider = ({ children }) => {
       ownerName: "Marcus Vance",
       ownerEmail: "marcus@synthlabs.io",
       status: "Active",
+      gaPropertyId: null,
       activeServices: [
         "Creator Infrastructure",
         "Stripe Membership Billing",
@@ -405,6 +410,7 @@ export const DashboardProvider = ({ children }) => {
             ownerName: "Titas (Owner)",
             ownerEmail: "contact@egostix.com",
             status: "Internal",
+            gaPropertyId: "412345678",
             activeServices: [],
             metrics: {
               traffic: "45,200",
@@ -640,6 +646,7 @@ export const DashboardProvider = ({ children }) => {
       ownerName: name,
       ownerEmail: email,
       status: "Active",
+      gaPropertyId: null,
       activeServices: ["AI-Powered Business Website"],
       metrics: {
         traffic: "0",

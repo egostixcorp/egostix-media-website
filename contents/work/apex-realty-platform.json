@@ -1,0 +1,53 @@
+{
+  "slug": "apex-realty-platform",
+  "category": "real-world",
+  "title": "Apex Realty Platform",
+  "subtitle": "AI-first lead generation and customer acquisition web system for luxury real estate.",
+  "client": "Apex Luxury Real Estate Group",
+  "service": "AI-Powered Business Websites",
+  "year": "2025",
+  "summary": "A high-performance lead generation web system for a luxury real estate brokerage. Integrates a custom AI assistant that conducts initial client onboarding, schedules property viewings, and syncs directly with their CRM.",
+  "image": "/work/apex-realty/apex-realty.jpg",
+  "accentColor": "blue",
+  "tags": ["Next.js", "Tailwind CSS", "OpenAI API", "HubSpot CRM", "Dynamic SEO"],
+  "metrics": [
+    { "value": "+40%", "label": "Property Viewings Scheduled" },
+    { "value": "65%", "label": "Faster Response Times" },
+    { "value": "+2.4x", "label": "Lead-to-Booking Rate" }
+  ],
+  "challenge": [
+    "Apex Luxury Real Estate Group faced a persistent issue with off-hours lead acquisition. High-net-worth international clients browsing listings in different time zones were forced to wait up to 24 hours for a response from human agents.",
+    "This delay resulted in a low lead-to-booking conversion rate, as potential buyers lost interest or scheduled appointments with competitors. Furthermore, human agents spent excessive time on basic qualification questions (budget, timeline, location preferences) instead of closing high-value deals."
+  ],
+  "solution": [
+    "We engineered a custom AI-Powered Business Website utilizing Next.js for server-side rendering and exceptional performance. The core of the platform is an embedded, context-aware AI Concierge trained on the agency's current listings and localized real estate guidelines.",
+    "The AI agent engages visitors in natural conversation, answering detailed questions about properties, analyzing buying criteria, and automatically scheduling viewings. The entire system connects via webhooks to HubSpot CRM, instantly tagging qualified leads and scheduling live broker calls when needed."
+  ],
+  "results": [
+    "Since launching the system, Apex has seen a 40% increase in scheduled property viewings, with over half of them booked during non-business hours.",
+    "Response times plummeted from a 12-hour average to less than 3 seconds. The automated qualification workflow has saved human brokers an estimated 15 hours per week, allowing them to focus entirely on prepared, high-intent buyers."
+  ],
+  "mockups": [
+    {
+      "title": "Properties Portal",
+      "description": "The desktop landing view featuring fast spatial maps, luxury property filters, and clean high-end typography.",
+      "type": "desktop",
+      "badge": "Client Facing",
+      "image": "/work/apex-realty/apex-realty-desktop.jpg"
+    },
+    {
+      "title": "AI Booking Assistant",
+      "description": "The mobile conversational drawer that assists clients, gathers budget preferences, and offers instant viewing slots.",
+      "type": "mobile",
+      "badge": "AI Onboarding",
+      "image": "/work/apex-realty/apex-realty-chat.jpg"
+    },
+    {
+      "title": "Lead Insights Dashboard",
+      "description": "Admin workspace where brokers monitor hot lead scoring, conversation logs, and view upcoming auto-scheduled appointments.",
+      "type": "analytics",
+      "badge": "Internal Ops",
+      "image": "/work/apex-realty/apex-realty-leads.jpg"
+    }
+  ]
+}

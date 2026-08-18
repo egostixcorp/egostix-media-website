@@ -1,0 +1,50 @@
+{
+  "slug": "synth-academy",
+  "category": "skill-display",
+  "title": "Synth Academy",
+  "subtitle": "Dedicated subscription network and AI content pipeline built for creator economies.",
+  "client": "Egostix Media Labs",
+  "service": "Creator Infrastructure",
+  "year": "2025",
+  "summary": "An all-in-one subscription network and community platform built for a prominent tech-art creator. Includes automated content workflows, membership tier management, and AI-assisted community moderation.",
+  "image": "/work/synth-academy/synth-academy.jpg",
+  "accentColor": "purple",
+  "tags": ["Next.js", "Stripe API", "Mux Video", "AI Moderation", "Tailwind CSS"],
+  "metrics": [
+    { "value": "-55%", "label": "Platform Fee Overhead" },
+    { "value": "85%", "label": "Yearly Member Retention" },
+    { "value": "3 hrs", "label": "Saved per Video Upload" }
+  ],
+  "challenge": [
+    "Synth Labs, a rapidly growing community of digital art creators, was operating across multiple disconnected platforms: Patreon for subscriptions, Discord for chat, and Teachable for courses.",
+    "This fragmented infrastructure led to user confusion, high subscription churn, and an average platform fee overhead of 12% across services. Content uploads were also highly manual, involving video compression, manual transcribing, and manual email notifications."
+  ],
+  "solution": [
+    "We built a bespoke, unified Creator Infrastructure app. The platform integrates custom high-quality video hosting via Mux, a rich community forum, and tier-based membership access using Stripe Billing.",
+    "We implemented a customized content pipeline: when the creator uploads a video, an AI worker automatically transcribes the audio, drafts detailed lesson summaries, timestamps key sections, and queues up email newsletters and Discord announcements for approval."
+  ],
+  "results": [
+    "By consolidating hosting, courses, and billing, Synth Labs reduced third-party platform fee overheads by 55%, capturing thousands in additional monthly revenue.",
+    "The unified portal improved the member experience, driving a steady 85% retention rate. The creator now saves roughly 3 hours per video upload, converting raw video to a fully polished course module in one click."
+  ],
+  "mockups": [
+    {
+      "title": "Member Hub & Video Room",
+      "description": "Dark-mode community hub displaying full-width video lessons, interactive notes, and module progression tracking.",
+      "type": "desktop",
+      "badge": "Subscriber View"
+    },
+    {
+      "title": "Creator Control Panel",
+      "description": "Backstage manager to drag-and-drop course layouts, configure Stripe billing tiers, and run upload jobs.",
+      "type": "analytics",
+      "badge": "Creator Admin"
+    },
+    {
+      "title": "Community Feed",
+      "description": "Mobile viewport of the interactive forum displaying real-time discussions, user profiles, and AI moderations.",
+      "type": "mobile",
+      "badge": "Mobile Forum"
+    }
+  ]
+}

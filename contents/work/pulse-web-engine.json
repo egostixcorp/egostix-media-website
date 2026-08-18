@@ -1,0 +1,51 @@
+{
+  "slug": "pulse-web-engine",
+  "category": "skill-display",
+  "title": "Pulse Web Engine",
+  "subtitle": "High-performance marketing site showcase featuring automated localization and AI copy matching.",
+  "client": "Egostix Media Labs",
+  "service": "AI-Powered Business Websites",
+  "year": "2025",
+  "summary": "A premium marketing and content engine showcase utilizing edge servers for sub-second delivery, multi-region localizations, and programmatic SEO models.",
+  "image": "/work/pulse-web-engine/pulse-web-engine.jpg",
+  "accentColor": "blue",
+  "tags": ["Vercel Edge", "Next.js ISR", "i18next", "Programmatic SEO", "Tailwind CSS"],
+  "metrics": [
+    { "value": "99/100", "label": "Lighthouse Performance" },
+    { "value": "250ms", "label": "Time to First Byte" },
+    { "value": "+300%", "label": "Indexed Landing Pages" }
+  ],
+  "challenge": [
+    "Modern marketing sites fail to capture local search markets due to static single-region structures and heavy asset weight, leading to low organic traffic.",
+    "This system displays how Edge-hosted pages can generate content dynamically based on geographical client location, keeping load times under 300ms while scaling to thousands of pages."
+  ],
+  "solution": [
+    "We constructed the Pulse Web Engine, demonstrating Next.js incremental static regeneration (ISR) and localized middleware routing.",
+    "The website automatically formats copy, currency, and local references depending on the visitor's IP address. It features a programmatic SEO generator that translates database schemas into search-optimized landing pages.",
+    "An integrated AI editor allows marketing teams to type a prompt to generate or translate local landing page layouts instantly."
+  ],
+  "results": [
+    "Achieved a perfect 99 Lighthouse performance rating across core vitals, proving edge optimization.",
+    "Demonstrates the capability to deploy thousands of search-indexed landing pages automatically, driving higher organic visibility without manual creation."
+  ],
+  "mockups": [
+    {
+      "title": "Geo-Localized Landing Page",
+      "description": "Desktop hero page detailing adaptive content cards that change copy depending on geographical location.",
+      "type": "desktop",
+      "badge": "Dynamic Layout"
+    },
+    {
+      "title": "Programmatic Manager",
+      "description": "Control hub showing URL routing paths, meta tag models, and active edge caching indices.",
+      "type": "analytics",
+      "badge": "Web Infrastructure"
+    },
+    {
+      "title": "Editor Tool",
+      "description": "Mobile viewport of the copy-writing tool allowing direct textual revisions and language translations.",
+      "type": "mobile",
+      "badge": "Content Tool"
+    }
+  ]
+}

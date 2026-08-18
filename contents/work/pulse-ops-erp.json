@@ -1,0 +1,53 @@
+{
+  "slug": "pulse-ops-erp",
+  "category": "real-world",
+  "title": "PulseOps ERP",
+  "subtitle": "Custom operational software and intelligent dashboard optimizing SMB supply chains.",
+  "client": "Pulse Logistics & Distribution",
+  "service": "AI Internal Tools for SMBs",
+  "year": "2025",
+  "summary": "A custom operational dashboard and inventory intelligence platform for a regional shipping firm. Eliminates spreadsheets by automating routing, inventory tracking, and client invoicing.",
+  "image": "/work/pulse-ops/pulse-ops.jpg",
+  "accentColor": "slate",
+  "tags": ["React", "Express.js", "PostgreSQL", "Google Maps API", "Predictive Analytics"],
+  "metrics": [
+    { "value": "25 hrs", "label": "Saved Weekly Per Dispatcher" },
+    { "value": "99.8%", "label": "Inventory Tracking Accuracy" },
+    { "value": "-18%", "label": "Reduction in Fuel Costs" }
+  ],
+  "challenge": [
+    "Pulse Logistics relied heavily on a complex web of Excel spreadsheets, legacy databases, and manual phone calls to manage their shipping fleet and warehouse inventories.",
+    "Dispatchers wasted hours daily resolving conflicts between scheduled routes and actual inventory levels. This lack of integration caused frequent shipping errors, delayed deliveries, and rising fuel expenses from inefficient route planning."
+  ],
+  "solution": [
+    "We developed PulseOps ERP, a unified internal tool tailored to their business flow. The web application aggregates real-time inventory counts and live GPS telemetry from the vehicle fleet into a single interface.",
+    "An intelligent routing engine calculates optimal dispatch sequences based on destination coordinates and warehouse load. We embedded predictive analytics models that alert managers to impending supply bottlenecks before they disrupt active shipments."
+  ],
+  "results": [
+    "The implementation eliminated manual spreadsheets completely, saving dispatchers an average of 25 hours per week in pure administration.",
+    "Inventory tracking errors fell to near zero, reaching a record 99.8% accuracy. Optimized logistics routes cut total vehicle fuel consumption by 18% in the first quarter of deployment alone."
+  ],
+  "mockups": [
+    {
+      "title": "Dispatch Command Center",
+      "description": "Central dashboard featuring live routing lists, fleet visual charts, and direct drag-and-drop driver assignment.",
+      "type": "desktop",
+      "badge": "Dispatcher View",
+      "image": "/work/pulse-ops/pulse-ops-dispatch.jpg"
+    },
+    {
+      "title": "Inventory Matrix",
+      "description": "Grid view tracker of warehouse levels, with automatic low-stock triggers and supplier order form generation.",
+      "type": "analytics",
+      "badge": "Warehouse Ops",
+      "image": "/work/pulse-ops/pulse-ops-inventory.jpg"
+    },
+    {
+      "title": "Driver Companion",
+      "description": "Mobile dispatch utility with sequential route coordinates, client signature capture, and status triggers.",
+      "type": "mobile",
+      "badge": "Field App",
+      "image": "/work/pulse-ops/pulse-ops-driver.jpg"
+    }
+  ]
+}

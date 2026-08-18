@@ -1,0 +1,50 @@
+{
+  "slug": "chronos-support-engine",
+  "category": "real-world",
+  "title": "Chronos Support Engine",
+  "subtitle": "Conversational automation connecting customer care and appointment booking pipelines.",
+  "client": "Chronos Health & Wellness",
+  "service": "AI Workflow Automation",
+  "year": "2026",
+  "summary": "An automated patient communication and customer service pipeline across WhatsApp, email, and internal messaging, integrated directly with electronic health records (EHR).",
+  "image": "/work/chronos-support-engine/chronos-automation.jpg",
+  "accentColor": "emerald",
+  "tags": ["Node.js", "WhatsApp API", "LangChain", "EHR Integrations", "Email Automations"],
+  "metrics": [
+    { "value": "70%", "label": "Standard Inquiries Automated" },
+    { "value": "0%", "label": "Missed Follow-up Bookings" },
+    { "value": "+18 pt", "label": "NPS Score Increase" }
+  ],
+  "challenge": [
+    "Chronos Health & Wellness clinics were struggling to keep up with incoming patient communications. Receptionists were buried under phone calls and messages regarding appointment rescheduling, directions, basic medical prep questions, and post-care check-ins.",
+    "This overload caused clinic phones to be constantly busy, resulting in missed appointment requests and delayed follow-up check-ins that directly affected patient care outcomes."
+  ],
+  "solution": [
+    "We engineered an AI Workflow Automation system acting as a virtual clinic assistant, operating over WhatsApp and Email. Built using LangChain and security-compliant APIs, the engine links directly with the clinic's internal EHR (Electronic Health Record) scheduling database.",
+    "The system handles patient inquiries instantly, answering common clinic FAQs, facilitating self-service appointment rescheduling with instant live verification, and running automated, tailored follow-up sequences post-treatment."
+  ],
+  "results": [
+    "Over 70% of standard patient inquiries are now handled completely by the AI system without human staff intervention, freeing up receptionist desks.",
+    "The clinics achieved 0% missed follow-up appointments through the automated reminders. Patient satisfaction surged, resulting in a Net Promoter Score (NPS) improvement from 64 to 82."
+  ],
+  "mockups": [
+    {
+      "title": "Conversational Interface",
+      "description": "Visual demo of the WhatsApp patient interaction scheduling an appointment and confirming medical records.",
+      "type": "mobile",
+      "badge": "Patient Chat"
+    },
+    {
+      "title": "Pipeline Control Console",
+      "description": "Admin monitor showing automation throughput, successful message deliveries, and queue resolution times.",
+      "type": "desktop",
+      "badge": "Automation Monitor"
+    },
+    {
+      "title": "EHR Sync logs",
+      "description": "Auditable connection log displaying real-time patient validation matches and database schedule write confirmations.",
+      "type": "analytics",
+      "badge": "System Sync"
+    }
+  ]
+}

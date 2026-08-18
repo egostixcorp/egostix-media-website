@@ -1,0 +1,50 @@
+{
+  "slug": "omniflow-agent",
+  "category": "skill-display",
+  "title": "OmniFlow Agent",
+  "subtitle": "Demonstration system showing automated multi-agent support workflows for enterprise.",
+  "client": "Egostix Media Labs",
+  "service": "AI Workflow Automation",
+  "year": "2026",
+  "summary": "An advanced internal demonstration displaying multi-channel ticket parsing, vector embeddings lookup, and automated response drafting via synchronized LLM agents.",
+  "image": "/work/omniflow-agent/omniflow-agent.jpg",
+  "accentColor": "emerald",
+  "tags": ["LangChain", "VectorDB", "Node.js", "Slack API", "Multi-Agent Systems"],
+  "metrics": [
+    { "value": "92%", "label": "First-contact Deflection" },
+    { "value": "< 45s", "label": "Average Response Time" },
+    { "value": "24/7", "label": "Automated Operational Window" }
+  ],
+  "challenge": [
+    "Customer support teams in growing SaaS operations are inundated with technical requests that often require cross-referencing knowledge bases, release notes, and API documentation.",
+    "Human responses take hours and are often inconsistent. The system demonstrates how a multi-agent network can divide, research, write, and verify technical support answers directly in customer-facing tools."
+  ],
+  "solution": [
+    "We engineered OmniFlow Agent, an advanced workflow automation display. The application showcases a lead agent routing issues to specialized sub-agents (database agent, API agent, copywriter agent).",
+    "The sub-agents query a vector database containing simulated platform manuals, synthesize answers, and submit draft responses to Slack or Zendesk platforms with verifiable source citations."
+  ],
+  "results": [
+    "In simulated testing loops, the system successfully resolved 92% of common technical requests without human intervention.",
+    "The multi-agent research and synthesis loop completed in under 45 seconds on average, ensuring fast and accurate answers for end users."
+  ],
+  "mockups": [
+    {
+      "title": "Agent Orchestrator",
+      "description": "Visual workspace displaying active sub-agents, their memory pools, and live execution graphs as they research queries.",
+      "type": "desktop",
+      "badge": "Visual Graph"
+    },
+    {
+      "title": "Knowledge Vector Base",
+      "description": "Internal dataset inspector illustrating semantic vector space, matching scores, and document chunks.",
+      "type": "analytics",
+      "badge": "Database View"
+    },
+    {
+      "title": "Slack Bot Interface",
+      "description": "Sleek mobile viewport of the agent interface replying in Slack threads with code snippets and documentation links.",
+      "type": "mobile",
+      "badge": "Integrations View"
+    }
+  ]
+}

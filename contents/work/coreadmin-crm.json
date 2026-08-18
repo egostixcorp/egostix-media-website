@@ -1,0 +1,50 @@
+{
+  "slug": "coreadmin-crm",
+  "category": "skill-display",
+  "title": "CoreAdmin CRM",
+  "subtitle": "Modern operations portal showcasing drag-and-drop analytics and team task pipelines.",
+  "client": "Egostix Media Labs",
+  "service": "AI Internal Tools for SMBs",
+  "year": "2025",
+  "summary": "An internal prototype application displaying visual CRM metrics, pipeline task automation, and team communication panels for operational efficiency.",
+  "image": "/work/coreadmin-crm/coreadmin-crm.jpg",
+  "accentColor": "slate",
+  "tags": ["React Table", "Chart.js", "Tailwind CSS", "Next.js API", "SQL Analytics"],
+  "metrics": [
+    { "value": "100%", "label": "Custom Widget Control" },
+    { "value": "60 FPS", "label": "Interactive Visuals" },
+    { "value": "< 100ms", "label": "Database Read Speed" }
+  ],
+  "challenge": [
+    "Off-the-shelf CRM systems are either overly generic or require costly configuration packages to fit specific operational pipelines for small businesses.",
+    "Our display project shows how a business can build customized dashboards tailored to their exact internal requirements without compromising on user experience, database speed, or pricing."
+  ],
+  "solution": [
+    "We engineered CoreAdmin CRM as an operational display system. It integrates custom responsive layout builders, interactive database search matrices, and real-time socket connections for team coordination.",
+    "Managers can configure dashboards by dragging charts, setting custom alert thresholds for logistics, and defining webhook triggers to third-party databases."
+  ],
+  "results": [
+    "The system demonstrates modular front-end architecture, allowing new internal widgets to be deployed in days instead of months.",
+    "Boasts high-speed telemetry reads with interface response times below 100ms, proving that custom operational dashboards outpace bloated legacy systems."
+  ],
+  "mockups": [
+    {
+      "title": "Interactive CRM Board",
+      "description": "Modern spreadsheet view with inline editing, row filtering, and customized column headers.",
+      "type": "desktop",
+      "badge": "Spreadsheet View"
+    },
+    {
+      "title": "Analytics Builder",
+      "description": "Dashboard component letting admins design visual widgets, choose chart types, and write query parameters.",
+      "type": "analytics",
+      "badge": "Widget Creator"
+    },
+    {
+      "title": "Task Inbox",
+      "description": "Mobile-responsive pipeline feed displaying outstanding admin notifications, checklists, and chat threads.",
+      "type": "mobile",
+      "badge": "Notification Panel"
+    }
+  ]
+}
