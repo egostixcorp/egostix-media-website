@@ -122,7 +122,7 @@ export default function BlogList({ posts = [] }) {
                 href={`/blog/${slug}`}
                 className="group flex h-full flex-col overflow-hidden rounded border border-neutral-300 bg-white transition hover:border-blue-600"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100">
+                <div className="relative aspect-square w-full overflow-hidden bg-neutral-100">
                   <NextImage
                     src={coverImage || "/egostix-media-trans.png"}
                     alt={coverAlt || title}

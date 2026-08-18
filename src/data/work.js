@@ -9,7 +9,7 @@ export const projects = [
     service: "AI-Powered Business Websites",
     year: "2025",
     summary: "A high-performance lead generation web system for a luxury real estate brokerage. Integrates a custom AI assistant that conducts initial client onboarding, schedules property viewings, and syncs directly with their CRM.",
-    image: "/apex-realty.jpg",
+    image: "/work/apex-realty/apex-realty.jpg",
     accentColor: "blue",
     tags: ["Next.js", "Tailwind CSS", "OpenAI API", "HubSpot CRM", "Dynamic SEO"],
     metrics: [
@@ -35,21 +35,21 @@ export const projects = [
         description: "The desktop landing view featuring fast spatial maps, luxury property filters, and clean high-end typography.",
         type: "desktop",
         badge: "Client Facing",
-        image: "/apex-realty-desktop.jpg"
+        image: "/work/apex-realty/apex-realty-desktop.jpg"
       },
       {
         title: "AI Booking Assistant",
         description: "The mobile conversational drawer that assists clients, gathers budget preferences, and offers instant viewing slots.",
         type: "mobile",
         badge: "AI Onboarding",
-        image: "/apex-realty-chat.jpg"
+        image: "/work/apex-realty/apex-realty-chat.jpg"
       },
       {
         title: "Lead Insights Dashboard",
         description: "Admin workspace where brokers monitor hot lead scoring, conversation logs, and view upcoming auto-scheduled appointments.",
         type: "analytics",
         badge: "Internal Ops",
-        image: "/apex-realty-leads.jpg"
+        image: "/work/apex-realty/apex-realty-leads.jpg"
       }
     ]
   },
@@ -62,7 +62,7 @@ export const projects = [
     service: "AI Internal Tools for SMBs",
     year: "2025",
     summary: "A custom operational dashboard and inventory intelligence platform for a regional shipping firm. Eliminates spreadsheets by automating routing, inventory tracking, and client invoicing.",
-    image: "/pulse-ops.jpg",
+    image: "/work/pulse-ops/pulse-ops.jpg",
     accentColor: "slate",
     tags: ["React", "Express.js", "PostgreSQL", "Google Maps API", "Predictive Analytics"],
     metrics: [
@@ -88,21 +88,21 @@ export const projects = [
         description: "Central dashboard featuring live routing lists, fleet visual charts, and direct drag-and-drop driver assignment.",
         type: "desktop",
         badge: "Dispatcher View",
-        image: "/pulse-ops-dispatch.jpg"
+        image: "/work/pulse-ops/pulse-ops-dispatch.jpg"
       },
       {
         title: "Inventory Matrix",
         description: "Grid view tracker of warehouse levels, with automatic low-stock triggers and supplier order form generation.",
         type: "analytics",
         badge: "Warehouse Ops",
-        image: "/pulse-ops-inventory.jpg"
+        image: "/work/pulse-ops/pulse-ops-inventory.jpg"
       },
       {
         title: "Driver Companion",
         description: "Mobile dispatch utility with sequential route coordinates, client signature capture, and status triggers.",
         type: "mobile",
         badge: "Field App",
-        image: "/pulse-ops-driver.jpg"
+        image: "/work/pulse-ops/pulse-ops-driver.jpg"
       }
     ]
   },
@@ -115,7 +115,7 @@ export const projects = [
     service: "AI Workflow Automation",
     year: "2026",
     summary: "An automated patient communication and customer service pipeline across WhatsApp, email, and internal messaging, integrated directly with electronic health records (EHR).",
-    image: "/chronos-automation.jpg",
+    image: "/work/chronos-support-engine/chronos-automation.jpg",
     accentColor: "emerald",
     tags: ["Node.js", "WhatsApp API", "LangChain", "EHR Integrations", "Email Automations"],
     metrics: [
@@ -167,7 +167,7 @@ export const projects = [
     service: "Creator Infrastructure",
     year: "2025",
     summary: "An all-in-one subscription network and community platform built for a prominent tech-art creator. Includes automated content workflows, membership tier management, and AI-assisted community moderation.",
-    image: "/synth-academy.jpg",
+    image: "/work/synth-academy/synth-academy.jpg",
     accentColor: "purple",
     tags: ["Next.js", "Stripe API", "Mux Video", "AI Moderation", "Tailwind CSS"],
     metrics: [
@@ -217,7 +217,7 @@ export const projects = [
     service: "AI Workflow Automation",
     year: "2026",
     summary: "An advanced internal demonstration displaying multi-channel ticket parsing, vector embeddings lookup, and automated response drafting via synchronized LLM agents.",
-    image: "/omniflow-agent.jpg",
+    image: "/work/omniflow-agent/omniflow-agent.jpg",
     accentColor: "emerald",
     tags: ["LangChain", "VectorDB", "Node.js", "Slack API", "Multi-Agent Systems"],
     metrics: [
@@ -267,7 +267,7 @@ export const projects = [
     service: "AI Internal Tools for SMBs",
     year: "2025",
     summary: "An internal prototype application displaying visual CRM metrics, pipeline task automation, and team communication panels for operational efficiency.",
-    image: "/coreadmin-crm.jpg",
+    image: "/work/coreadmin-crm/coreadmin-crm.jpg",
     accentColor: "slate",
     tags: ["React Table", "Chart.js", "Tailwind CSS", "Next.js API", "SQL Analytics"],
     metrics: [
@@ -317,7 +317,7 @@ export const projects = [
     service: "AI-Powered Business Websites",
     year: "2025",
     summary: "A premium marketing and content engine showcase utilizing edge servers for sub-second delivery, multi-region localizations, and programmatic SEO models.",
-    image: "/pulse-web-engine.jpg",
+    image: "/work/pulse-web-engine/pulse-web-engine.jpg",
     accentColor: "blue",
     tags: ["Vercel Edge", "Next.js ISR", "i18next", "Programmatic SEO", "Tailwind CSS"],
     metrics: [

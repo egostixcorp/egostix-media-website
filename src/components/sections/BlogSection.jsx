@@ -38,7 +38,7 @@ const BlogSection = ({ posts = [] }) => {
                 href={`/blog/${post.slug}`}
                 className="group flex h-full flex-col overflow-hidden rounded border border-neutral-300 bg-white transition hover:border-blue-700"
               >
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-neutral-100">
+                <div className="relative aspect-square w-full overflow-hidden bg-neutral-100">
                   <Image
                     src={post.coverImage || "/egostix-media-trans.png"}
                     alt={post.coverAlt || post.title}
