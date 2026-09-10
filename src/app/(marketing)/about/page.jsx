@@ -19,22 +19,20 @@ const AboutPage = () => {
   return (
     <main className="w-full px-6 py-24">
       <div className="mx-auto max-w-6xl space-y-20">
-        <section className="flex flex-col items-center gap-10 pt-10 text-center">
-          <div className="flex max-w-4xl flex-col items-center space-y-6">
-            <p className="text-xs w-full redd font-mono uppercase text-left tracking-normal text-blue-600">
-              About
-            </p>
-            <h1 className="text-3xl font-mono tracking-tight tablet:text-4xl laptop:text-6xl">
-              Egostix Media builds systems where creativity, engineering, and
-              intelligence meet.
-            </h1>
-            <p className="max-w-3xl text-sm font-inter leading-relaxed text-neutral-600 tablet:text-base">
-              We are an AI-native productized software and media studio under
-              Egostix Engineering. We help modern businesses, creators, and
-              organizations move faster with automation, rapid software
-              development, and scalable digital infrastructure.
-            </p>
-          </div>
+        <section className="space-y-6 pt-10">
+          <p className="text-xs font-mono uppercase tracking-normal text-blue-600">
+            About
+          </p>
+          <h1 className="max-w-4xl text-3xl font-mono tracking-tight tablet:text-4xl laptop:text-6xl text-neutral-900">
+            Egostix Media builds systems where creativity, engineering, and
+            intelligence meet.
+          </h1>
+          <p className="max-w-3xl text-sm tablet:text-base font-inter leading-relaxed text-neutral-600">
+            We are an AI-native productized software and media studio under
+            Egostix Engineering. We help modern businesses, creators, and
+            organizations move faster with automation, rapid software
+            development, and scalable digital infrastructure.
+          </p>
         </section>
 
         <section className="grid gap-10 border-t border-neutral-200 pt-12 md:grid-cols-[0.8fr_1fr]">

@@ -1,12 +1,28 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { header } from "@/data/nav";
+import InteractiveInquiryButton from "@/components/ui/InteractiveInquiryButton";
+
+const navigationLinks = [
+  { label: "About", route: "/about" },
+  { label: "Services", route: "/service" },
+  { label: "Work", route: "/work" },
+  { label: "Approach", route: "/approach" },
+  { label: "Blog", route: "/blog" },
+  { label: "Contact", route: "/contact" },
+];
+
+const serviceLinks = [
+  { label: "AI Business Websites", route: "/service#websites" },
+  { label: "AI Internal Tools", route: "/service#tools" },
+  { label: "Creator Infrastructure", route: "/service#creator" },
+  { label: "AI Workflow Automation", route: "/service#automation" },
+];
 
 const Footer = () => {
   return (
     <footer className="w-full border-t border-neutral-200 bg-white px-2 py-12 tablet:px-[10%] laptop:px-[15%]">
-      {/* Top half: Grid of information */}
+      {/* Top Grid */}
       <div className="grid grid-cols-1 gap-10 px-4 py-4 tablet:grid-cols-2 laptop:grid-cols-4 tablet:px-5">
         {/* Brand Column */}
         <div className="flex flex-col space-y-4">
@@ -26,22 +42,21 @@ const Footer = () => {
             Where Imagination Meets Intelligence
           </div>
           <p className="text-sm font-inter leading-relaxed text-slate-700">
-            An AI-native productized software and media studio. We build
-            frameworks that scale, learn, and evolve.
+            An AI-native productized software and media studio under Egostix Engineering. We build frameworks that scale, learn, and evolve.
           </p>
         </div>
 
-        {/* Navigation Column - aligned with Header nav data */}
+        {/* Navigation Column */}
         <div className="flex flex-col space-y-4">
           <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900">
-            System Routes
+            Navigation
           </h4>
-          <nav className="flex flex-col space-y-2 text-sm">
-            {header.map((item, i) => (
+          <nav className="flex flex-col space-y-2 text-sm font-inter">
+            {navigationLinks.map((item, i) => (
               <Link
                 key={i}
                 href={item.route}
-                className="text-slate-700 hover:text-blue-700 hover:translate-x-0.5 transition-all duration-150 ease-in-out w-fit"
+                className="text-slate-700 hover:text-blue-600 hover:translate-x-0.5 transition-all duration-150 ease-in-out w-fit"
               >
                 {item.label}
               </Link>
@@ -49,105 +64,56 @@ const Footer = () => {
           </nav>
         </div>
 
-        {/* Offerings Column */}
+        {/* Services Column */}
         <div className="flex flex-col space-y-4">
           <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900">
-            Offerings
+            Services
           </h4>
-          <nav className="flex flex-col space-y-2 text-sm">
-            <Link
-              href="/service#websites"
-              className="text-slate-700 hover:text-blue-700 hover:translate-x-0.5 transition-all duration-150 ease-in-out w-fit"
-            >
-              AI Business Websites
-            </Link>
-            <Link
-              href="/service#tools"
-              className="text-slate-700 hover:text-blue-700 hover:translate-x-0.5 transition-all duration-150 ease-in-out w-fit"
-            >
-              AI Internal Tools for SMBs
-            </Link>
-            <Link
-              href="/service#creator"
-              className="text-slate-700 hover:text-blue-700 hover:translate-x-0.5 transition-all duration-150 ease-in-out w-fit"
-            >
-              Creator Infrastructure
-            </Link>
-            <Link
-              href="/service#automation"
-              className="text-slate-700 hover:text-blue-700 hover:translate-x-0.5 transition-all duration-150 ease-in-out w-fit"
-            >
-              AI Workflow Automation
-            </Link>
+          <nav className="flex flex-col space-y-2 text-sm font-inter">
+            {serviceLinks.map((item, i) => (
+              <Link
+                key={i}
+                href={item.route}
+                className="text-slate-700 hover:text-blue-600 hover:translate-x-0.5 transition-all duration-150 ease-in-out w-fit"
+              >
+                {item.label}
+              </Link>
+            ))}
           </nav>
         </div>
 
-        {/* Coordinates Column */}
+        {/* Contact Us Column */}
         <div className="flex flex-col space-y-4">
           <h4 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900">
-            Coordinates
+            Contact Us
           </h4>
-          <div className="flex flex-col space-y-2 text-sm text-slate-700">
+          <div className="flex flex-col space-y-2.5 text-sm font-inter text-slate-700">
             <a
               href="mailto:contact@egostix.com"
-              className="hover:text-blue-700 transition-colors duration-150 w-fit"
+              className="hover:text-blue-600 transition-colors duration-150 w-fit font-mono text-xs"
             >
               contact@egostix.com
             </a>
             <a
               href="tel:+917319274817"
-              className="hover:text-blue-700 transition-colors duration-150 w-fit"
+              className="hover:text-blue-600 transition-colors duration-150 w-fit font-mono text-xs"
             >
               +91 73192 74817
             </a>
-            <p className="text-slate-700">Badkulla, West Bengal, India</p>
-            <p className="text-xs text-slate-500 pt-1 font-mono">
-              media.egostix.com
+            <p className="text-slate-600 text-xs leading-relaxed pt-1">
+              Badkulla, Nadia, West Bengal, India - 741121
             </p>
+            <div className="pt-2">
+              <InteractiveInquiryButton label="Send an Inquiry" className="w-full sm:w-auto" />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Middle: Timeline process visual (Discover -> Prototype -> Integrate -> Scale) */}
-      {/* <div className="border-t border-neutral-200 mt-10 pt-10 pb-6 px-4 tablet:px-5">
-        <div className="flex flex-col space-y-4 md:flex-row md:space-y-0 md:items-center md:justify-between">
-          <div className="max-w-xs">
-            <h5 className="font-mono text-xs font-semibold uppercase tracking-wider text-slate-900">
-              Execution Model
-            </h5>
-            <p className="text-xs text-slate-700 mt-1">
-              Our structured process compresses time-to-value for every project.
-            </p>
-          </div>
-          <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] font-medium text-slate-700 bg-slate-50 border border-neutral-100 rounded-lg p-3 w-fit">
-            <span className="flex items-center text-slate-900 font-semibold">
-              <span className="bg-slate-200/80 text-slate-800 rounded px-1.5 py-0.5 mr-1 text-[10px]">01</span>
-              Discover
-            </span>
-            <span className="text-slate-400 font-normal px-1">→</span>
-            <span className="flex items-center text-slate-900 font-semibold">
-              <span className="bg-slate-200/80 text-slate-800 rounded px-1.5 py-0.5 mr-1 text-[10px]">02</span>
-              Prototype
-            </span>
-            <span className="text-slate-400 font-normal px-1">→</span>
-            <span className="flex items-center text-slate-900 font-semibold">
-              <span className="bg-slate-200/80 text-slate-800 rounded px-1.5 py-0.5 mr-1 text-[10px]">03</span>
-              Integrate
-            </span>
-            <span className="text-slate-400 font-normal px-1">→</span>
-            <span className="flex items-center text-blue-700 font-bold">
-              <span className="bg-blue-100 text-blue-800 rounded px-1.5 py-0.5 mr-1 text-[10px]">04</span>
-              Scale
-            </span>
-          </div>
-        </div>
-      </div> */}
-
-      {/* Bottom half: Copyright and legal */}
-      <div className="border-t border-neutral-200 mt-6 pt-6 px-4 tablet:px-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      {/* Bottom Legal & Copyright Bar */}
+      <div className="border-t border-neutral-200 mt-8 pt-6 px-4 tablet:px-5 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-inter">
         <div>
-          © {new Date().getFullYear()} Egostix Engineering Pvt. Ltd. All rights
-          reserved.
+          © {new Date().getFullYear()} Egostix Engineering Pvt. Ltd. All rights reserved.
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
           <span className="font-mono text-[10px] uppercase text-slate-400">
@@ -156,11 +122,14 @@ const Footer = () => {
           <span className="text-slate-300 hidden sm:inline">|</span>
           <Link
             href="/privacy"
-            className="hover:text-blue-700 transition-colors"
+            className="hover:text-blue-600 transition-colors"
           >
             Privacy Policy
           </Link>
-          <Link href="/terms" className="hover:text-blue-700 transition-colors">
+          <Link
+            href="/terms"
+            className="hover:text-blue-600 transition-colors"
+          >
             Terms of Service
           </Link>
         </div>
@@ -170,3 +139,4 @@ const Footer = () => {
 };
 
 export default Footer;
+
