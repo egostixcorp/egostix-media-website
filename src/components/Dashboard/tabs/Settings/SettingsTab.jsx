@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from "react";
 import { useDashboard } from "@/components/Dashboard/DashboardContext";
+import Image from "next/image";
 import {
   Settings,
   FileText,
@@ -64,7 +65,7 @@ const ImageDropzone = ({ label, value, onChange, onRemove, helpText }) => {
         <div className="relative rounded-xl border border-neutral-200 bg-neutral-50 p-3 flex items-center justify-between gap-3 shadow-2xs">
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="size-14 rounded-lg overflow-hidden border border-neutral-300 bg-neutral-900 shrink-0 relative">
-              <img src={value} alt="Uploaded preview" className="w-full h-full object-cover" />
+              <Image unoptimized src={value} alt="Uploaded preview" fill className="w-full h-full object-cover" />
             </div>
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 text-xs font-mono font-bold text-slate-900 truncate">
@@ -685,7 +686,7 @@ const SettingsTab = () => {
           </form>
         </div>
 
-        {/* RIGHT COLUMN: White Theme Live Responsive Preview (Matching /work/[projectSlug]) */}
+        {/* RIGHT COLUMN: White Theme Live Responsive Preview (Copied 1:1 from /work/[projectSlug]) */}
         <div className="lg:col-span-7 space-y-4">
           <div className="flex items-center justify-between border-b border-neutral-200 pb-3">
             <h4 className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
@@ -743,7 +744,7 @@ const SettingsTab = () => {
                 <div className="space-y-4">
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-neutral-100 border border-neutral-200">
                     {heroImage ? (
-                      <img src={heroImage} alt={title} className="object-cover w-full h-full" />
+                      <Image unoptimized src={heroImage} alt={title} fill className="object-cover" />
                     ) : (
                       <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-50 text-neutral-400 p-4 text-center">
                         <ImageIcon className="size-6 text-neutral-400 mb-1" />
@@ -832,7 +833,7 @@ const SettingsTab = () => {
               <section className="space-y-2">
                 <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg border border-neutral-200 bg-neutral-100 shadow-xs">
                   {heroImage ? (
-                    <img src={heroImage} alt={title} className="object-cover w-full h-full" />
+                    <Image unoptimized src={heroImage} alt={title} fill className="object-cover" />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-neutral-50 text-neutral-400 p-6 text-center space-y-2">
                       <ImageIcon className="size-8 text-neutral-400" />
@@ -943,7 +944,7 @@ const SettingsTab = () => {
                   <div className="bg-neutral-50/70 border border-neutral-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
                     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-neutral-900/5 border border-neutral-200/60">
                       {mockup1Image ? (
-                        <img src={mockup1Image} alt={mockup1Title} className="object-cover w-full h-full" />
+                        <Image unoptimized src={mockup1Image} alt={mockup1Title} fill className="object-cover" />
                       ) : (
                         <MockupShell type="desktop" title={mockup1Title} accentColor={accentColor} />
                       )}
@@ -965,7 +966,7 @@ const SettingsTab = () => {
                   <div className="bg-neutral-50/70 border border-neutral-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
                     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-neutral-900/5 border border-neutral-200/60">
                       {mockup2Image ? (
-                        <img src={mockup2Image} alt={mockup2Title} className="object-cover w-full h-full" />
+                        <Image unoptimized src={mockup2Image} alt={mockup2Title} fill className="object-cover" />
                       ) : (
                         <MockupShell type="mobile" title={mockup2Title} accentColor={accentColor} />
                       )}
@@ -987,7 +988,7 @@ const SettingsTab = () => {
                   <div className="bg-neutral-50/70 border border-neutral-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
                     <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-neutral-900/5 border border-neutral-200/60">
                       {mockup3Image ? (
-                        <img src={mockup3Image} alt={mockup3Title} className="object-cover w-full h-full" />
+                        <Image unoptimized src={mockup3Image} alt={mockup3Title} fill className="object-cover" />
                       ) : (
                         <MockupShell type="analytics" title={mockup3Title} accentColor={accentColor} />
                       )}
@@ -1050,7 +1051,7 @@ const SettingsTab = () => {
                   <span className="text-[9px] font-mono text-slate-500 uppercase">Main Hero Header</span>
                   <div className="relative aspect-[16/9] w-full overflow-hidden rounded-lg bg-neutral-100 border border-neutral-200">
                     {heroImage ? (
-                      <img src={heroImage} alt={title} className="object-cover w-full h-full" />
+                      <Image unoptimized src={heroImage} alt={title} fill className="object-cover" />
                     ) : (
                       <MockupShell type="desktop" title={title} accentColor={accentColor} />
                     )}
@@ -1062,7 +1063,7 @@ const SettingsTab = () => {
                   <span className="text-[9px] font-mono text-slate-500 uppercase">Card 2 Mobile View</span>
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-neutral-100 border border-neutral-200">
                     {mockup2Image ? (
-                      <img src={mockup2Image} alt={mockup2Title} className="object-cover w-full h-full" />
+                      <Image unoptimized src={mockup2Image} alt={mockup2Title} fill className="object-cover" />
                     ) : (
                       <MockupShell type="mobile" title={mockup2Title} accentColor={accentColor} />
                     )}

@@ -190,7 +190,7 @@ const FilesTab = () => {
               {clientFiles.length === 0 ? (
                 <tr>
                   <td colSpan={5} className="py-12 text-center text-slate-400 font-mono text-xs">
-                    No files uploaded yet for this client context. Click "Upload New Asset" above.
+                    No files uploaded yet for this client context. Click &quot;Upload New Asset&quot; above.
                   </td>
                 </tr>
               ) : (
