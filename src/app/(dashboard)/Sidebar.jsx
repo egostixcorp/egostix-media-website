@@ -16,26 +16,28 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const serviceNavMap = {
-  "AI-Powered Business Website": { id: "service-websites", label: "AI Business Websites", icon: Shield },
-  "SEO Pipeline": { id: "service-websites", label: "AI Business Websites", icon: Shield },
-  "CRM Sync (HubSpot)": { id: "service-websites", label: "AI Business Websites", icon: Shield },
+  "AI-Powered Business Website": { id: "service-websites", route: "/dashboard/service-websites", label: "AI Business Websites", icon: Shield },
+  "SEO Pipeline": { id: "service-websites", route: "/dashboard/service-websites", label: "AI Business Websites", icon: Shield },
+  "CRM Sync (HubSpot)": { id: "service-websites", route: "/dashboard/service-websites", label: "AI Business Websites", icon: Shield },
   
-  "AI Internal Tools (PulseOps ERP)": { id: "service-tools", label: "AI Internal Tools", icon: Layers },
-  "Database Ops (PostgreSQL)": { id: "service-tools", label: "AI Internal Tools", icon: Layers },
-  "GPS Fleet Analytics Routing": { id: "service-tools", label: "AI Internal Tools", icon: Layers },
+  "AI Internal Tools (PulseOps ERP)": { id: "service-tools", route: "/dashboard/service-tools", label: "AI Internal Tools", icon: Layers },
+  "Database Ops (PostgreSQL)": { id: "service-tools", route: "/dashboard/service-tools", label: "AI Internal Tools", icon: Layers },
+  "GPS Fleet Analytics Routing": { id: "service-tools", route: "/dashboard/service-tools", label: "AI Internal Tools", icon: Layers },
   
-  "AI Workflow Automation": { id: "service-automation", label: "Workflow Automation", icon: TrendingUp },
-  "WhatsApp API Integration": { id: "service-automation", label: "Workflow Automation", icon: TrendingUp },
-  "EHR Database Synchronization": { id: "service-automation", label: "Workflow Automation", icon: TrendingUp },
+  "AI Workflow Automation": { id: "service-automation", route: "/dashboard/service-automation", label: "Workflow Automation", icon: TrendingUp },
+  "WhatsApp API Integration": { id: "service-automation", route: "/dashboard/service-automation", label: "Workflow Automation", icon: TrendingUp },
+  "EHR Database Synchronization": { id: "service-automation", route: "/dashboard/service-automation", label: "Workflow Automation", icon: TrendingUp },
   
-  "Creator Infrastructure": { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase },
-  "Stripe Membership Billing": { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase },
-  "Mux Video Streaming CDN": { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase }
+  "Creator Infrastructure": { id: "service-creator", route: "/dashboard/service-creator", label: "Creator Infrastructure", icon: Briefcase },
+  "Stripe Membership Billing": { id: "service-creator", route: "/dashboard/service-creator", label: "Creator Infrastructure", icon: Briefcase },
+  "Mux Video Streaming CDN": { id: "service-creator", route: "/dashboard/service-creator", label: "Creator Infrastructure", icon: Briefcase }
 };
 
 const Sidebar = () => {
+  const pathname = usePathname();
   const {
     role,
     setRole,
@@ -50,8 +52,8 @@ const Sidebar = () => {
 
   // Base client navigation items
   const baseClientNav = [
-    { id: "overview", label: "Analytics Overview", icon: LayoutDashboard },
-    { id: "analytics", label: "Traffic Analytics", icon: TrendingUp },
+    { id: "analysis", route: "/dashboard/analysis", label: "Analysis Overview", icon: LayoutDashboard },
+    { id: "plan-it", route: "/dashboard/plan-it", label: "Plan it", icon: Trello },
   ];
 
   // Dynamic modules inlined based on active services
@@ -64,6 +66,7 @@ const Sidebar = () => {
         seenIds.add(moduleConf.id);
         customModuleNav.push({
           id: moduleConf.id,
+          route: moduleConf.route,
           label: moduleConf.label,
           icon: moduleConf.icon,
         });
@@ -72,29 +75,28 @@ const Sidebar = () => {
   }
 
   const trailingClientNav = [
-    { id: "kanban", label: "Project Board", icon: Trello },
-    { id: "leads", label: "Captured Leads", icon: Inbox },
-    { id: "files", label: "Shared Files", icon: FileText },
-    { id: "upgrades", label: "Request Upgrades", icon: Layers },
+    { id: "leads", route: "/dashboard/leads", label: "Captured Leads", icon: Inbox },
+    { id: "files", route: "/dashboard/files", label: "Shared Files", icon: FileText },
+    { id: "upgrades", route: "/dashboard/upgrades", label: "Request Upgrades", icon: Layers },
   ];
 
   const clientNav = [...baseClientNav, ...customModuleNav, ...trailingClientNav];
 
   const staffNav = [
-    { id: "overview", label: "System Monitor", icon: LayoutDashboard },
-    { id: "kanban", label: "Board Manager", icon: Trello },
-    { id: "files", label: "Client Files Sync", icon: FileText },
-    { id: "settings", label: "Publish Case Study", icon: Settings },
+    { id: "analysis", route: "/dashboard/analysis", label: "System Analysis", icon: LayoutDashboard },
+    { id: "plan-it", route: "/dashboard/plan-it", label: "Plan it (Board)", icon: Trello },
+    { id: "files", route: "/dashboard/files", label: "Client Files Sync", icon: FileText },
+    { id: "settings", route: "/dashboard/settings", label: "Publish Case Study", icon: Settings },
   ];
 
   const ownerNav = [
-    { id: "overview", label: "Admin Operations", icon: LayoutDashboard },
-    { id: "clients", label: "Clients Directory", icon: Users },
-    { id: "upgrades", label: "Service Requests", icon: Layers },
-    { id: "leads", label: "Global Lead Hub", icon: Inbox },
-    { id: "kanban", label: "Pipeline Review", icon: Trello },
-    { id: "settings", label: "Publish Case Study", icon: Settings },
-    { id: "client-settings", label: "Client Profile Manager", icon: Users },
+    { id: "analysis", route: "/dashboard/analysis", label: "Admin Analysis", icon: LayoutDashboard },
+    { id: "plan-it", route: "/dashboard/plan-it", label: "Plan it (Pipeline)", icon: Trello },
+    { id: "clients", route: "/dashboard/clients", label: "Clients Directory", icon: Users },
+    { id: "upgrades", route: "/dashboard/upgrades", label: "Service Requests", icon: Layers },
+    { id: "leads", route: "/dashboard/leads", label: "Global Lead Hub", icon: Inbox },
+    { id: "settings", route: "/dashboard/settings", label: "Publish Case Study", icon: Settings },
+    { id: "client-settings", route: "/dashboard/client-settings", label: "Client Profile Manager", icon: Users },
   ];
 
   const activeNav =
@@ -185,11 +187,12 @@ const Sidebar = () => {
         </p>
         {activeNav.map((item) => {
           const Icon = item.icon;
-          const isActive = activeTab === item.id;
+          const isActive = pathname === item.route || (pathname === "/dashboard" && item.id === "analysis");
 
           return (
-            <button
+            <Link
               key={item.id}
+              href={item.route}
               onClick={() => setActiveTab(item.id)}
               className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium font-inter transition-all duration-150 ${
                 isActive
@@ -201,7 +204,7 @@ const Sidebar = () => {
                 className={`size-4 ${isActive ? "text-blue-700" : "text-slate-500"}`}
               />
               {item.label}
-            </button>
+            </Link>
           );
         })}
 
@@ -212,10 +215,10 @@ const Sidebar = () => {
               Service Control Commands
             </p>
             {[
-              { id: "service-websites", label: "AI Business Websites", icon: Shield },
-              { id: "service-tools", label: "AI Internal Tools", icon: Layers },
-              { id: "service-creator", label: "Creator Infrastructure", icon: Briefcase },
-              { id: "service-automation", label: "Workflow Automation", icon: TrendingUp }
+              { id: "service-websites", route: "/dashboard/service-websites", label: "AI Business Websites", icon: Shield },
+              { id: "service-tools", route: "/dashboard/service-tools", label: "AI Internal Tools", icon: Layers },
+              { id: "service-creator", route: "/dashboard/service-creator", label: "Creator Infrastructure", icon: Briefcase },
+              { id: "service-automation", route: "/dashboard/service-automation", label: "Workflow Automation", icon: TrendingUp }
             ].filter((moduleConf) => {
               if (!activeClient || !activeClient.activeServices) return false;
               return activeClient.activeServices.some((serviceName) => {
@@ -224,11 +227,12 @@ const Sidebar = () => {
               });
             }).map((moduleConf) => {
               const Icon = moduleConf.icon;
-              const isActive = activeTab === moduleConf.id;
+              const isActive = pathname === moduleConf.route;
 
               return (
-                <button
+                <Link
                   key={moduleConf.id}
+                  href={moduleConf.route}
                   onClick={() => setActiveTab(moduleConf.id)}
                   className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium font-inter transition-all duration-150 ${
                     isActive
@@ -240,7 +244,7 @@ const Sidebar = () => {
                     className={`size-4 ${isActive ? "text-blue-700" : "text-slate-500"}`}
                   />
                   {moduleConf.label}
-                </button>
+                </Link>
               );
             })}
           </div>
