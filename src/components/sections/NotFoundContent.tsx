@@ -194,7 +194,7 @@ export default function NotFoundContent() {
             })
           ) : (
             <div className="col-span-full py-8 text-center font-mono text-xs text-slate-500 border border-dashed border-slate-200 rounded-lg">
-              No destination nodes matched "{searchTerm}". Try another search term.
+              No destination nodes matched &quot;{searchTerm}&quot;. Try another search term.
             </div>
           )}
         </div>

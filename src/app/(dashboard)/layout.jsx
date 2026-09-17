@@ -1,16 +1,10 @@
 "use client";
 
 import React from "react";
-import { DashboardProvider, useDashboard } from "@/components/Dashboard/DashboardContext";
+import { DashboardProvider } from "@/components/Dashboard/DashboardContext";
 import Sidebar from "./Sidebar";
 
 const DashboardShell = ({ children }) => {
-  const { isLoggedIn } = useDashboard();
-
-  if (!isLoggedIn) {
-    return <div className="min-h-screen bg-neutral-50 flex flex-col">{children}</div>;
-  }
-
   return (
     <div className="min-h-screen bg-neutral-50 flex text-slate-900 font-inter">
       {/* Left Sidebar Menu */}

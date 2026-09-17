@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useDashboard } from "./DashboardContext";
+import { loginAction, signupAction } from "@/actions/auth";
 import {
   Lock,
   Mail,
@@ -10,12 +11,14 @@ import {
   Sparkles,
   ArrowRight,
   ShieldCheck,
+  Loader2,
 } from "lucide-react";
 import Image from "next/image";
 
 const Auth = () => {
-  const { login, signup } = useDashboard();
+  const { refreshSession } = useDashboard();
   const [isLoginView, setIsLoginView] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -36,38 +39,69 @@ const Auth = () => {
     }
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setIsLoading(true);
 
-    if (isLoginView) {
-      if (!formData.email || !formData.password) {
-        setError("Please enter both email and password.");
-        return;
+    try {
+      if (isLoginView) {
+        if (!formData.email || !formData.password) {
+          setError("Please enter both email and password.");
+          setIsLoading(false);
+          return;
+        }
+        const res = await loginAction(formData.email, formData.password);
+        if (!res.success) {
+          setError(res.error || "Failed to sign in. Please check your credentials.");
+        } else if (refreshSession) {
+          await refreshSession();
+        }
+      } else {
+        if (
+          !formData.name ||
+          !formData.email ||
+          !formData.password ||
+          !formData.companyName
+        ) {
+          setError("All fields are required to register.");
+          setIsLoading(false);
+          return;
+        }
+        const res = await signupAction(
+          formData.name,
+          formData.email,
+          formData.password,
+          formData.companyName
+        );
+        if (!res.success) {
+          setError(res.error || "Failed to register account.");
+        } else if (refreshSession) {
+          await refreshSession();
+        }
       }
-      login(formData.email, formData.password);
-    } else {
-      if (
-        !formData.name ||
-        !formData.email ||
-        !formData.password ||
-        !formData.companyName
-      ) {
-        setError("All fields are required to register.");
-        return;
-      }
-      signup(
-        formData.name,
-        formData.email,
-        formData.password,
-        formData.companyName,
-      );
+    } catch (err) {
+      setError(err?.message || "An unexpected error occurred.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
-  // Helper helper to login automatically with demo credentials
-  const handleQuickLogin = (email) => {
-    login(email, "password123");
+  const handleQuickLogin = async (email) => {
+    setError("");
+    setIsLoading(true);
+    try {
+      const res = await loginAction(email, "password123");
+      if (!res.success) {
+        setError(res.error || `Could not log in as ${email}. Make sure user exists in Supabase.`);
+      } else if (refreshSession) {
+        await refreshSession();
+      }
+    } catch (err) {
+      setError(err?.message || "Quick login failed.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -223,14 +257,24 @@ const Auth = () => {
           {/* Submit */}
           <button
             type="submit"
-            className="w-full rounded bg-blue-700 px-4 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-800 transition shadow-sm flex items-center justify-center gap-1.5"
+            disabled={isLoading}
+            className="w-full rounded bg-blue-700 px-4 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-800 disabled:opacity-50 transition shadow-sm flex items-center justify-center gap-1.5"
           >
-            {isLoginView ? "Sign In to Console" : "Register and Log In"}
-            <ArrowRight className="size-3.5" />
+            {isLoading ? (
+              <>
+                <Loader2 className="size-4 animate-spin" />
+                <span>Processing...</span>
+              </>
+            ) : (
+              <>
+                <span>{isLoginView ? "Sign In to Console" : "Register and Log In"}</span>
+                <ArrowRight className="size-3.5" />
+              </>
+            )}
           </button>
         </form>
 
-        {/* Quick Demo Selector for fast evaluation */}
+        {/* Quick Demo Selector */}
         {isLoginView && (
           <div className="border-t border-neutral-200 pt-5 space-y-3">
             <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase text-slate-400">
@@ -239,8 +283,9 @@ const Auth = () => {
             </div>
             <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
               <button
+                disabled={isLoading}
                 onClick={() => handleQuickLogin("owner@egostix.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition"
+                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
               >
                 <div className="font-bold text-[9px] uppercase text-blue-700">
                   Owner Access
@@ -248,8 +293,9 @@ const Auth = () => {
                 owner@egostix.com
               </button>
               <button
+                disabled={isLoading}
                 onClick={() => handleQuickLogin("staff@egostix.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition"
+                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
               >
                 <div className="font-bold text-[9px] uppercase text-blue-700">
                   Staff Node
@@ -257,8 +303,9 @@ const Auth = () => {
                 staff@egostix.com
               </button>
               <button
+                disabled={isLoading}
                 onClick={() => handleQuickLogin("sarah@apex.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition"
+                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
               >
                 <div className="font-bold text-[9px] uppercase text-blue-700">
                   Apex Realty (Client)
@@ -266,8 +313,9 @@ const Auth = () => {
                 sarah@apex.com
               </button>
               <button
+                disabled={isLoading}
                 onClick={() => handleQuickLogin("david@pulse.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition"
+                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
               >
                 <div className="font-bold text-[9px] uppercase text-blue-700">
                   Pulse Ops (Client)

@@ -16,6 +16,8 @@ import {
   SheetClose,
 } from "@/components/ui/sheet";
 
+import { createClient } from "@/utils/supabase/client";
+
 const Header = () => {
   const path = usePathname();
   const basePath = path
@@ -26,10 +28,18 @@ const Header = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const savedUser = sessionStorage.getItem("egostix_session_user");
-      setIsLoggedIn(!!savedUser);
-    }
+    const supabase = createClient();
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setIsLoggedIn(!!session);
+    });
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      setIsLoggedIn(!!session);
+    });
+
+    return () => subscription.unsubscribe();
   }, [path]);
 
   return (
@@ -93,23 +103,13 @@ const Header = () => {
             ) : (
               <>
                 <Link
-                  href="/dashboard"
-                  onClick={() => {
-                    if (typeof window !== "undefined") {
-                      sessionStorage.setItem("egostix_auth_tab", "login");
-                    }
-                  }}
+                  href="/login"
                   className="text-xs font-mono font-semibold text-slate-700 hover:text-blue-700 px-2 py-2 transition"
                 >
                   Login
                 </Link>
                 <Link
-                  href="/dashboard"
-                  onClick={() => {
-                    if (typeof window !== "undefined") {
-                      sessionStorage.setItem("egostix_auth_tab", "signup");
-                    }
-                  }}
+                  href="/signup"
                   className="inline-flex items-center justify-center rounded bg-blue-700 px-3.5 py-1.5 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
                 >
                   Sign Up
@@ -146,12 +146,7 @@ const Header = () => {
               </Link>
             ) : (
               <Link
-                href="/dashboard"
-                onClick={() => {
-                  if (typeof window !== "undefined") {
-                    sessionStorage.setItem("egostix_auth_tab", "signup");
-                  }
-                }}
+                href="/signup"
                 className="inline-flex items-center justify-center rounded bg-blue-700 px-3 py-1.5 font-mono text-xs font-semibold text-white shadow-sm hover:bg-blue-800 transition"
               >
                 Sign Up
@@ -209,13 +204,8 @@ const Header = () => {
                     <div className="grid grid-cols-2 gap-2">
                       <SheetClose asChild>
                         <Link
-                          href="/dashboard"
-                          onClick={() => {
-                            if (typeof window !== "undefined") {
-                              sessionStorage.setItem("egostix_auth_tab", "login");
-                            }
-                            setOpen(false);
-                          }}
+                          href="/login"
+                          onClick={() => setOpen(false)}
                           className="flex items-center justify-center rounded border border-neutral-300 bg-white py-2 font-mono text-xs font-semibold text-slate-700 hover:bg-neutral-50 transition text-center shadow-2xs"
                         >
                           Login
@@ -224,13 +214,8 @@ const Header = () => {
 
                       <SheetClose asChild>
                         <Link
-                          href="/dashboard"
-                          onClick={() => {
-                            if (typeof window !== "undefined") {
-                              sessionStorage.setItem("egostix_auth_tab", "signup");
-                            }
-                            setOpen(false);
-                          }}
+                          href="/signup"
+                          onClick={() => setOpen(false)}
                           className="flex items-center justify-center rounded bg-blue-700 py-2 font-mono text-xs font-semibold text-white hover:bg-blue-800 transition text-center shadow-xs"
                         >
                           Sign Up
