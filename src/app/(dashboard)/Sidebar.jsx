@@ -13,6 +13,9 @@ import {
   Briefcase,
   Layers,
   ChevronDown,
+  LogOut,
+  User,
+  FileCode,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -22,15 +25,15 @@ const serviceNavMap = {
   "AI-Powered Business Website": { id: "service-websites", route: "/dashboard/service-websites", label: "AI Business Websites", icon: Shield },
   "SEO Pipeline": { id: "service-websites", route: "/dashboard/service-websites", label: "AI Business Websites", icon: Shield },
   "CRM Sync (HubSpot)": { id: "service-websites", route: "/dashboard/service-websites", label: "AI Business Websites", icon: Shield },
-  
+
   "AI Internal Tools (PulseOps ERP)": { id: "service-tools", route: "/dashboard/service-tools", label: "AI Internal Tools", icon: Layers },
   "Database Ops (PostgreSQL)": { id: "service-tools", route: "/dashboard/service-tools", label: "AI Internal Tools", icon: Layers },
   "GPS Fleet Analytics Routing": { id: "service-tools", route: "/dashboard/service-tools", label: "AI Internal Tools", icon: Layers },
-  
+
   "AI Workflow Automation": { id: "service-automation", route: "/dashboard/service-automation", label: "Workflow Automation", icon: TrendingUp },
   "WhatsApp API Integration": { id: "service-automation", route: "/dashboard/service-automation", label: "Workflow Automation", icon: TrendingUp },
   "EHR Database Synchronization": { id: "service-automation", route: "/dashboard/service-automation", label: "Workflow Automation", icon: TrendingUp },
-  
+
   "Creator Infrastructure": { id: "service-creator", route: "/dashboard/service-creator", label: "Creator Infrastructure", icon: Briefcase },
   "Stripe Membership Billing": { id: "service-creator", route: "/dashboard/service-creator", label: "Creator Infrastructure", icon: Briefcase },
   "Mux Video Streaming CDN": { id: "service-creator", route: "/dashboard/service-creator", label: "Creator Infrastructure", icon: Briefcase }
@@ -40,7 +43,6 @@ const Sidebar = () => {
   const pathname = usePathname();
   const {
     role,
-    setRole,
     activeTab,
     setActiveTab,
     clients,
@@ -48,6 +50,7 @@ const Sidebar = () => {
     setSelectedClientSlug,
     activeClient,
     logout,
+    currentUser,
   } = useDashboard();
 
   // Base client navigation items
@@ -78,6 +81,7 @@ const Sidebar = () => {
     { id: "leads", route: "/dashboard/leads", label: "Captured Leads", icon: Inbox },
     { id: "files", route: "/dashboard/files", label: "Shared Files", icon: FileText },
     { id: "upgrades", route: "/dashboard/upgrades", label: "Request Upgrades", icon: Layers },
+    { id: "profile", route: "/dashboard/profile", label: "Profile Settings", icon: User },
   ];
 
   const clientNav = [...baseClientNav, ...customModuleNav, ...trailingClientNav];
@@ -86,7 +90,9 @@ const Sidebar = () => {
     { id: "analysis", route: "/dashboard/analysis", label: "System Analysis", icon: LayoutDashboard },
     { id: "plan-it", route: "/dashboard/plan-it", label: "Plan it (Board)", icon: Trello },
     { id: "files", route: "/dashboard/files", label: "Client Files Sync", icon: FileText },
-    { id: "settings", route: "/dashboard/settings", label: "Publish Case Study", icon: Settings },
+    { id: "publish-case-study", route: "/dashboard/publish-case-study", label: "Publish Case Study", icon: FileCode },
+    { id: "profile", route: "/dashboard/profile", label: "Profile Settings", icon: User },
+    { id: "settings", route: "/dashboard/settings", label: "System ", icon: Settings },
   ];
 
   const ownerNav = [
@@ -95,12 +101,16 @@ const Sidebar = () => {
     { id: "clients", route: "/dashboard/clients", label: "Clients Directory", icon: Users },
     { id: "upgrades", route: "/dashboard/upgrades", label: "Service Requests", icon: Layers },
     { id: "leads", route: "/dashboard/leads", label: "Global Lead Hub", icon: Inbox },
-    { id: "settings", route: "/dashboard/settings", label: "Publish Case Study", icon: Settings },
+    { id: "publish-case-study", route: "/dashboard/publish-case-study", label: "Publish Case Study", icon: FileCode },
     { id: "client-settings", route: "/dashboard/client-settings", label: "Client Profile Manager", icon: Users },
+    { id: "profile", route: "/dashboard/profile", label: "Profile Settings", icon: User },
+    { id: "settings", route: "/dashboard/settings", label: "System ", icon: Settings },
   ];
 
   const activeNav =
     role === "client" ? clientNav : role === "staff" ? staffNav : ownerNav;
+
+  const displayEmail = currentUser?.email || "User Account";
 
   return (
     <aside className="w-64 border-r border-neutral-200 bg-white flex flex-col h-screen fixed left-0 top-0 z-30">
@@ -108,14 +118,14 @@ const Sidebar = () => {
       <div className="h-16 border-b border-neutral-200 flex items-center px-6 gap-3 justify-between bg-neutral-50/50">
         <Link
           href="/"
-          className="flex items-center gap-2 overflow-hidden h-12 w-28 redd"
+          className="flex items-center gap-2 overflow-hidden h-12 w-28"
         >
           <Image
             src="/egostix-media-trans.png"
             alt="Egostix Logo"
             width={500}
             height={56}
-            className="object-fill "
+            className="object-fill"
           />
         </Link>
         <span className="text-[9px] font-mono font-bold bg-blue-100 text-blue-700 px-1.5 py-0.5 rounded uppercase tracking-wider">
@@ -123,40 +133,28 @@ const Sidebar = () => {
         </span>
       </div>
 
-      {/* Role Simulator Switcher */}
-      <div className="p-4 border-b border-neutral-100 bg-neutral-50/20">
-        <label className="block text-[10px] font-mono font-semibold uppercase text-slate-500 tracking-wider mb-1.5">
-          Simulated User Role
-        </label>
-        <div className="relative">
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="w-full appearance-none rounded border border-neutral-300 bg-white px-3 py-2 text-xs font-mono text-slate-900 focus:border-blue-700 focus:outline-none pr-8 cursor-pointer shadow-sm hover:border-neutral-400 transition"
-          >
-            <option value="client">Client (Apex / Chronos)</option>
-            <option value="staff">Media Staff (Engineer)</option>
-            <option value="owner">Company Owner (Admin)</option>
-          </select>
-          <ChevronDown className="absolute right-2.5 top-2.5 size-3.5 text-slate-500 pointer-events-none" />
-        </div>
-      </div>
-
-      {/* Context Client Selector (Visible for Staff/Owners to toggle who they manage) */}
-      {(role === "owner" || role === "staff") && (
-        <div className="p-4 border-b border-neutral-100 bg-neutral-50/40">
-          <label className="block text-[10px] font-mono font-semibold uppercase text-slate-500 tracking-wider mb-1.5">
-            Active Client Context
-          </label>
+      {/* Context Client Selector (Visible when client tenants exist) */}
+      {(role === "owner" || role === "staff") && clients.length > 0 && (
+        <div className="p-4 border-b border-neutral-100 bg-neutral-50/40 space-y-1.5">
+          <div className="flex items-center justify-between">
+            <label className="block text-[10px] font-mono font-bold uppercase text-slate-500 tracking-wider">
+              Active Client Context
+            </label>
+            {activeClient?.activeServices && (
+              <span className="text-[9px] font-mono font-bold text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.2 rounded">
+                {activeClient.activeServices.length} Modules
+              </span>
+            )}
+          </div>
           <div className="relative">
             <select
               value={selectedClientSlug}
               onChange={(e) => setSelectedClientSlug(e.target.value)}
-              className="w-full appearance-none rounded border border-neutral-300 bg-white px-3 py-2 text-xs font-inter font-medium text-slate-900 focus:border-blue-700 focus:outline-none pr-8 cursor-pointer shadow-sm hover:border-neutral-400 transition"
+              className="w-full appearance-none rounded-lg border border-neutral-300 bg-white px-3 py-2 text-xs font-inter font-semibold text-slate-900 focus:border-blue-700 focus:outline-none pr-8 cursor-pointer shadow-xs hover:border-neutral-400 transition"
             >
               {clients.map((c) => (
                 <option key={c.slug} value={c.slug}>
-                  {c.slug === "egostix-internal" ? "Egostix Media (Agency Internal)" : c.shortName}
+                  {c.slug === "egostix-internal" ? "Egostix Media (Internal Agency)" : c.name}
                 </option>
               ))}
             </select>
@@ -166,16 +164,16 @@ const Sidebar = () => {
       )}
 
       {/* Client view displaying active profile context */}
-      {role === "client" && (
+      {role === "client" && activeClient && (
         <div className="p-4 border-b border-neutral-100 flex items-center gap-3">
-          <div className="size-8 rounded-full bg-blue-50 border border-neutral-200 overflow-hidden flex items-center justify-center font-mono font-bold text-xs text-blue-700">
-            {activeClient?.shortName.slice(0, 2).toUpperCase()}
+          <div className="size-9 rounded-xl bg-blue-50 border border-blue-200 overflow-hidden flex items-center justify-center font-mono font-bold text-xs text-blue-700 shadow-xs">
+            {activeClient.shortName ? activeClient.shortName.slice(0, 2).toUpperCase() : "CL"}
           </div>
           <div className="min-w-0 flex-1">
-            <h4 className="text-xs font-semibold text-slate-900 truncate">
-              {activeClient?.name}
+            <h4 className="text-xs font-bold font-mono text-slate-900 truncate">
+              {activeClient.name}
             </h4>
-            <p className="text-[10px] text-slate-500 font-mono">Client View</p>
+            <p className="text-[10px] text-slate-500 font-mono">Client Portal ({activeClient.activeServices?.length || 0} Modules)</p>
           </div>
         </div>
       )}
@@ -194,11 +192,10 @@ const Sidebar = () => {
               key={item.id}
               href={item.route}
               onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium font-inter transition-all duration-150 ${
-                isActive
-                  ? "bg-blue-50 text-blue-700 font-semibold border-l-2 border-blue-700 pl-2.5"
-                  : "text-slate-700 hover:bg-neutral-100 hover:text-slate-900"
-              }`}
+              className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium font-inter transition-all duration-150 ${isActive
+                ? "bg-blue-50 text-blue-700 font-semibold border-l-2 border-blue-700 pl-2.5"
+                : "text-slate-700 hover:bg-neutral-100 hover:text-slate-900"
+                }`}
             >
               <Icon
                 className={`size-4 ${isActive ? "text-blue-700" : "text-slate-500"}`}
@@ -234,11 +231,10 @@ const Sidebar = () => {
                   key={moduleConf.id}
                   href={moduleConf.route}
                   onClick={() => setActiveTab(moduleConf.id)}
-                  className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium font-inter transition-all duration-150 ${
-                    isActive
-                      ? "bg-blue-50 text-blue-700 font-semibold border-l-2 border-blue-700 pl-2.5"
-                      : "text-slate-700 hover:bg-neutral-100 hover:text-slate-900"
-                  }`}
+                  className={`w-full flex items-center gap-3 px-3 py-2 rounded text-xs font-medium font-inter transition-all duration-150 ${isActive
+                    ? "bg-blue-50 text-blue-700 font-semibold border-l-2 border-blue-700 pl-2.5"
+                    : "text-slate-700 hover:bg-neutral-100 hover:text-slate-900"
+                    }`}
                 >
                   <Icon
                     className={`size-4 ${isActive ? "text-blue-700" : "text-slate-500"}`}
@@ -251,30 +247,37 @@ const Sidebar = () => {
         )}
       </nav>
 
-      {/* Footer Info: User Credentials */}
-      <div className="p-4 border-t border-neutral-200 bg-neutral-50/50 flex flex-col gap-1.5">
-        <div className="flex items-center gap-2">
-          <div className="size-6 rounded-full bg-slate-200 border border-neutral-300 flex items-center justify-center font-mono font-bold text-[10px] text-slate-700 uppercase">
-            {role === "client" ? activeClient?.ownerName.slice(0, 2) : "EM"}
+      {/* Footer Info: Real Authenticated User Credentials + Settings Icon */}
+      <div className="p-4 border-t border-neutral-200 bg-neutral-50/50 flex flex-col gap-2">
+        <div className="flex items-center gap-2.5">
+          <div className="size-8 rounded-full bg-blue-100 border border-blue-200 flex items-center justify-center font-mono font-bold text-xs text-blue-700 uppercase shrink-0">
+            {displayEmail.slice(0, 2).toUpperCase()}
           </div>
-          <div className="min-w-0 flex flex-col">
-            <p className="text-[10px] font-semibold text-slate-900 truncate leading-tight">
-              {role === "client"
-                ? activeClient?.ownerName
-                : role === "staff"
-                  ? "Titas (Engineer)"
-                  : "Arun & Titas (Owners)"}
+          <div className="min-w-0 flex-1">
+            <p className="text-xs font-mono font-bold text-slate-900 truncate leading-tight">
+              {displayEmail}
             </p>
-            <p className="text-[8px] text-slate-500 font-mono truncate">
-              {role === "client" ? activeClient?.ownerEmail : "ops@egostix.com"}
-            </p>
-            <button
-              onClick={logout}
-              className="text-[9px] font-mono font-bold text-red-650 hover:text-red-750 hover:underline mt-1 text-left"
-            >
-              Sign Out
-            </button>
+            <span className="inline-block text-[9px] font-mono font-semibold uppercase text-blue-700 bg-blue-50 border border-blue-200 px-1.5 py-0.2 rounded mt-0.5">
+              {role.toUpperCase()}
+            </span>
           </div>
+        </div>
+
+        <div className="flex items-center gap-1.5 mt-1">
+          <Link
+            href="/dashboard/profile"
+            className="p-2 rounded border border-neutral-200 bg-white hover:bg-blue-50 hover:border-blue-200 text-slate-700 hover:text-blue-700 transition"
+            title="Profile & Account Settings"
+          >
+            <Settings className="size-3.5" />
+          </Link>
+          <button
+            onClick={logout}
+            className="flex-1 py-1.5 px-3 rounded border border-neutral-200 bg-white hover:bg-red-50 hover:border-red-200 hover:text-red-700 text-slate-700 font-mono text-xs font-semibold flex items-center justify-center gap-1.5 transition"
+          >
+            <LogOut className="size-3.5" />
+            <span>Sign Out</span>
+          </button>
         </div>
       </div>
     </aside>

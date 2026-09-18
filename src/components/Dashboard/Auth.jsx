@@ -8,9 +8,7 @@ import {
   Mail,
   User,
   Building2,
-  Sparkles,
   ArrowRight,
-  ShieldCheck,
   Loader2,
 } from "lucide-react";
 import Image from "next/image";
@@ -82,23 +80,6 @@ const Auth = () => {
       }
     } catch (err) {
       setError(err?.message || "An unexpected error occurred.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleQuickLogin = async (email) => {
-    setError("");
-    setIsLoading(true);
-    try {
-      const res = await loginAction(email, "password123");
-      if (!res.success) {
-        setError(res.error || `Could not log in as ${email}. Make sure user exists in Supabase.`);
-      } else if (refreshSession) {
-        await refreshSession();
-      }
-    } catch (err) {
-      setError(err?.message || "Quick login failed.");
     } finally {
       setIsLoading(false);
     }
@@ -273,58 +254,6 @@ const Auth = () => {
             )}
           </button>
         </form>
-
-        {/* Quick Demo Selector */}
-        {isLoginView && (
-          <div className="border-t border-neutral-200 pt-5 space-y-3">
-            <div className="flex items-center gap-1.5 text-[10px] font-mono font-bold uppercase text-slate-400">
-              <ShieldCheck className="size-4 text-slate-400" />
-              <span>One-Click Demo Credentials</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 text-[10px] font-mono">
-              <button
-                disabled={isLoading}
-                onClick={() => handleQuickLogin("owner@egostix.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
-              >
-                <div className="font-bold text-[9px] uppercase text-blue-700">
-                  Owner Access
-                </div>
-                owner@egostix.com
-              </button>
-              <button
-                disabled={isLoading}
-                onClick={() => handleQuickLogin("staff@egostix.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
-              >
-                <div className="font-bold text-[9px] uppercase text-blue-700">
-                  Staff Node
-                </div>
-                staff@egostix.com
-              </button>
-              <button
-                disabled={isLoading}
-                onClick={() => handleQuickLogin("sarah@apex.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
-              >
-                <div className="font-bold text-[9px] uppercase text-blue-700">
-                  Apex Realty (Client)
-                </div>
-                sarah@apex.com
-              </button>
-              <button
-                disabled={isLoading}
-                onClick={() => handleQuickLogin("david@pulse.com")}
-                className="rounded border border-neutral-200 hover:border-blue-600 px-2 py-1.5 bg-neutral-50 text-slate-700 text-left hover:text-blue-700 transition disabled:opacity-50"
-              >
-                <div className="font-bold text-[9px] uppercase text-blue-700">
-                  Pulse Ops (Client)
-                </div>
-                david@pulse.com
-              </button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );

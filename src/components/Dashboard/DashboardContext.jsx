@@ -7,7 +7,7 @@ import { addTaskAction, moveTaskAction, deleteTaskAction } from "@/actions/kanba
 import { deleteFileAction } from "@/actions/files";
 import { requestUpgradeAction, approveUpgradeAction, declineUpgradeAction } from "@/actions/upgrades";
 import { addLeadAction, toggleLeadStatusAction } from "@/actions/leads";
-import { updateClientAction } from "@/actions/clients";
+import { updateClientAction, createClientAccountAction } from "@/actions/clients";
 
 const DashboardContext = createContext();
 
@@ -19,56 +19,6 @@ export const useDashboard = () => {
   return context;
 };
 
-// Fallback demo dataset to prevent crashes if DB tables are empty before initial seed
-const FALLBACK_CLIENTS = [
-  {
-    slug: "egostix-internal",
-    name: "Egostix Media (Internal Agency)",
-    shortName: "Egostix Media",
-    logo: "/egostix-media-trans.png",
-    ownerName: "Titas (Owner)",
-    ownerEmail: "contact@egostix.com",
-    status: "Internal",
-    gaPropertyId: "412345678",
-    activeServices: [],
-    metrics: {
-      traffic: "45,200",
-      trafficChange: "+12.4%",
-      leads: "142",
-      leadsChange: "+18%",
-      conversionRate: "6.2%",
-      conversionChange: "+1.2%",
-      aiChatResponseTime: "1.2s",
-      activeChats: "5"
-    }
-  },
-  {
-    slug: "apex-realty-platform",
-    name: "Apex Luxury Real Estate Group",
-    shortName: "Apex Realty",
-    logo: "/work/apex-realty/apex-realty.jpg",
-    ownerName: "Sarah Jenkins",
-    ownerEmail: "sarah@apexrealty.com",
-    status: "Active",
-    gaPropertyId: null,
-    activeServices: [
-      "AI-Powered Business Website",
-      "SEO Pipeline",
-      "CRM Sync (HubSpot)"
-    ],
-    metrics: {
-      traffic: "12,480",
-      trafficChange: "+18%",
-      leads: "294",
-      leadsChange: "+24%",
-      conversionRate: "4.8%",
-      conversionChange: "+0.8%",
-      aiChatResponseTime: "2.8s",
-      activeChats: "14"
-    }
-  }
-];
-
 export const DashboardProvider = ({ children }) => {
   const [role, setRole] = useState("owner");
   const [selectedClientSlug, setSelectedClientSlug] = useState("egostix-internal");
@@ -78,7 +28,7 @@ export const DashboardProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const [customProjects, setCustomProjects] = useState([]);
 
-  const [clients, setClients] = useState(FALLBACK_CLIENTS);
+  const [clients, setClients] = useState([]);
   const [kanbanTasks, setKanbanTasks] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
   const [serviceUpgrades, setServiceUpgrades] = useState([]);
@@ -114,8 +64,14 @@ export const DashboardProvider = ({ children }) => {
         if (profile.client_slug) setSelectedClientSlug(profile.client_slug);
       } else {
         // Default role based on email if profile not inserted yet
-        if (session.user.email?.includes("owner") || session.user.email?.includes("egostix.com")) {
+        const userEmail = session.user.email?.toLowerCase() || "";
+        if (
+          userEmail.includes("owner") ||
+          userEmail.includes("egostix.com")
+        ) {
           setRole("owner");
+        } else if (userEmail.includes("staff") || userEmail.includes("engineer")) {
+          setRole("staff");
         } else {
           setRole("client");
         }
@@ -124,6 +80,7 @@ export const DashboardProvider = ({ children }) => {
       // Fetch database records (RLS isolates client data automatically)
       const [
         { data: clientsRes },
+        { data: profilesRes },
         { data: tasksRes },
         { data: filesRes },
         { data: upgradesRes },
@@ -131,6 +88,7 @@ export const DashboardProvider = ({ children }) => {
         { data: projectsRes }
       ] = await Promise.all([
         supabase.from("clients").select("*"),
+        supabase.from("profiles").select("*"),
         supabase.from("kanban_tasks").select("*"),
         supabase.from("uploaded_files").select("*"),
         supabase.from("service_upgrades").select("*"),
@@ -138,31 +96,98 @@ export const DashboardProvider = ({ children }) => {
         supabase.from("custom_projects").select("*")
       ]);
 
-      if (clientsRes && clientsRes.length > 0) {
-        const formattedClients = clientsRes.map((c) => ({
-          slug: c.slug,
-          name: c.name,
-          shortName: c.short_name || c.name,
-          logo: c.logo_url || "/egostix-media-trans.png",
-          ownerName: c.owner_name,
-          ownerEmail: c.owner_email,
-          status: c.status || "Active",
-          gaPropertyId: c.ga_property_id,
-          activeServices: c.active_services || [],
-          metrics: {
-            traffic: c.metric_traffic || "0",
-            trafficChange: c.metric_traffic_chg || "+0%",
-            leads: c.metric_leads || "0",
-            leadsChange: c.metric_leads_chg || "+0%",
-            conversionRate: c.metric_conversion || "0.0%",
-            conversionChange: c.metric_conv_chg || "+0%",
-            aiChatResponseTime: c.metric_ai_latency || "0.0s",
-            activeChats: c.metric_active_chats || "0"
-          },
-          config: c.config || {}
-        }));
-        setClients(formattedClients);
+      const clientMap = new Map();
+
+      // 1. Process existing clients in clients table
+      if (clientsRes) {
+        clientsRes.forEach((c) => {
+          clientMap.set(c.slug, {
+            slug: c.slug,
+            name: c.name,
+            shortName: c.short_name || c.name,
+            logo: c.logo_url || "/egostix-media-trans.png",
+            ownerName: c.owner_name,
+            ownerEmail: c.owner_email,
+            status: c.status || "Active",
+            gaPropertyId: c.ga_property_id,
+            activeServices: c.active_services || [],
+            onboardingCompleted: c.onboarding_completed || false,
+            metrics: {
+              traffic: c.metric_traffic || "0",
+              trafficChange: c.metric_traffic_chg || "+0%",
+              leads: c.metric_leads || "0",
+              leadsChange: c.metric_leads_chg || "+0%",
+              conversionRate: c.metric_conversion || "0.0%",
+              conversionChange: c.metric_conv_chg || "+0%",
+              aiChatResponseTime: c.metric_ai_latency || "0.0s",
+              activeChats: c.metric_active_chats || "0"
+            },
+            config: c.config || {}
+          });
+        });
       }
+
+      // 2. Auto-heal: Match profiles with role === 'client' and synthesize missing tenant entries
+      if (profilesRes) {
+        const clientProfiles = profilesRes.filter((p) => p.role === "client");
+        for (const prof of clientProfiles) {
+          const expectedSlug =
+            prof.client_slug ||
+            (prof.company_name
+              ? prof.company_name.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-")
+              : prof.email
+              ? prof.email.split("@")[0].toLowerCase().replace(/[^a-z0-9]+/g, "-")
+              : `client-${prof.id.slice(0, 6)}`);
+
+          // Check if already mapped by slug or email
+          const existingClient =
+            clientMap.get(expectedSlug) ||
+            Array.from(clientMap.values()).find((c) => c.ownerEmail === prof.email);
+
+          if (!existingClient) {
+            const synthesizedClient = {
+              slug: expectedSlug,
+              name: prof.company_name || prof.name || prof.full_name || "Client Portal",
+              shortName: (prof.company_name || prof.name || "Client").split(" ")[0],
+              logo: prof.avatar_url || "/egostix-media-trans.png",
+              ownerName: prof.full_name || prof.name || "Client Owner",
+              ownerEmail: prof.email || "",
+              status: "Active",
+              activeServices: ["AI-Powered Business Website"],
+              onboardingCompleted: prof.onboarding_completed || false,
+              metrics: {
+                traffic: "0",
+                trafficChange: "+0%",
+                leads: "0",
+                leadsChange: "+0%",
+                conversionRate: "0.0%",
+                conversionChange: "+0%",
+                aiChatResponseTime: "0.0s",
+                activeChats: "0"
+              },
+              config: {}
+            };
+
+            clientMap.set(expectedSlug, synthesizedClient);
+
+            // Auto-heal database row asynchronously
+            supabase.from("clients").upsert({
+              slug: expectedSlug,
+              name: synthesizedClient.name,
+              short_name: synthesizedClient.shortName,
+              owner_name: synthesizedClient.ownerName,
+              owner_email: synthesizedClient.ownerEmail,
+              status: "Active",
+              active_services: synthesizedClient.activeServices,
+              created_at: new Date().toISOString()
+            }).then(({ error }) => {
+              if (error) console.warn("Auto-heal client record upsert warning:", error.message);
+            });
+          }
+        }
+      }
+
+      setClients(Array.from(clientMap.values()));
 
       if (tasksRes) {
         setKanbanTasks(
@@ -176,6 +201,8 @@ export const DashboardProvider = ({ children }) => {
             dueDate: t.due_date
           }))
         );
+      } else {
+        setKanbanTasks([]);
       }
 
       if (filesRes) {
@@ -192,6 +219,8 @@ export const DashboardProvider = ({ children }) => {
             status: f.status || "Uploaded"
           }))
         );
+      } else {
+        setUploadedFiles([]);
       }
 
       if (upgradesRes) {
@@ -205,6 +234,8 @@ export const DashboardProvider = ({ children }) => {
             status: u.status
           }))
         );
+      } else {
+        setServiceUpgrades([]);
       }
 
       if (leadsRes) {
@@ -221,10 +252,14 @@ export const DashboardProvider = ({ children }) => {
             chatLog: l.chat_log || []
           }))
         );
+      } else {
+        setLeads([]);
       }
 
       if (projectsRes) {
         setCustomProjects(projectsRes);
+      } else {
+        setCustomProjects([]);
       }
     } catch (err) {
       console.error("Error refreshing Supabase dashboard session:", err);
@@ -264,8 +299,17 @@ export const DashboardProvider = ({ children }) => {
       owner_name: updatedFields.ownerName,
       owner_email: updatedFields.ownerEmail,
       ga_property_id: updatedFields.gaPropertyId,
+      active_services: updatedFields.activeServices,
       config: updatedFields.config
     });
+  };
+
+  const createClientAccount = async (clientData) => {
+    const res = await createClientAccountAction(clientData);
+    if (res.success) {
+      await refreshSession();
+    }
+    return res;
   };
 
   const addKanbanTask = async (task) => {
@@ -367,20 +411,26 @@ export const DashboardProvider = ({ children }) => {
   };
 
   const logout = async () => {
-    await logoutAction();
-    setIsLoggedIn(false);
-    setCurrentUser(null);
+    try {
+      const supabase = createClient();
+      await supabase.auth.signOut();
+      await logoutAction();
+    } catch (e) {
+      console.error("Error signing out:", e);
+    } finally {
+      setIsLoggedIn(false);
+      setCurrentUser(null);
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
+    }
   };
 
-  const activeClient = clients.find((c) => c.slug === selectedClientSlug) || clients[0];
+  const activeClient = clients.find((c) => c.slug === selectedClientSlug) || clients[0] || null;
 
   useEffect(() => {
     setActiveTab("overview");
-    if (role === "client" && selectedClientSlug === "egostix-internal") {
-      const firstRealClient = clients.find((c) => c.slug !== "egostix-internal");
-      if (firstRealClient) setSelectedClientSlug(firstRealClient.slug);
-    }
-  }, [role, selectedClientSlug, clients]);
+  }, [role, selectedClientSlug]);
 
   return (
     <DashboardContext.Provider
@@ -412,6 +462,7 @@ export const DashboardProvider = ({ children }) => {
         logout,
         customProjects,
         updateClientDetails,
+        createClientAccount,
         isLoadingData
       }}
     >

@@ -5,10 +5,17 @@
 -- 1. Profiles Table (Extends auth.users)
 CREATE TABLE IF NOT EXISTS public.profiles (
   id           UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
-  name         TEXT NOT NULL,
+  name         TEXT,
+  full_name    TEXT,
+  email        TEXT,
+  company_name TEXT,
+  phone        TEXT,
+  avatar_url   TEXT,
   role         TEXT NOT NULL DEFAULT 'client', -- 'owner' | 'staff' | 'client'
   client_slug  TEXT,                            -- NULL for owner/staff
-  created_at   TIMESTAMPTZ DEFAULT NOW()
+  onboarding_completed BOOLEAN DEFAULT false,
+  created_at   TIMESTAMPTZ DEFAULT NOW(),
+  updated_at   TIMESTAMPTZ DEFAULT NOW()
 );
 
 -- 2. Clients Table (Tenants)
@@ -31,6 +38,7 @@ CREATE TABLE IF NOT EXISTS public.clients (
   metric_ai_latency  TEXT DEFAULT '0.0s',
   metric_active_chats TEXT DEFAULT '0',
   config             JSONB DEFAULT '{}',
+  onboarding_completed BOOLEAN DEFAULT false,
   created_at         TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -148,6 +156,8 @@ CREATE POLICY "profiles_admin_read" ON public.profiles FOR SELECT USING (get_my_
 -- Clients Policies
 CREATE POLICY "clients_admin" ON public.clients FOR ALL USING (get_my_role() IN ('owner', 'staff'));
 CREATE POLICY "clients_own" ON public.clients FOR SELECT USING (slug = get_my_client_slug());
+CREATE POLICY "clients_auth_insert" ON public.clients FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+CREATE POLICY "clients_own_update" ON public.clients FOR UPDATE USING (slug = get_my_client_slug());
 
 -- Relational Tables Policies
 CREATE POLICY "tasks_admin"    ON public.kanban_tasks    FOR ALL USING (get_my_role() IN ('owner', 'staff'));
