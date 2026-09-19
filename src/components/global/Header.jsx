@@ -24,6 +24,7 @@ const Header = () => {
     ? "/" + path.split("/").filter(Boolean).slice(0, 2).join("/")
     : "/";
 
+  const isDev = process.env.NODE_ENV === "development";
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -93,14 +94,14 @@ const Header = () => {
 
           {/* Desktop Auth Buttons */}
           <div className="flex items-center gap-3">
-            {isLoggedIn ? (
+            {isDev && isLoggedIn ? (
               <Link
                 href="/dashboard"
                 className="inline-flex items-center justify-center rounded bg-blue-700 px-4 py-2 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
               >
                 Dashboard
               </Link>
-            ) : (
+            ) : isDev ? (
               <>
                 <Link
                   href="/login"
@@ -115,6 +116,13 @@ const Header = () => {
                   Sign Up
                 </Link>
               </>
+            ) : (
+              <Link
+                href="/signup"
+                className="inline-flex items-center justify-center rounded bg-blue-700 px-3.5 py-1.5 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
+              >
+                Sign Up
+              </Link>
             )}
           </div>
         </div>
@@ -137,7 +145,7 @@ const Header = () => {
 
           {/* Mobile Right: Sign Up Button + Hamburger UI Sheet Trigger */}
           <div className="flex items-center gap-2">
-            {isLoggedIn ? (
+            {isDev && isLoggedIn ? (
               <Link
                 href="/dashboard"
                 className="inline-flex items-center justify-center rounded bg-blue-700 px-3 py-1.5 font-mono text-xs font-semibold text-white shadow-sm hover:bg-blue-800 transition"
@@ -197,32 +205,55 @@ const Header = () => {
                   })}
                 </nav>
 
-                {/* Bottom Actions Area: Auth deep subtle blue container + Standalone Contact CTA */}
+                {/* Bottom Actions Area: Auth container + Standalone Contact CTA */}
                 <div className="mt-auto border-t border-neutral-200 pt-5 space-y-3">
-                  {/* Subtle blue deep container for Login & Sign Up */}
-                  <div className="rounded-lg border border-blue-100 bg-blue-50/70 p-3 shadow-xs">
-                    <div className="grid grid-cols-2 gap-2">
+                  {isDev ? (
+                    isLoggedIn ? (
                       <SheetClose asChild>
                         <Link
-                          href="/login"
+                          href="/dashboard"
                           onClick={() => setOpen(false)}
-                          className="flex items-center justify-center rounded border border-neutral-300 bg-white py-2 font-mono text-xs font-semibold text-slate-700 hover:bg-neutral-50 transition text-center shadow-2xs"
+                          className="flex w-full items-center justify-center rounded bg-blue-700 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-800 transition text-center shadow-xs"
                         >
-                          Login
+                          Dashboard
                         </Link>
                       </SheetClose>
+                    ) : (
+                      <div className="rounded-lg border border-blue-100 bg-blue-50/70 p-3 shadow-xs">
+                        <div className="grid grid-cols-2 gap-2">
+                          <SheetClose asChild>
+                            <Link
+                              href="/login"
+                              onClick={() => setOpen(false)}
+                              className="flex items-center justify-center rounded border border-neutral-300 bg-white py-2 font-mono text-xs font-semibold text-slate-700 hover:bg-neutral-50 transition text-center shadow-2xs"
+                            >
+                              Login
+                            </Link>
+                          </SheetClose>
 
-                      <SheetClose asChild>
-                        <Link
-                          href="/signup"
-                          onClick={() => setOpen(false)}
-                          className="flex items-center justify-center rounded bg-blue-700 py-2 font-mono text-xs font-semibold text-white hover:bg-blue-800 transition text-center shadow-xs"
-                        >
-                          Sign Up
-                        </Link>
-                      </SheetClose>
-                    </div>
-                  </div>
+                          <SheetClose asChild>
+                            <Link
+                              href="/signup"
+                              onClick={() => setOpen(false)}
+                              className="flex items-center justify-center rounded bg-blue-700 py-2 font-mono text-xs font-semibold text-white hover:bg-blue-800 transition text-center shadow-xs"
+                            >
+                              Sign Up
+                            </Link>
+                          </SheetClose>
+                        </div>
+                      </div>
+                    )
+                  ) : (
+                    <SheetClose asChild>
+                      <Link
+                        href="/signup"
+                        onClick={() => setOpen(false)}
+                        className="flex w-full items-center justify-center rounded bg-blue-700 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-800 transition text-center shadow-xs"
+                      >
+                        Sign Up
+                      </Link>
+                    </SheetClose>
+                  )}
 
                   {/* Standalone Highlighted Main Contact CTA Button */}
                   <SheetClose asChild>
