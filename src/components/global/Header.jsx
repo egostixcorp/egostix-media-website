@@ -93,41 +93,36 @@ const Header = () => {
           </nav>
 
           {/* Desktop Auth Buttons */}
-          <div className="flex items-center gap-3">
-            {isDev && isLoggedIn ? (
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center justify-center rounded bg-blue-700 px-4 py-2 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
-              >
-                Dashboard
-              </Link>
-            ) : isDev ? (
-              <>
+          {isDev && (
+            <div className="flex items-center gap-3">
+              {isLoggedIn ? (
                 <Link
-                  href="/login"
-                  className="text-xs font-mono font-semibold text-slate-700 hover:text-blue-700 px-2 py-2 transition"
+                  href="/dashboard"
+                  className="inline-flex items-center justify-center rounded bg-blue-700 px-4 py-2 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
                 >
-                  Login
+                  Dashboard
                 </Link>
-                <Link
-                  href="/signup"
-                  className="inline-flex items-center justify-center rounded bg-blue-700 px-3.5 py-1.5 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
-                >
-                  Sign Up
-                </Link>
-              </>
-            ) : (
-              <Link
-                href="/signup"
-                className="inline-flex items-center justify-center rounded bg-blue-700 px-3.5 py-1.5 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
-              >
-                Sign Up
-              </Link>
-            )}
-          </div>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className="text-xs font-mono font-semibold text-slate-700 hover:text-blue-700 px-2 py-2 transition"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="inline-flex items-center justify-center rounded bg-blue-700 px-3.5 py-1.5 font-mono text-xs font-semibold text-white transition-all duration-200 hover:bg-blue-800 shadow-sm"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Mobile View: Logo on Left; Sign Up + Hamburger Menu Trigger on Right */}
+        {/* Mobile View: Logo on Left; Hamburger Menu Trigger on Right */}
         <div className="flex md:hidden items-center justify-between w-full">
           {/* Mobile Left: Egostix Media Logo ONLY */}
           <Link
@@ -143,22 +138,24 @@ const Header = () => {
             />
           </Link>
 
-          {/* Mobile Right: Sign Up Button + Hamburger UI Sheet Trigger */}
+          {/* Mobile Right: Auth Buttons (Dev only) + Hamburger UI Sheet Trigger */}
           <div className="flex items-center gap-2">
-            {isDev && isLoggedIn ? (
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center justify-center rounded bg-blue-700 px-3 py-1.5 font-mono text-xs font-semibold text-white shadow-sm hover:bg-blue-800 transition"
-              >
-                Dashboard
-              </Link>
-            ) : (
-              <Link
-                href="/signup"
-                className="inline-flex items-center justify-center rounded bg-blue-700 px-3 py-1.5 font-mono text-xs font-semibold text-white shadow-sm hover:bg-blue-800 transition"
-              >
-                Sign Up
-              </Link>
+            {isDev && (
+              isLoggedIn ? (
+                <Link
+                  href="/dashboard"
+                  className="inline-flex items-center justify-center rounded bg-blue-700 px-3 py-1.5 font-mono text-xs font-semibold text-white shadow-sm hover:bg-blue-800 transition"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  href="/signup"
+                  className="inline-flex items-center justify-center rounded bg-blue-700 px-3 py-1.5 font-mono text-xs font-semibold text-white shadow-sm hover:bg-blue-800 transition"
+                >
+                  Sign Up
+                </Link>
+              )
             )}
 
             <Sheet open={open} onOpenChange={setOpen}>
@@ -205,9 +202,9 @@ const Header = () => {
                   })}
                 </nav>
 
-                {/* Bottom Actions Area: Auth container + Standalone Contact CTA */}
+                {/* Bottom Actions Area: Auth container (Dev only) + Standalone Contact CTA */}
                 <div className="mt-auto border-t border-neutral-200 pt-5 space-y-3">
-                  {isDev ? (
+                  {isDev && (
                     isLoggedIn ? (
                       <SheetClose asChild>
                         <Link
@@ -243,16 +240,6 @@ const Header = () => {
                         </div>
                       </div>
                     )
-                  ) : (
-                    <SheetClose asChild>
-                      <Link
-                        href="/signup"
-                        onClick={() => setOpen(false)}
-                        className="flex w-full items-center justify-center rounded bg-blue-700 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-800 transition text-center shadow-xs"
-                      >
-                        Sign Up
-                      </Link>
-                    </SheetClose>
                   )}
 
                   {/* Standalone Highlighted Main Contact CTA Button */}
