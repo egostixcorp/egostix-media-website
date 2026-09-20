@@ -1,7 +1,9 @@
 import React from "react";
 import Link from "next/link";
 import WorkSection from "@/components/sections/WorkSection";
-import { projects } from "@/data/work";
+import { getProjects } from "@/data/work";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Our Work | Egostix Media",
@@ -9,11 +11,13 @@ export const metadata = {
 };
 
 const WorkPage = () => {
+  const publicProjects = getProjects();
+
   return (
     <main className="w-full px-6 py-24">
       <div className="mx-auto max-w-6xl space-y-16">
         {/* Render the Interactive Client Component */}
-        <WorkSection projects={projects} />
+        <WorkSection projects={publicProjects} />
 
         {/* Bottom Call to Action (Shared Server-side Component) */}
         <section className="border-t border-neutral-200 pt-12">

@@ -1,0 +1,87 @@
+{
+  "slug": "demo-project",
+  "category": "real-world",
+  "title": "Demo Business Automation & Web System",
+  "subtitle": "Complete reference case study demonstrating custom AI tools, CRM integration, and responsive web infrastructure.",
+  "client": "Demo Client Enterprise",
+  "service": "AI-Powered Business Websites",
+  "year": "2026",
+  "summary": "This is a demonstration case study showing how case study data in contents/work/demo-project.json seamlessly links with image assets stored in public/work/demo-project/. Use this as a reference template when adding new client projects.",
+  "image": "/work/demo-project/cover.png",
+  "accentColor": "blue",
+  "tags": [
+    "Next.js",
+    "Tailwind CSS",
+    "Supabase",
+    "AI Tools",
+    "TypeScript"
+  ],
+  "metrics": [
+    {
+      "value": "+45%",
+      "label": "Conversion Rate Growth"
+    },
+    {
+      "value": "10x",
+      "label": "Faster Lead Qualification"
+    },
+    {
+      "value": "100%",
+      "label": "Automated Sync Accuracy"
+    }
+  ],
+  "challenge": [
+    "The client struggled with manual lead tracking, slow customer response times, and fragmented data across multiple legacy tools.",
+    "Without a unified modern web platform, off-hours inquiries were lost and operational overhead continued to scale."
+  ],
+  "solution": [
+    "We engineered a custom AI-Powered Business Website built on Next.js and Supabase.",
+    "The platform features automated lead scoring, an embedded conversational AI assistant, and real-time CRM webhooks."
+  ],
+  "results": [
+    "Increased off-hours lead capture by 45% within the first 30 days.",
+    "Saved an estimated 15 operational hours per week per team member.",
+    "Achieved 100% automated synchronization between web forms and backend CRM."
+  ],
+  "journey": [
+    {
+      "phase": "Phase 01 — Web Foundation",
+      "title": "Custom Brand Website & CMS",
+      "description": "High-converting brand web presence with localized SEO and fast response times."
+    },
+    {
+      "phase": "Phase 02 — Commercial Scale",
+      "title": "E-Commerce & CRM Sync",
+      "description": "Integrated client portal with payment processing, inventory tracking, and lead CRM."
+    },
+    {
+      "phase": "Phase 03 — AI Internal Tool",
+      "title": "Automated Operations Console",
+      "description": "Custom AI dashboard converting raw customer inputs into qualified sales pipelines."
+    }
+  ],
+  "mockups": [
+    {
+      "title": "Phase 01: Desktop Storefront & Web App",
+      "description": "High-resolution desktop landing view with custom typography and search filters.",
+      "type": "desktop",
+      "badge": "Phase 01 — Web",
+      "image": "/work/demo-project/desktop.png"
+    },
+    {
+      "title": "Phase 02: Mobile Onboarding & Assistant",
+      "description": "Mobile responsive interface and client onboarding chat drawer.",
+      "type": "mobile",
+      "badge": "Phase 02 — Mobile",
+      "image": "/work/demo-project/mobile.png"
+    },
+    {
+      "title": "Phase 03: AI Internal Tool & Analytics",
+      "description": "Admin workspace featuring AI image generation, cataloging, and lead telemetry.",
+      "type": "analytics",
+      "badge": "Phase 03 — AI Tool",
+      "image": "/work/demo-project/analytics.png"
+    }
+  ],
+  "isPrivate": true
+}

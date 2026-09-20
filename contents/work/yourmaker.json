@@ -1,0 +1,104 @@
+{
+  "slug": "yourmaker",
+  "category": "real-world",
+  "title": "YourMaker",
+  "subtitle": "High-performance digital marketing and media agency web platform with automated lead acquisition.",
+  "client": "Tukai Karmakar",
+  "service": "AI-Powered Business Websites",
+  "year": "2026",
+  "summary": "A bespoke, high-converting web platform engineered for YourMaker Agency. Features custom typography, interactive service showcases, automated client onboarding drawers, and real-time CRM lead capture.",
+  "image": "/work/yourmaker/cover.png",
+  "liveUrl": "https://yourmaker.in",
+  "accentColor": "blue",
+  "isPrivate": false,
+  "tags": [
+    "Next.js",
+    "Tailwind CSS",
+    "Supabase",
+    "AI Tools",
+    "CRM Integration"
+  ],
+  "metrics": [
+    {
+      "value": "+45%",
+      "label": "Lead Conversion Rate"
+    },
+    {
+      "value": "3x",
+      "label": "Faster Client Onboarding"
+    },
+    {
+      "value": "100%",
+      "label": "Automated CRM Sync"
+    }
+  ],
+  "challenge": [
+    "YourMaker Agency faced significant bottlenecks with slow manual lead capture and off-hours prospect inquiry delays.",
+    "Without a high-converting digital web platform, potential clients seeking agency growth services experienced response friction, resulting in lost discovery opportunities and manual sales qualification overhead."
+  ],
+  "solution": [
+    "We engineered a custom AI-Powered Business Website built on Next.js for sub-second page delivery, localized SEO, and maximum conversion performance.",
+    "The platform features interactive service pricing calculators, instant client inquiry flows, and automated webhook synchronization connecting website leads directly to their backend CRM database."
+  ],
+  "results": [
+    "Increased lead-to-consultation conversion rate by 45% within the first month of deployment.",
+    "Accelerated new client onboarding speeds by 3x through automated intake workflows.",
+    "Achieved 100% automated synchronization between website contact drawers and agency CRM records."
+  ],
+  "journey": [
+    {
+      "phase": "Phase 01 — Web Foundation",
+      "title": "Custom Agency Website & CMS",
+      "description": "High-converting agency web presence with localized service showcases and fast response times."
+    },
+    {
+      "phase": "Phase 02 — Lead Automation",
+      "title": "Interactive Client Onboarding & CRM Sync",
+      "description": "Automated lead qualification pipeline with real-time CRM webhook synchronization."
+    }
+  ],
+  "mockups": [
+    {
+      "title": "Agency Desktop Storefront",
+      "description": "High-impact agency landing page featuring the hero statement 'WANNA GROW Your Business', dark-mode aesthetic, direct service call-to-actions, and mission breakdown designed for maximum client acquisition.",
+      "type": "desktop",
+      "badge": "Desktop View",
+      "image": "/work/yourmaker/mockup-desktop-4.webp"
+    },
+    {
+      "title": "Commercial Creative Portfolio",
+      "description": "Curated media showcase gallery featuring YourMaker's commercial creative portfolio, including high-end 3D product renders, food branding post designs, and mobile app launch graphics.",
+      "type": "desktop",
+      "badge": "Desktop View",
+      "image": "/work/yourmaker/mockup-desktop-5.webp"
+    },
+    {
+      "title": "Agency Core Services Showcase",
+      "description": "Bespoke agency services showcase featuring interactive dark-mode cards for Social Media Marketing & Paid Ads, Social Media Management, and Local Google Profile SEO optimization.",
+      "type": "desktop",
+      "badge": "Desktop View",
+      "image": "/work/yourmaker/mockup-desktop-6.webp"
+    },
+    {
+      "title": "Mobile Storefront Viewport",
+      "description": "Mobile application storefront hero view with responsive touch navigation, instant service drawer triggers, and localized brand typography.",
+      "type": "mobile",
+      "badge": "Mobile UI",
+      "image": "/work/yourmaker/mockup-1.webp"
+    },
+    {
+      "title": "Mobile Growth Consultation Drawer",
+      "description": "Interactive mobile growth consultation drawer showing service tier details, automated lead qualification, and real-time form validation.",
+      "type": "mobile",
+      "badge": "Mobile UI",
+      "image": "/work/yourmaker/mockup-2.webp"
+    },
+    {
+      "title": "Mobile Contact & Service Navigation Drawer",
+      "description": "Full mobile service navigation drawer featuring direct agency contact channels, project links, and instant client inquiry submission flows.",
+      "type": "mobile",
+      "badge": "Mobile UI",
+      "image": "/work/yourmaker/mockup-3.webp"
+    }
+  ]
+}

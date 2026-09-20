@@ -2,12 +2,15 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
-import { projects } from "@/data/work";
+import { ArrowLeft, ArrowRight, CheckCircle2, AlertCircle, Zap, Globe, ExternalLink } from "lucide-react";
+import { getAllProjects, getProjects } from "@/data/work";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }) {
-  const project = projects.find((p) => p.slug === params.projectSlug);
-  if (!project) {
+  const allProjects = getAllProjects();
+  const project = allProjects.find((p) => p.slug === params.projectSlug);
+  if (!project || project.isPrivate) {
     return {
       title: "Project Not Found | Egostix Media",
     };
@@ -20,7 +23,8 @@ export async function generateMetadata({ params }) {
 }
 
 export async function generateStaticParams() {
-  return projects.map((p) => ({
+  const publicProjects = getProjects();
+  return publicProjects.map((p) => ({
     projectSlug: p.slug,
   }));
 }
@@ -586,15 +590,20 @@ const MockupShell = ({ type, project, title }) => {
 
 const ProjectCaseStudy = ({ params }) => {
   const { projectSlug } = params;
-  const projectIndex = projects.findIndex((p) => p.slug === projectSlug);
-  const project = projects[projectIndex];
+  const allProjects = getAllProjects();
+  const projectIndex = allProjects.findIndex((p) => p.slug === projectSlug);
+  const project = allProjects[projectIndex];
 
-  if (!project) {
+  if (!project || project.isPrivate) {
     notFound();
   }
 
-  // Find the next project for the footer link
-  const nextProject = projects[(projectIndex + 1) % projects.length];
+  // Find the next public project for the footer link
+  const publicProjects = getProjects();
+  const currentPublicIndex = publicProjects.findIndex((p) => p.slug === projectSlug);
+  const nextProject = publicProjects.length > 0
+    ? publicProjects[(currentPublicIndex + 1) % publicProjects.length]
+    : null;
 
   return (
     <main className="w-full px-6 py-24">
@@ -632,6 +641,20 @@ const ProjectCaseStudy = ({ params }) => {
           <p className="font-inter text-base tablet:text-lg text-neutral-600 leading-relaxed font-light">
             {project.subtitle}
           </p>
+          {project.liveUrl && (
+            <div className="pt-2">
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white font-mono text-xs font-semibold shadow-sm transition-all hover:gap-2.5"
+              >
+                <Globe className="size-4" />
+                <span>Visit Live Site</span>
+                <ExternalLink className="size-3.5 opacity-80" />
+              </a>
+            </div>
+          )}
         </header>
 
         {/* Hero Image */}
@@ -683,9 +706,13 @@ const ProjectCaseStudy = ({ params }) => {
               {project.challenge.map((paragraph, index) => (
                 <p
                   key={index}
-                  className="text-sm tablet:text-base leading-relaxed"
+                  className="text-sm tablet:text-base leading-relaxed flex items-start gap-3"
                 >
-                  {paragraph}
+                  <AlertCircle
+                    size={20}
+                    className="mt-0.5 shrink-0 text-amber-600"
+                  />
+                  <span>{paragraph}</span>
                 </p>
               ))}
             </div>
@@ -702,9 +729,13 @@ const ProjectCaseStudy = ({ params }) => {
               {project.solution.map((paragraph, index) => (
                 <p
                   key={index}
-                  className="text-sm tablet:text-base leading-relaxed"
+                  className="text-sm tablet:text-base leading-relaxed flex items-start gap-3"
                 >
-                  {paragraph}
+                  <Zap
+                    size={20}
+                    className="mt-0.5 shrink-0 text-emerald-600"
+                  />
+                  <span>{paragraph}</span>
                 </p>
               ))}
             </div>
@@ -734,54 +765,104 @@ const ProjectCaseStudy = ({ params }) => {
           </div>
         </section>
 
-        {/* MULTIPLE SYSTEM MOCKUPS LAYOUT (Consistent for all case studies) */}
-        <section className="space-y-10 border-t border-neutral-200 pt-12">
-          <div className="space-y-3">
-            <h2 className="font-mono text-2xl tracking-tight text-neutral-900">
-              System Architecture & Interface Mockups
-            </h2>
-            <p className="text-sm font-inter text-neutral-600 max-w-3xl leading-relaxed">
-              A comprehensive visual tour of the specialized custom control dashboards, operational analytics panels, 
-              and client-facing interfaces designed for this system.
-            </p>
-          </div>
+        {/* MULTIPLE SYSTEM MOCKUPS LAYOUT (Editorial Desktop & Clean Mobile Sections) */}
+        {(() => {
+          const desktopMockups = project.mockups?.filter((m) => m.type === "desktop" || m.type === "analytics") || [];
+          const mobileMockups = project.mockups?.filter((m) => m.type === "mobile") || [];
 
-          <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
-            {project.mockups?.map((mockup, index) => (
-              <div key={index} className="group flex flex-col justify-between bg-neutral-50/50 border border-neutral-200 rounded-lg p-5 hover:bg-neutral-50 transition-all">
-                {/* Image Mockup or CSS Drawn Vector Mockup Component */}
-                <div className="relative w-full flex items-center justify-center bg-neutral-900/5 rounded border border-neutral-200/40 mb-4 h-[230px] overflow-hidden">
-                  {mockup.image ? (
-                    <Image
-                      src={mockup.image}
-                      alt={mockup.title}
-                      fill
-                      sizes="(max-w-768px) 100vw, 33vw"
-                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
-                    />
-                  ) : (
-                    <div className="w-full h-full p-4 flex items-center justify-center">
-                      <MockupShell type={mockup.type} project={project} title={mockup.title} />
+          if (desktopMockups.length > 0 || mobileMockups.length > 0) {
+            return (
+              <div className="space-y-20 border-t border-neutral-200 pt-16">
+                {/* Editorial Desktop Mockups Section */}
+                {desktopMockups.length > 0 && (
+                  <section className="space-y-16">
+                    {desktopMockups.map((mockup, index) => {
+                      const isEven = index % 2 === 0;
+
+                      return (
+                        <div
+                          key={index}
+                          className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-center"
+                        >
+                          {/* Image Block */}
+                          <div
+                            className={`w-full md:col-span-7 ${
+                              isEven ? "md:order-1" : "md:order-2"
+                            }`}
+                          >
+                            {mockup.image ? (
+                              <div className="relative w-full overflow-hidden transition-all duration-500 bg-transparent group">
+                                <Image
+                                  src={mockup.image}
+                                  alt={mockup.description || "Desktop Mockup"}
+                                  width={1600}
+                                  height={950}
+                                  className="w-full h-auto object-contain transition-transform duration-700 ease-out group-hover:scale-[1.015]"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-full h-[320px] p-6 flex items-center justify-center rounded-2xl bg-neutral-950 overflow-hidden shadow-md">
+                                <MockupShell type={mockup.type} project={project} title={mockup.title} />
+                              </div>
+                            )}
+                          </div>
+
+                          {/* Editorial Description Text Block */}
+                          <div
+                            className={`w-full md:col-span-5 flex flex-col justify-center ${
+                              isEven ? "md:order-2" : "md:order-1"
+                            }`}
+                          >
+                            <p className="text-base md:text-lg font-inter text-neutral-700 leading-relaxed font-normal">
+                              {mockup.description}
+                            </p>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </section>
+                )}
+
+                {/* Standing Mobile Mockups Section */}
+                {mobileMockups.length > 0 && (
+                  <section className={`space-y-8 ${desktopMockups.length > 0 ? "pt-12 border-t border-neutral-200/80" : ""}`}>
+                    <div className="grid gap-8 grid-cols-1 md:grid-cols-3">
+                      {mobileMockups.map((mockup, index) => (
+                        <div key={index} className="group flex flex-col justify-between space-y-3">
+                          <div className="w-full flex items-center justify-center">
+                            {mockup.image ? (
+                              <div className="relative w-full rounded-2xl overflow-hidden shadow-xs hover:shadow-lg transition-all duration-300">
+                                <Image
+                                  src={mockup.image}
+                                  alt={mockup.description || "Mobile Mockup"}
+                                  width={800}
+                                  height={1200}
+                                  className="w-full h-auto object-contain rounded-2xl transition-transform duration-500 ease-out group-hover:scale-[1.02]"
+                                />
+                              </div>
+                            ) : (
+                              <div className="w-full h-[280px] p-4 flex items-center justify-center rounded-2xl bg-neutral-900 overflow-hidden">
+                                <MockupShell type={mockup.type} project={project} title={mockup.title} />
+                              </div>
+                            )}
+                          </div>
+
+                          <div>
+                            <p className="text-xs md:text-sm font-inter text-neutral-600 leading-relaxed">
+                              {mockup.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  )}
-                </div>
-                
-                {/* Short, Important Copy Annotation */}
-                <div className="space-y-2">
-                  <span className="inline-block text-[9px] font-mono uppercase tracking-wider text-blue-600 bg-blue-50 border border-blue-100 rounded px-2 py-0.5">
-                    {mockup.badge}
-                  </span>
-                  <h4 className="font-mono text-sm font-bold text-neutral-900">
-                    {mockup.title}
-                  </h4>
-                  <p className="text-xs font-inter text-neutral-600 leading-relaxed">
-                    {mockup.description}
-                  </p>
-                </div>
+                  </section>
+                )}
               </div>
-            ))}
-          </div>
-        </section>
+            );
+          }
+
+          return null;
+        })()}
 
         {/* Technologies Used Bar */}
         <section className="border-t border-b border-neutral-200 py-6">

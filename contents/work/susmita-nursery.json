@@ -1,0 +1,104 @@
+{
+  "slug": "susmita-nursery",
+  "category": "real-world",
+  "title": "Susmita Nursery",
+  "subtitle": "Next-Gen Botanical E-Commerce Platform with Interactive 3D Desk Plant Previews",
+  "client": "Yuvraj Biswas",
+  "service": "AI-Powered Business Websites",
+  "year": "2026",
+  "summary": "A high-end e-commerce botanical platform engineered for Susmita Nursery. Features an expansive indoor plant catalog, interactive 3D desktop plant preview models, localized delivery calculators, and frictionless mobile order drawers.",
+  "image": "/work/susmita-nursery/cover.png",
+  "liveUrl": "https://susmitanursery.com",
+  "accentColor": "emerald",
+  "isPrivate": false,
+  "tags": [
+    "Next.js",
+    "Tailwind CSS",
+    "Supabase",
+    "3D Visualizer",
+    "E-Commerce"
+  ],
+  "metrics": [
+    {
+      "value": "+180%",
+      "label": "Online Plant Sales Growth"
+    },
+    {
+      "value": "4.2x",
+      "label": "Higher Desk Preview Engagement"
+    },
+    {
+      "value": "< 1s",
+      "label": "Instant Catalog Load Speed"
+    }
+  ],
+  "challenge": [
+    "Susmita Nursery needed to transition from traditional local nursery sales to a nationwide digital e-commerce presence capable of showcasing indoor desktop plants effectively.",
+    "Traditional 2D static images failed to convey real plant dimensions, foliage texture, and desk placement scale, leading to high cart abandonment and customer uncertainty."
+  ],
+  "solution": [
+    "We engineered a high-performance Next.js botanical e-commerce platform integrated with interactive 3D plant visualizers, allowing customers to preview indoor desk plants in real-time.",
+    "Implemented a lightning-fast catalog search, automated inventory management via Supabase, and a streamlined mobile checkout flow with external seller links and direct WhatsApp order drawers."
+  ],
+  "results": [
+    "Achieved a 180% surge in online order conversions within the first 60 days of platform launch.",
+    "Increased user time-on-site by 4.2x driven by interactive 3D desktop plant preview features.",
+    "Reduced cart abandonment rates significantly through frictionless mobile navigation drawers and instant order triggers."
+  ],
+  "journey": [
+    {
+      "phase": "Phase 01 — Botanical E-Commerce Storefront",
+      "title": "High-Converting Catalog & Stock Filtering",
+      "description": "Custom plant catalog UI featuring real-time stock availability, care guides, and localized delivery calculators."
+    },
+    {
+      "phase": "Phase 02 — Interactive 3D Desk Preview & Order Drawer",
+      "title": "WebGL 3D Plant Visualizer & Mobile Checkout",
+      "description": "Interactive WebGL 3D plant preview models and automated order intake drawers."
+    }
+  ],
+  "mockups": [
+    {
+      "title": "Desktop Plant Catalog Grid",
+      "description": "Comprehensive desktop product grid displaying full botanical categories, real-time stock availability badges, and instant filter controls.",
+      "type": "desktop",
+      "badge": "Desktop View",
+      "image": "/work/susmita-nursery/mockup-desktop-1.png"
+    },
+    {
+      "title": "Featured Indoor Plant Showcase",
+      "description": "Featured indoor plant showcase section highlighting desk-friendly succulents, care guides, and interactive lighting recommendations.",
+      "type": "desktop",
+      "badge": "Desktop View",
+      "image": "/work/susmita-nursery/mockup-desktop-2.png"
+    },
+    {
+      "title": "Desktop Conversion & Order Hero",
+      "description": "Full-width desktop conversion hero view featuring direct consultation CTAs, customer review telemetry, and instant order triggers.",
+      "type": "analytics",
+      "badge": "Analytics Panel",
+      "image": "/work/susmita-nursery/mockup-desktop-3.png"
+    },
+    {
+      "title": "Mobile Product Detail & 3D View",
+      "description": "High-converting mobile product detail page with 3D desk plant visualizer, care requirements breakdown, and one-tap checkout.",
+      "type": "mobile",
+      "badge": "Mobile View",
+      "image": "/work/susmita-nursery/mockup-mobile-4.png"
+    },
+    {
+      "title": "Mobile Navigation & Care Sidebar",
+      "description": "Frictionless mobile navigation sidebar drawer enabling instant category browsing, cart management, and care tips.",
+      "type": "mobile",
+      "badge": "Mobile View",
+      "image": "/work/susmita-nursery/mockup-mobile-5.png"
+    },
+    {
+      "title": "Mobile Storefront Collection Banner",
+      "description": "Mobile storefront hero display featuring seasonal botanical banners, plant category collections, and rapid search integration.",
+      "type": "mobile",
+      "badge": "Mobile View",
+      "image": "/work/susmita-nursery/mockup-mobile-6.png"
+    }
+  ]
+}

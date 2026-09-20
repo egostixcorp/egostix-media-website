@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-const getProjects = () => {
+export const getAllProjects = () => {
   const dirPath = path.join(process.cwd(), "contents", "work");
   try {
     if (fs.existsSync(dirPath)) {
@@ -11,13 +11,24 @@ const getProjects = () => {
         const data = fs.readFileSync(filePath, "utf-8");
         return JSON.parse(data);
       });
-      // Sort projects by year descending (latest first)
       return list.sort((a, b) => Number(b.year) - Number(a.year));
     }
   } catch (error) {
     console.error("Error loading case studies dynamically:", error);
   }
   return [];
+};
+
+export const getProjects = () => {
+  const all = getAllProjects();
+  return all.filter((p) => !p.isPrivate);
+};
+
+export const getProjectBySlug = (slug) => {
+  const all = getAllProjects();
+  const found = all.find((p) => p.slug === slug);
+  if (!found || found.isPrivate) return null;
+  return found;
 };
 
 export const projects = getProjects();

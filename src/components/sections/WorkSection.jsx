@@ -26,8 +26,9 @@ const WorkSection = ({ projects }) => {
     }
   }, [projects]);
 
-  const realWorldProjects = allProjects.filter((p) => p.category === "real-world");
-  const skillProjects = allProjects.filter((p) => p.category === "skill-display");
+  const visibleProjects = (allProjects || []).filter((p) => !p.isPrivate);
+  const realWorldProjects = visibleProjects.filter((p) => p.category === "real-world");
+  const skillProjects = visibleProjects.filter((p) => p.category === "skill-display");
 
   // Render a project card in Grid Layout
   const renderGridCard = (project) => (
@@ -37,15 +38,15 @@ const WorkSection = ({ projects }) => {
     >
       <div>
         {/* Image Container */}
-        <div className="relative aspect-[3/2] w-full overflow-hidden bg-neutral-50 border-b border-neutral-200">
+        <div className="relative aspect-[16/9.5] w-full overflow-hidden bg-neutral-900 border-b border-neutral-200">
           <Image
             src={project.image}
             alt={project.title}
             fill
             sizes="(max-w-768px) 100vw, 50vw"
-            className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+            className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
           />
-          <div className="absolute left-4 top-4 rounded bg-neutral-950/85 px-2.5 py-1 text-[9px] font-mono uppercase tracking-wider text-white backdrop-blur-sm">
+          <div className="absolute left-3 top-3 rounded bg-neutral-950/85 px-2 py-0.5 text-[8px] font-mono uppercase tracking-wider text-white backdrop-blur-sm z-10">
             {project.service}
           </div>
         </div>
@@ -116,15 +117,15 @@ const WorkSection = ({ projects }) => {
       className="group grid grid-cols-1 md:grid-cols-[280px_1fr] overflow-hidden rounded-lg border border-neutral-200 bg-white transition-all duration-300 hover:border-blue-500 hover:shadow-md"
     >
       {/* Left side Image */}
-      <div className="relative aspect-[3/2] md:aspect-auto w-full min-h-[180px] overflow-hidden bg-neutral-50 border-b md:border-b-0 md:border-r border-neutral-200">
+      <div className="relative aspect-[16/9.5] md:aspect-auto w-full min-h-[180px] overflow-hidden bg-neutral-900 border-b md:border-b-0 md:border-r border-neutral-200">
         <Image
           src={project.image}
           alt={project.title}
           fill
           sizes="(max-w-768px) 100vw, 25vw"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+          className="object-cover object-top transition-transform duration-500 ease-out group-hover:scale-[1.02]"
         />
-        <div className="absolute left-3 top-3 rounded bg-neutral-950/85 px-2 py-0.5 text-[8px] font-mono uppercase tracking-wider text-white backdrop-blur-sm">
+        <div className="absolute left-3 top-3 rounded bg-neutral-950/85 px-2 py-0.5 text-[8px] font-mono uppercase tracking-wider text-white backdrop-blur-sm z-10">
           {project.service}
         </div>
       </div>
