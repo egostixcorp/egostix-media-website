@@ -1,7 +1,10 @@
-"use client";
-
 import React from "react";
 import ClientSettingsTab from "@/components/Dashboard/tabs/ClientSettings/ClientSettingsTab";
+
+export const metadata = {
+  title: "Client Profile Manager | Egostix Dashboard",
+  description: "Configure client organization settings, active service tiers, and integrations.",
+};
 
 export default function ClientSettingsPage() {
   return (

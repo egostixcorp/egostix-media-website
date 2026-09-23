@@ -1,29 +1,11 @@
-"use client";
-
 import React from "react";
-import { DashboardProvider } from "@/components/Dashboard/DashboardContext";
-import Sidebar from "./Sidebar";
+import DashboardClientLayout from "@/components/Dashboard/DashboardClientLayout";
 
-const DashboardShell = ({ children }) => {
-  return (
-    <div className="min-h-screen bg-neutral-50 flex text-slate-900 font-inter">
-      {/* Left Sidebar Menu */}
-      <Sidebar />
-
-      {/* Content Viewport Container */}
-      <div className="flex-1 pl-64 flex flex-col min-h-screen">
-        {children}
-      </div>
-    </div>
-  );
+export const metadata = {
+  title: "Dashboard | Egostix Media",
+  description: "Egostix Media management portal, system analytics, and delivery console.",
 };
 
-const DashBoardLayout = ({ children }) => {
-  return (
-    <DashboardProvider>
-      <DashboardShell>{children}</DashboardShell>
-    </DashboardProvider>
-  );
-};
-
-export default DashBoardLayout;
+export default function DashBoardLayout({ children }) {
+  return <DashboardClientLayout>{children}</DashboardClientLayout>;
+}

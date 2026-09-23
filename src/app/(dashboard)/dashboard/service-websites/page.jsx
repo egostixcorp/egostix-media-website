@@ -1,7 +1,10 @@
-"use client";
-
 import React from "react";
 import ServiceWebsitesTab from "@/components/Dashboard/tabs/Services/ServiceWebsitesTab";
+
+export const metadata = {
+  title: "AI Business Websites Console | Egostix Dashboard",
+  description: "Website performance telemetry, SEO rankings, Lighthouse scores, and CMS management.",
+};
 
 export default function ServiceWebsitesPage() {
   return (

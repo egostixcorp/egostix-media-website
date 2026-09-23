@@ -1,5 +1,11 @@
 import React from "react";
 
+export const metadata = {
+  title: "Our Approach | Egostix Media",
+  description:
+    "We engineer business outcomes through a repeatable four-stage operating model: Discover, Prototype, Integrate, and Scale.",
+};
+
 const steps = [
   {
     title: "Discover",

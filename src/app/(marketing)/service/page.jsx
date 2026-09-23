@@ -2,6 +2,12 @@ import Link from "next/link";
 import React from "react";
 import { services } from "@/data/servicesData";
 
+export const metadata = {
+  title: "Services & Systems | Egostix Media",
+  description:
+    "Explore our 4 AI-native service offerings: AI-Powered Business Websites, AI Internal Tools, Workflow Automation, and Creator Infrastructure.",
+};
+
 const methodologySteps = [
   {
     step: "01",

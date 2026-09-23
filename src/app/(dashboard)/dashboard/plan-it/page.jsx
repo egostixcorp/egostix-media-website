@@ -1,7 +1,10 @@
-"use client";
-
 import React from "react";
 import PlanItTab from "@/components/Dashboard/tabs/PlanIt/PlanItTab";
+
+export const metadata = {
+  title: "Plan-it Delivery Pipeline | Egostix Dashboard",
+  description: "Kanban project board, milestone roadmap, and feature delivery queue.",
+};
 
 export default function PlanItPage() {
   return (

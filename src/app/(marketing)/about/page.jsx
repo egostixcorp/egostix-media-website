@@ -1,5 +1,11 @@
 import React from "react";
 
+export const metadata = {
+  title: "About Us | Egostix Media",
+  description:
+    "Egostix Media is an AI-native productized software and media studio building scalable systems where creativity, engineering, and intelligence meet.",
+};
+
 const principles = [
   {
     title: "Systems, Not Campaigns",
