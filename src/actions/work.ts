@@ -188,6 +188,7 @@ export async function toggleCaseStudyVisibilityAction(
         .eq('slug', slug);
     } catch (e) {}
 
+    revalidatePath('/');
     revalidatePath('/work');
     revalidatePath(`/work/${slug}`);
     revalidatePath('/dashboard');
@@ -272,6 +273,7 @@ export async function publishCaseStudyAction(data: CaseStudyData): Promise<{
       // Optional Supabase sync failure non-blocking
     }
 
+    revalidatePath('/');
     revalidatePath('/work');
     revalidatePath(`/work/${cleanSlug}`);
     revalidatePath('/dashboard');
@@ -308,6 +310,7 @@ export async function deleteCaseStudyAction(slug: string): Promise<{
       // Ignore optional Supabase delete failure
     }
 
+    revalidatePath('/');
     revalidatePath('/work');
     revalidatePath('/dashboard');
     revalidatePath('/dashboard/publish-case-study');
