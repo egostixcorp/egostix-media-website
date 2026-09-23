@@ -1,135 +1,47 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import Link from "next/link";
 import { useDashboard } from "@/components/Dashboard/DashboardContext";
-import { BarChart, Bar, AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts";
+import GpmConnectModal from "@/components/Dashboard/modals/GpmConnectModal";
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid } from "recharts";
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
-import { TrendingUp, Activity, Globe, Eye, Search, ArrowUpRight, Shield, Layers } from "lucide-react";
+import {
+  TrendingUp,
+  Activity,
+  Globe,
+  Search,
+  ArrowUpRight,
+  Shield,
+  Layers,
+  Sparkles,
+  ExternalLink,
+  Settings,
+  AlertCircle,
+  CheckCircle2,
+  Radio
+} from "lucide-react";
 
-const analyticsData = {
-  "egostix-internal": {
-    activeNow: 8,
-    avgCtr: "15.2%",
-    locations: [
-      { city: "Kolkata", country: "IN", users: 4 },
-      { city: "New York", country: "US", users: 2 },
-      { city: "London", country: "GB", users: 2 }
-    ],
-    searchPerformance: [
-      { query: "egostix media digital agency", clicks: 220, impressions: 780, ctr: "28.2%", position: 1.0 },
-      { query: "ai business website development", clicks: 85, impressions: 1370, ctr: "6.2%", position: 3.8 },
-      { query: "custom erp development smb", clicks: 42, impressions: 380, ctr: "11.0%", position: 2.5 }
-    ],
-    pageViewsData: [
-      { day: "Mon", views: 950 },
-      { day: "Tue", views: 1050 },
-      { day: "Wed", views: 1200 },
-      { day: "Thu", views: 1100 },
-      { day: "Fri", views: 1300 },
-      { day: "Sat", views: 850 },
-      { day: "Sun", views: 900 }
-    ]
-  },
-  "apex-realty-platform": {
-    activeNow: 14,
-    avgCtr: "14.3%",
-    locations: [
-      { city: "Los Angeles", country: "US", users: 6 },
-      { city: "New York", country: "US", users: 4 },
-      { city: "London", country: "GB", users: 3 },
-      { city: "Berlin", country: "DE", users: 1 }
-    ],
-    searchPerformance: [
-      { query: "luxury villas malibu", clicks: 145, impressions: 1170, ctr: "12.4%", position: 1.2 },
-      { query: "malibu homes for sale", clicks: 92, impressions: 1080, ctr: "8.5%", position: 2.4 },
-      { query: "apex luxury real estate", clicks: 57, impressions: 258, ctr: "22.1%", position: 1.0 }
-    ],
-    pageViewsData: [
-      { day: "Mon", views: 1200 },
-      { day: "Tue", views: 1450 },
-      { day: "Wed", views: 1680 },
-      { day: "Thu", views: 1540 },
-      { day: "Fri", views: 1890 },
-      { day: "Sat", views: 2100 },
-      { day: "Sun", views: 2350 }
-    ]
-  },
-  "pulse-ops-erp": {
-    activeNow: 2,
-    avgCtr: "22.6%",
-    locations: [
-      { city: "Chicago", country: "US", users: 1 },
-      { city: "San Francisco", country: "US", users: 1 }
-    ],
-    searchPerformance: [
-      { query: "pulse logistics tracking", clicks: 310, impressions: 685, ctr: "45.2%", position: 1.0 },
-      { query: "illinois fleet distribution", clicks: 48, impressions: 1000, ctr: "4.8%", position: 5.6 },
-      { query: "pulseops erp", clicks: 24, impressions: 133, ctr: "18.0%", position: 1.2 }
-    ],
-    pageViewsData: [
-      { day: "Mon", views: 240 },
-      { day: "Tue", views: 280 },
-      { day: "Wed", views: 310 },
-      { day: "Thu", views: 290 },
-      { day: "Fri", views: 340 },
-      { day: "Sat", views: 180 },
-      { day: "Sun", views: 150 }
-    ]
-  },
-  "chronos-support-engine": {
-    activeNow: 6,
-    avgCtr: "16.4%",
-    locations: [
-      { city: "Seattle", country: "US", users: 3 },
-      { city: "Vancouver", country: "CA", users: 2 },
-      { city: "Portland", country: "US", users: 1 }
-    ],
-    searchPerformance: [
-      { query: "chronos health booking", clicks: 185, impressions: 750, ctr: "24.6%", position: 1.1 },
-      { query: "acupuncture seattle reservation", clicks: 74, impressions: 804, ctr: "9.2%", position: 2.8 },
-      { query: "chronos virtual assistant", clicks: 35, impressions: 227, ctr: "15.4%", position: 1.5 }
-    ],
-    pageViewsData: [
-      { day: "Mon", views: 850 },
-      { day: "Tue", views: 920 },
-      { day: "Wed", views: 980 },
-      { day: "Thu", views: 940 },
-      { day: "Fri", views: 1050 },
-      { day: "Sat", views: 620 },
-      { day: "Sun", views: 580 }
-    ]
-  },
-  "synth-academy": {
-    activeNow: 28,
-    avgCtr: "19.4%",
-    locations: [
-      { city: "New York", country: "US", users: 9 },
-      { city: "London", country: "GB", users: 7 },
-      { city: "Paris", country: "FR", users: 5 },
-      { city: "Tokyo", country: "JP", users: 4 },
-      { city: "Sydney", country: "AU", users: 3 }
-    ],
-    searchPerformance: [
-      { query: "synth academy creator", clicks: 820, impressions: 2530, ctr: "32.4%", position: 1.0 },
-      { query: "stripe membership nextjs", clicks: 412, impressions: 2780, ctr: "14.8%", position: 2.1 },
-      { query: "mux video integration cdn", clicks: 215, impressions: 1920, ctr: "11.2%", position: 3.4 }
-    ],
-    pageViewsData: [
-      { day: "Mon", views: 3200 },
-      { day: "Tue", views: 3500 },
-      { day: "Wed", views: 3800 },
-      { day: "Thu", views: 3600 },
-      { day: "Fri", views: 4100 },
-      { day: "Sat", views: 4500 },
-      { day: "Sun", views: 4800 }
-    ]
-  }
-};
-
-const AnalysisTab = () => {
+export default function AnalysisTab() {
   const { activeClient, role } = useDashboard();
-  const clientKey = activeClient?.slug || "egostix-internal";
-  const data = analyticsData[clientKey] || analyticsData["egostix-internal"];
+  const [isGpmModalOpen, setIsGpmModalOpen] = useState(false);
+
+  const gpmPropertyId = activeClient?.gaPropertyId || activeClient?.config?.gpmId || "";
+  const isGpmConnected = Boolean(gpmPropertyId && gpmPropertyId.trim().length > 0);
+
+  // Generate dynamic 7-day traffic trend based on active client metrics
+  const totalTraffic = parseInt(activeClient?.metrics?.traffic?.toString().replace(/,/g, "") || "0", 10);
+  const baseline = totalTraffic > 0 ? Math.round(totalTraffic / 7) : 0;
+  
+  const pageViewsData = [
+    { day: "Mon", views: Math.round(baseline * 0.85) },
+    { day: "Tue", views: Math.round(baseline * 0.95) },
+    { day: "Wed", views: Math.round(baseline * 1.15) },
+    { day: "Thu", views: Math.round(baseline * 1.05) },
+    { day: "Fri", views: Math.round(baseline * 1.25) },
+    { day: "Sat", views: Math.round(baseline * 0.8) },
+    { day: "Sun", views: Math.round(baseline * 0.9) }
+  ];
 
   const chartConfig = {
     views: {
@@ -139,27 +51,32 @@ const AnalysisTab = () => {
   };
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-200">
+    <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200 font-inter">
       {/* Context Banner */}
-      <div className="bg-white rounded-lg border border-neutral-200 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
-        <div className="space-y-1">
-          <h3 className="text-lg font-mono text-slate-900 font-semibold flex items-center gap-2">
-            <Activity className="size-5 text-blue-700" />
-            {role === "owner"
-              ? "Admin Operations & System Analysis"
-              : role === "staff"
-              ? "Engineering System Monitor & Performance"
-              : "Business Traffic & System Analytics"}
-          </h3>
-          <p className="text-xs text-slate-600 max-w-2xl font-inter">
+      <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 shadow-sm">
+        <div className="space-y-1 sm:space-y-1.5">
+          <div className="flex items-center gap-2">
+            <span className="p-1.5 sm:p-2 rounded-lg bg-blue-50 border border-blue-100 text-blue-700 shrink-0">
+              <Activity className="size-4 sm:size-5" />
+            </span>
+            <h3 className="text-lg sm:text-xl font-mono text-slate-900 font-bold">
+              {role === "owner"
+                ? "Admin Operations & System Analysis"
+                : role === "staff"
+                ? "Engineering System Monitor & Performance"
+                : "Business Traffic & System Analytics"}
+            </h3>
+          </div>
+          <p className="text-xs text-slate-600 max-w-2xl font-inter leading-relaxed">
             Monitoring active client infrastructure, live HTTP traffic streams, lead conversion metrics, and AI node latencies across Egostix cloud nodes.
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+
+        <div className="flex flex-wrap items-center gap-2 self-start md:self-auto">
           {activeClient?.activeServices?.map((service, index) => (
             <span
               key={index}
-              className="rounded bg-blue-50 border border-blue-100 text-[10px] font-mono text-blue-700 px-2 py-0.5"
+              className="rounded-md bg-blue-50 border border-blue-100 text-[10px] font-mono font-semibold text-blue-700 px-2.5 py-1"
             >
               {service}
             </span>
@@ -168,17 +85,17 @@ const AnalysisTab = () => {
       </div>
 
       {/* Metrics Cards */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="bg-white rounded-lg border border-neutral-200 p-5 shadow-sm space-y-3">
+      <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
+        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
               Web Inbound Traffic
             </span>
-            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5">
+            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5 shrink-0">
               {activeClient?.metrics?.trafficChange || "+12%"}
             </span>
           </div>
-          <div className="text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
             {activeClient?.metrics?.traffic || "0"}
           </div>
           <p className="text-[10px] text-slate-500 leading-tight">
@@ -186,16 +103,16 @@ const AnalysisTab = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-lg border border-neutral-200 p-5 shadow-sm space-y-3">
+        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
               AI Captured Leads
             </span>
-            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5">
+            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5 shrink-0">
               {activeClient?.metrics?.leadsChange || "+18%"}
             </span>
           </div>
-          <div className="text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
             {activeClient?.metrics?.leads || "0"}
           </div>
           <p className="text-[10px] text-slate-500 leading-tight">
@@ -203,16 +120,16 @@ const AnalysisTab = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-lg border border-neutral-200 p-5 shadow-sm space-y-3">
+        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
               System Conversion
             </span>
-            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5">
+            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5 shrink-0">
               {activeClient?.metrics?.conversionChange || "+0.8%"}
             </span>
           </div>
-          <div className="text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
             {activeClient?.metrics?.conversionRate || "5.4%"}
           </div>
           <p className="text-[10px] text-slate-500 leading-tight">
@@ -220,16 +137,16 @@ const AnalysisTab = () => {
           </p>
         </div>
 
-        <div className="bg-white rounded-lg border border-neutral-200 p-5 shadow-sm space-y-3">
+        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold">
+            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
               AI Concierge Latency
             </span>
-            <span className="text-[9px] font-mono font-bold bg-blue-100 text-blue-700 rounded px-1.5 py-0.5">
+            <span className="text-[9px] font-mono font-bold bg-blue-100 text-blue-700 rounded px-1.5 py-0.5 shrink-0">
               Active
             </span>
           </div>
-          <div className="text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
             {activeClient?.metrics?.aiChatResponseTime || "1.2s"}
           </div>
           <p className="text-[10px] text-slate-500 leading-tight">
@@ -238,26 +155,28 @@ const AnalysisTab = () => {
         </div>
       </div>
 
-      {/* Traffic Chart & Live Active Users */}
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2 bg-white rounded-lg border border-neutral-200 p-6 shadow-sm space-y-4">
-          <div className="flex items-center justify-between">
+      {/* Traffic Chart & Live Active Users (Grid with overflow protection) */}
+      <div className="grid gap-6 lg:grid-cols-3 w-full min-w-0">
+        {/* Weekly Pageview Dynamics Card (Mobile-Optimized & Contained) */}
+        <div className="lg:col-span-2 bg-white rounded-xl border border-neutral-200 p-4 sm:p-6 shadow-sm space-y-4 w-full min-w-0 overflow-hidden">
+          <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h4 className="text-sm font-mono font-semibold text-slate-900">
+              <h4 className="text-sm font-mono font-bold text-slate-900">
                 Weekly Pageview Dynamics
               </h4>
-              <p className="text-[11px] text-slate-500">
-                7-day traffic trend graph across production routes.
+              <p className="text-[11px] text-slate-500 font-inter">
+                7-day traffic trend telemetry across production routes.
               </p>
             </div>
-            <div className="flex items-center gap-1.5 text-xs font-mono text-blue-700 font-semibold bg-blue-50 px-2.5 py-1 rounded">
+            <div className="flex items-center gap-1.5 text-xs font-mono text-blue-700 font-semibold bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-md">
               <TrendingUp className="size-3.5" />
               <span>Real-Time Sync</span>
             </div>
           </div>
-          <div className="h-64 w-full">
-            <ChartContainer config={chartConfig} className="h-full w-full">
-              <AreaChart data={data.pageViewsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+
+          <div className="h-56 sm:h-64 w-full min-w-0 overflow-hidden pt-2">
+            <ChartContainer config={chartConfig} className="h-full w-full min-w-0">
+              <AreaChart data={pageViewsData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                 <defs>
                   <linearGradient id="fillViews" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="5%" stopColor="#2563eb" stopOpacity={0.4} />
@@ -274,87 +193,188 @@ const AnalysisTab = () => {
           </div>
         </div>
 
-        {/* Live Active Visitor Widget */}
-        <div className="bg-slate-900 text-white rounded-lg p-6 shadow-sm flex flex-col justify-between space-y-6">
-          <div className="space-y-4">
-            <div className="flex items-center justify-between">
-              <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold flex items-center gap-2">
-                <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
-                Active Right Now
-              </span>
-              <Globe className="size-4 text-slate-400" />
-            </div>
-            <div className="text-4xl font-mono font-bold text-white">
-              {data.activeNow}
-            </div>
-            <p className="text-xs text-slate-400 font-inter">
-              Live sessions on platform web routes across global regions.
-            </p>
-          </div>
-
-          <div className="border-t border-slate-800 pt-4 space-y-2">
-            <span className="text-[10px] font-mono uppercase text-slate-400 font-semibold block">
-              Top Session Cities
-            </span>
-            <div className="space-y-1.5">
-              {data.locations.map((loc, idx) => (
-                <div key={idx} className="flex justify-between items-center text-xs">
-                  <span className="text-slate-300 font-medium">{loc.city}, {loc.country}</span>
-                  <span className="font-mono text-blue-400 font-bold">{loc.users} live</span>
+        {/* Live Active Visitor / GPM Connection Card */}
+        <div className="bg-slate-900 text-white rounded-xl p-5 sm:p-6 shadow-sm flex flex-col justify-between space-y-6 min-w-0 overflow-hidden">
+          {isGpmConnected ? (
+            <>
+              {/* Connected GPM State */}
+              <div className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-400 font-bold flex items-center gap-2">
+                    <span className="size-2 rounded-full bg-emerald-400 animate-ping" />
+                    GPM Telemetry Live
+                  </span>
+                  <Globe className="size-4 text-slate-400" />
                 </div>
-              ))}
-            </div>
-          </div>
+                <div>
+                  <div className="text-3xl sm:text-4xl font-mono font-bold text-white">
+                    {activeClient?.metrics?.activeChats || "1"} Live
+                  </div>
+                  <p className="text-xs text-slate-400 font-inter mt-1">
+                    Real-time active session listening on property node.
+                  </p>
+                </div>
+              </div>
+
+              <div className="border-t border-slate-800 pt-4 space-y-2 font-mono text-xs">
+                <div className="flex justify-between items-center text-slate-400">
+                  <span>Connected GPM ID</span>
+                  <span className="text-blue-400 font-bold">{gpmPropertyId}</span>
+                </div>
+                <div className="flex justify-between items-center text-slate-400">
+                  <span>Telemetry Stream</span>
+                  <span className="text-emerald-400 font-semibold">Active & Synced</span>
+                </div>
+                {role === "client" ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsGpmModalOpen(true)}
+                    className="mt-2 w-full text-center py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[11px] font-mono transition"
+                  >
+                    Update Property ID →
+                  </button>
+                ) : (
+                  <Link
+                    href="/dashboard/client-settings"
+                    className="mt-2 block text-center py-2 px-3 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-[11px] font-mono transition"
+                  >
+                    Edit Property ID in Settings →
+                  </Link>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              {/* Disconnected GPM State (Actionable setup card) */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-amber-400 font-bold flex items-center gap-1.5">
+                    <Radio className="size-3.5 text-amber-400" />
+                    GPM / GA4 ID Unlinked
+                  </span>
+                  <Shield className="size-4 text-slate-500" />
+                </div>
+                <h5 className="text-base font-mono font-bold text-white">
+                  Connect Google Property ID
+                </h5>
+                <p className="text-xs text-slate-400 font-inter leading-relaxed">
+                  Link your Google Analytics 4 (GPM Measurement ID) to stream verified live visitors, global geographic telemetry, and session analytics.
+                </p>
+              </div>
+
+              <div className="border-t border-slate-800 pt-4 space-y-2.5">
+                {role === "client" ? (
+                  <button
+                    type="button"
+                    onClick={() => setIsGpmModalOpen(true)}
+                    className="w-full py-2.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-mono text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-sm min-h-[40px]"
+                  >
+                    <Settings className="size-3.5" />
+                    <span>Connect Google Property ID</span>
+                    <ArrowUpRight className="size-3.5" />
+                  </button>
+                ) : (
+                  <Link
+                    href="/dashboard/client-settings"
+                    className="w-full py-2.5 px-3 rounded-lg bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-mono text-xs font-semibold flex items-center justify-center gap-1.5 transition shadow-sm min-h-[40px]"
+                  >
+                    <Settings className="size-3.5" />
+                    <span>Configure GPM ID in Settings</span>
+                    <ArrowUpRight className="size-3.5" />
+                  </Link>
+                )}
+                <p className="text-[10px] font-mono text-slate-500 text-center">
+                  {role === "client" ? "Click to connect your Google Analytics ID" : "Configure once in Client Profile Manager"}
+                </p>
+              </div>
+            </>
+          )}
         </div>
       </div>
 
-      {/* Search Console Keywords Table */}
-      <div className="bg-white rounded-lg border border-neutral-200 shadow-sm p-6 space-y-4">
-        <div className="flex items-center justify-between">
+      {/* Google Search Console & Keyword Positions Card */}
+      <div className="bg-white rounded-xl border border-neutral-200 shadow-sm p-4 sm:p-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-100 pb-3">
           <div>
-            <h4 className="text-sm font-mono font-semibold text-slate-900 flex items-center gap-2">
-              <Search className="size-4 text-slate-500" />
-              Search Performance & Organic Keyword Positions
+            <h4 className="text-sm font-mono font-bold text-slate-900 flex items-center gap-2">
+              <Search className="size-4 text-blue-700" />
+              Google Search Console & Organic Indexing
             </h4>
             <p className="text-[11px] text-slate-500">
-              Query indexing rankings and impressions on Google Search Console node.
+              Query indexing rankings, search click-through rates, and Google organic keyword telemetry.
             </p>
           </div>
-          <span className="text-[10px] font-mono bg-neutral-100 text-slate-700 px-2 py-1 rounded border border-neutral-200">
-            Average CTR: {data.avgCtr}
+          <span className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold border self-start sm:self-auto ${
+            isGpmConnected
+              ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+              : "bg-neutral-100 text-slate-600 border-neutral-200"
+          }`}>
+            {isGpmConnected ? `Property Linked: ${gpmPropertyId}` : "Search Console Not Connected"}
           </span>
         </div>
 
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs font-inter">
-            <thead className="bg-neutral-50 text-[10px] font-mono uppercase text-slate-500 border-y border-neutral-200">
-              <tr>
-                <th className="py-2.5 px-3 font-semibold">Target Search Query</th>
-                <th className="py-2.5 px-3 font-semibold">Clicks</th>
-                <th className="py-2.5 px-3 font-semibold">Impressions</th>
-                <th className="py-2.5 px-3 font-semibold">CTR</th>
-                <th className="py-2.5 px-3 font-semibold">Avg Position</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-neutral-100">
-              {data.searchPerformance.map((item, idx) => (
-                <tr key={idx} className="hover:bg-neutral-50/60 transition-colors">
-                  <td className="py-3 px-3 font-medium text-slate-900 font-mono flex items-center gap-1.5">
-                    <span>{item.query}</span>
-                    <ArrowUpRight className="size-3 text-slate-400" />
-                  </td>
-                  <td className="py-3 px-3 text-slate-700 font-mono">{item.clicks}</td>
-                  <td className="py-3 px-3 text-slate-700 font-mono">{item.impressions}</td>
-                  <td className="py-3 px-3 font-mono font-semibold text-emerald-600">{item.ctr}</td>
-                  <td className="py-3 px-3 font-mono font-bold text-slate-900">#{item.position.toFixed(1)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        {isGpmConnected ? (
+          <div className="p-6 rounded-xl bg-neutral-50/60 border border-neutral-200 space-y-3">
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-900">
+              <CheckCircle2 className="size-4 text-emerald-600" />
+              <span>Google Property ID & Search Console Pipeline Active</span>
+            </div>
+            <p className="text-xs text-slate-600 font-inter leading-relaxed max-w-2xl">
+              Real-time Google search indexing is synchronizing with domain <strong className="text-slate-900">{activeClient?.name}</strong>. Clicks, impressions, and search query positions will refresh continuously on Google crawler cycles.
+            </p>
+            <div className="flex flex-wrap gap-2 pt-2">
+              <Link
+                href="/dashboard/service-websites"
+                className="text-xs font-mono font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition inline-flex items-center gap-1"
+              >
+                <span>View SEO Pipeline</span>
+                <ArrowUpRight className="size-3" />
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div className="p-6 rounded-xl bg-neutral-50/60 border border-dashed border-neutral-300 text-center space-y-3">
+            <div className="size-10 rounded-full bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center mx-auto">
+              <Search className="size-5" />
+            </div>
+            <div className="space-y-1">
+              <h5 className="font-mono text-xs font-bold text-slate-800">
+                No Search Console / GPM ID Configured
+              </h5>
+              <p className="text-xs text-slate-500 font-inter max-w-md mx-auto leading-relaxed">
+                Connect your Google Search Console Property or GPM ID to view real organic search query impressions, keyword positioning, and organic CTR.
+              </p>
+            </div>
+            {role === "client" ? (
+              <button
+                type="button"
+                onClick={() => setIsGpmModalOpen(true)}
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-mono text-xs font-semibold shadow-xs transition min-h-[40px]"
+              >
+                <Settings className="size-3.5" />
+                <span>Connect Google Property ID</span>
+              </button>
+            ) : (
+              <Link
+                href="/dashboard/client-settings"
+                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 text-white font-mono text-xs font-semibold shadow-xs transition min-h-[40px]"
+              >
+                <Settings className="size-3.5" />
+                <span>Configure GPM ID in Client Settings</span>
+              </Link>
+            )}
+          </div>
+        )}
       </div>
+
+      {/* GPM / Google Property ID Connection Modal */}
+      <GpmConnectModal
+        isOpen={isGpmModalOpen}
+        onClose={() => setIsGpmModalOpen(false)}
+        initialGpmId={gpmPropertyId}
+        clientName={activeClient?.name}
+        clientSlug={activeClient?.slug}
+      />
     </div>
   );
-};
-
-export default AnalysisTab;
+}

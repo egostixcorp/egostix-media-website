@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useState, useRef } from "react";
-import { UploadCloud, Camera, X, Loader2, CheckCircle2, AlertCircle } from "lucide-react";
+import { Camera, Trash2, Loader2, CheckCircle2, AlertCircle, Image as ImageIcon } from "lucide-react";
 import { createClient } from "@/utils/supabase/client";
 
 export default function AvatarUpload({ value = "", onChange, userName = "User" }) {
-  const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const [error, setError] = useState(null);
   const [uploadSuccess, setUploadSuccess] = useState(false);
@@ -54,7 +53,7 @@ export default function AvatarUpload({ value = "", onChange, userName = "User" }
         });
 
       if (uploadErr) {
-        // Fallback: If bucket doesn't exist yet, convert image to data URL for seamless UX
+        // Fallback: If bucket does not exist, convert image to data URL for seamless UX
         console.warn("Supabase storage upload fallback:", uploadErr.message);
         const reader = new FileReader();
         reader.onloadend = () => {
@@ -81,28 +80,6 @@ export default function AvatarUpload({ value = "", onChange, userName = "User" }
     }
   };
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(true);
-  };
-
-  const handleDragLeave = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-  };
-
-  const handleDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsDragging(false);
-
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleUpload(e.dataTransfer.files[0]);
-    }
-  };
-
   const handleFileSelect = (e) => {
     if (e.target.files && e.target.files[0]) {
       handleUpload(e.target.files[0]);
@@ -118,15 +95,16 @@ export default function AvatarUpload({ value = "", onChange, userName = "User" }
   };
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-3 font-inter">
       <label className="block text-[11px] font-mono uppercase text-slate-700 font-bold">
         Profile Photo & Avatar
       </label>
 
-      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5">
-        {/* Avatar Preview */}
-        <div className="relative group shrink-0">
-          <div className="size-20 rounded-2xl border-2 border-dashed border-neutral-300 bg-neutral-50 overflow-hidden flex items-center justify-center text-slate-400 shadow-xs relative">
+      {/* Single Unified Card: Avatar Preview + Direct Input Controls */}
+      <div className="rounded-xl border border-neutral-200 bg-neutral-50/60 p-4 sm:p-5 flex flex-col sm:flex-row items-center sm:items-center gap-4 sm:gap-5 shadow-xs transition">
+        {/* Avatar Visual Preview */}
+        <div className="relative shrink-0">
+          <div className="size-20 rounded-2xl border-2 border-neutral-200 bg-white overflow-hidden flex items-center justify-center text-slate-400 shadow-sm relative ring-4 ring-neutral-100">
             {value ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
@@ -135,42 +113,31 @@ export default function AvatarUpload({ value = "", onChange, userName = "User" }
                 className="size-full object-cover rounded-2xl"
               />
             ) : (
-              <span className="font-mono font-bold text-xl text-blue-700">
+              <span className="font-mono font-bold text-2xl text-blue-700">
                 {getInitials(userName)}
               </span>
             )}
 
             {isUploading && (
-              <div className="absolute inset-0 bg-slate-900/60 flex flex-col items-center justify-center text-white backdrop-blur-xs">
-                <Loader2 className="size-6 animate-spin" />
+              <div className="absolute inset-0 bg-slate-950/70 flex flex-col items-center justify-center text-white backdrop-blur-xs">
+                <Loader2 className="size-6 animate-spin text-blue-400" />
               </div>
             )}
           </div>
-
-          {value && !isUploading && (
-            <button
-              type="button"
-              onClick={handleRemove}
-              className="absolute -top-1.5 -right-1.5 p-1 rounded-full bg-red-600 text-white shadow-md hover:bg-red-700 transition"
-              title="Remove Avatar"
-            >
-              <X className="size-3" />
-            </button>
-          )}
         </div>
 
-        {/* Drag and Drop Zone */}
-        <div
-          onDragOver={handleDragOver}
-          onDragLeave={handleDragLeave}
-          onDrop={handleDrop}
-          onClick={() => fileInputRef.current?.click()}
-          className={`flex-1 w-full rounded-xl border-2 border-dashed p-4 text-center cursor-pointer transition flex flex-col items-center justify-center gap-1.5 ${
-            isDragging
-              ? "border-blue-700 bg-blue-50/60 ring-2 ring-blue-700/20"
-              : "border-neutral-300 bg-neutral-50/50 hover:border-blue-500 hover:bg-neutral-50"
-          }`}
-        >
+        {/* Action Controls & Metadata Info */}
+        <div className="min-w-0 flex-1 space-y-2 text-center sm:text-left w-full">
+          <div className="space-y-0.5">
+            <h5 className="font-mono text-xs font-bold text-slate-900">
+              {userName || "Your Profile"}
+            </h5>
+            <p className="text-[11px] text-slate-500 font-inter">
+              JPG, PNG, WebP up to 5MB. Photo will appear across platform headers and activity logs.
+            </p>
+          </div>
+
+          {/* Hidden File Input */}
           <input
             ref={fileInputRef}
             type="file"
@@ -179,17 +146,37 @@ export default function AvatarUpload({ value = "", onChange, userName = "User" }
             className="hidden"
           />
 
-          <div className="p-2 rounded-full bg-white border border-neutral-200 text-blue-700 shadow-xs">
-            <UploadCloud className="size-4" />
-          </div>
+          {/* Action Buttons Row */}
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 pt-1">
+            <button
+              type="button"
+              disabled={isUploading}
+              onClick={() => fileInputRef.current?.click()}
+              className="inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-blue-700 hover:bg-blue-800 disabled:opacity-50 text-white font-mono text-xs font-semibold shadow-xs transition min-h-[40px]"
+            >
+              {isUploading ? (
+                <>
+                  <Loader2 className="size-3.5 animate-spin" />
+                  <span>Uploading...</span>
+                </>
+              ) : (
+                <>
+                  <Camera className="size-3.5" />
+                  <span>{value ? "Change Photo" : "Upload Photo"}</span>
+                </>
+              )}
+            </button>
 
-          <div className="space-y-0.5">
-            <p className="text-xs font-mono font-semibold text-slate-800">
-              <span className="text-blue-700 underline underline-offset-2">Click to upload</span> or drag and drop photo
-            </p>
-            <p className="text-[10px] font-mono text-slate-500">
-              Supports JPG, PNG, WEBP, GIF, SVG (Max 5MB)
-            </p>
+            {value && !isUploading && (
+              <button
+                type="button"
+                onClick={handleRemove}
+                className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg border border-neutral-200 bg-white hover:bg-red-50 hover:border-red-200 text-red-600 font-mono text-xs font-semibold transition min-h-[40px]"
+              >
+                <Trash2 className="size-3.5" />
+                <span>Remove</span>
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -197,7 +184,7 @@ export default function AvatarUpload({ value = "", onChange, userName = "User" }
       {uploadSuccess && (
         <div className="flex items-center gap-2 text-xs font-mono text-emerald-700 bg-emerald-50 border border-emerald-200 p-2.5 rounded-lg">
           <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
-          <span>Photo uploaded to avatars storage bucket successfully!</span>
+          <span>Profile photo updated successfully!</span>
         </div>
       )}
 

@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function PublishCaseStudyPage() {
   return (
-    <div className="flex-1 overflow-y-auto max-w-7xl w-full mx-auto">
+    <div className="flex-1 max-w-7xl w-full mx-auto">
       <PublishCaseStudyTab />
     </div>
   );

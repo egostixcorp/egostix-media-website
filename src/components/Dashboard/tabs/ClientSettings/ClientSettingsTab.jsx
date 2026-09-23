@@ -49,6 +49,7 @@ const ClientSettingsTab = () => {
     name: activeClient?.name || "",
     ownerName: activeClient?.ownerName || "",
     ownerEmail: activeClient?.ownerEmail || "",
+    gaPropertyId: activeClient?.gaPropertyId || "",
     activeServices: activeClient?.activeServices || []
   });
 
@@ -59,6 +60,7 @@ const ClientSettingsTab = () => {
     ownerName: "",
     ownerEmail: "",
     password: "",
+    gaPropertyId: "",
     activeServices: []
   });
 
@@ -77,6 +79,7 @@ const ClientSettingsTab = () => {
         name: activeClient.name || "",
         ownerName: activeClient.ownerName || "",
         ownerEmail: activeClient.ownerEmail || "",
+        gaPropertyId: activeClient.gaPropertyId || activeClient.config?.gpmId || "",
         activeServices: activeClient.activeServices || []
       });
     }
@@ -139,6 +142,7 @@ const ClientSettingsTab = () => {
           ownerName: "",
           ownerEmail: "",
           password: "",
+          gaPropertyId: "",
           activeServices: []
         });
         setTimeout(() => setCreateSuccess(false), 4000);
@@ -186,23 +190,23 @@ const ClientSettingsTab = () => {
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
       {/* Context Banner */}
-      <div className="bg-white rounded-xl border border-neutral-200 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
-        <div className="space-y-1.5">
+      <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 shadow-sm">
+        <div className="space-y-1 sm:space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-lg bg-blue-50 border border-blue-100 text-blue-700">
-              <Users className="size-5" />
+            <span className="p-1.5 sm:p-2 rounded-lg bg-blue-50 border border-blue-100 text-blue-700 shrink-0">
+              <Users className="size-4 sm:size-5" />
             </span>
-            <h3 className="text-xl font-mono text-slate-900 font-bold">
+            <h3 className="text-lg sm:text-xl font-mono text-slate-900 font-bold">
               Client Profile & Credentials Manager
             </h3>
           </div>
           <p className="text-xs text-slate-600 max-w-2xl font-inter leading-relaxed">
-            Provision internal client credentials, assign service subscriptions, dispatch access invitations, and manage client databases.
+            Provision internal client credentials, assign service subscriptions, configure Google Analytics/GPM property IDs, and manage client databases.
           </p>
         </div>
 
         {/* Action Toggle Navigation */}
-        <div className="flex items-center bg-neutral-100 p-1 rounded-xl border border-neutral-200 shrink-0">
+        <div className="flex items-center bg-neutral-100 p-1 rounded-xl border border-neutral-200 shrink-0 self-start md:self-auto">
           <button
             onClick={() => setActiveTabSection("provision")}
             className={`px-3.5 py-2 rounded-lg text-xs font-mono font-semibold transition ${
@@ -240,7 +244,7 @@ const ClientSettingsTab = () => {
       {saveSuccess && (
         <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex items-center gap-3 text-green-800 text-xs font-mono shadow-xs">
           <CheckCircle2 className="size-5 text-green-600 shrink-0" />
-          <span>Client parameters & active services updated successfully! Sidebar navigation updated.</span>
+          <span>Client parameters, GPM Property ID & active services updated successfully!</span>
         </div>
       )}
 
@@ -260,7 +264,7 @@ const ClientSettingsTab = () => {
 
       {/* SECTION 1: PROVISIONING & ACTIVE CLIENT SERVICES */}
       {activeTabSection === "provision" && (
-        <div className="bg-white rounded-xl border border-neutral-200 p-6 shadow-sm space-y-6">
+        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-6 shadow-sm space-y-6">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-100 pb-4">
             <div className="space-y-1">
               <h4 className="text-xs font-mono font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
@@ -268,7 +272,7 @@ const ClientSettingsTab = () => {
                 Active Editing Context: <span className="text-blue-700">{activeClient?.name || "Client Portal"}</span>
               </h4>
               <p className="text-[11px] font-inter text-slate-500">
-                Update client info and toggle provisioned services to control sidebar service modules.
+                Update client credentials, Google Analytics (GPM) Property ID, and provisioned services.
               </p>
             </div>
 
@@ -294,7 +298,7 @@ const ClientSettingsTab = () => {
 
           <form onSubmit={handleSubmit} className="space-y-6 text-xs font-inter">
             {/* Basic Client Credentials & Info */}
-            <div className="grid gap-4 md:grid-cols-3">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
               <div className="space-y-1.5">
                 <label className="block text-[11px] font-mono uppercase text-slate-700 font-bold">
                   Client Organization Name *
@@ -331,6 +335,19 @@ const ClientSettingsTab = () => {
                   value={clientForm.ownerEmail}
                   onChange={(e) => setClientForm({ ...clientForm, ownerEmail: e.target.value })}
                   className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-xs font-inter focus:border-blue-700 focus:outline-none min-h-[44px]"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block text-[11px] font-mono uppercase text-slate-700 font-bold">
+                  Google Property / GPM ID
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. G-8R8XK08XKZ or 432890123"
+                  value={clientForm.gaPropertyId}
+                  onChange={(e) => setClientForm({ ...clientForm, gaPropertyId: e.target.value })}
+                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-xs font-mono text-slate-900 focus:border-blue-700 focus:outline-none min-h-[44px]"
                 />
               </div>
             </div>
@@ -478,6 +495,19 @@ const ClientSettingsTab = () => {
                   value={newClient.ownerEmail}
                   onChange={(e) => setNewClient({ ...newClient, ownerEmail: e.target.value })}
                   className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-xs font-inter focus:border-blue-700 focus:outline-none min-h-[44px]"
+                />
+              </div>
+
+              <div className="space-y-1.5">
+                <label className="block text-[11px] font-mono uppercase text-slate-700 font-bold">
+                  Google Property / GPM ID
+                </label>
+                <input
+                  type="text"
+                  placeholder="e.g. G-8R8XK08XKZ"
+                  value={newClient.gaPropertyId}
+                  onChange={(e) => setNewClient({ ...newClient, gaPropertyId: e.target.value })}
+                  className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-xs font-mono text-slate-900 focus:border-blue-700 focus:outline-none min-h-[44px]"
                 />
               </div>
             </div>

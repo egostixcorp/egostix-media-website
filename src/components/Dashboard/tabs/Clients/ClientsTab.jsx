@@ -11,13 +11,13 @@ const ClientsTab = () => {
   return (
     <div className="space-y-8 animate-in fade-in duration-200">
       {/* Context Banner */}
-      <div className="bg-white rounded-xl border border-neutral-200 p-6 flex flex-col md:flex-row md:items-center justify-between gap-6 shadow-sm">
-        <div className="space-y-1.5">
+      <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 shadow-sm">
+        <div className="space-y-1 sm:space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="p-2 rounded-lg bg-blue-50 border border-blue-100 text-blue-700">
-              <Users className="size-5" />
+            <span className="p-1.5 sm:p-2 rounded-lg bg-blue-50 border border-blue-100 text-blue-700 shrink-0">
+              <Users className="size-4 sm:size-5" />
             </span>
-            <h3 className="text-xl font-mono text-slate-900 font-bold">
+            <h3 className="text-lg sm:text-xl font-mono text-slate-900 font-bold">
               Egostix Media Clients Directory & Accounts
             </h3>
           </div>
@@ -25,13 +25,13 @@ const ClientsTab = () => {
             Directory of all provisioned client portals created via Client Profile Manager, active service modules, and tenant databases.
           </p>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-3 py-2 rounded-lg uppercase">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 w-full md:w-auto">
+          <span className="text-xs font-mono font-bold bg-blue-50 text-blue-700 border border-blue-200 px-3 py-2 rounded-lg uppercase text-center">
             Active Tenants: {clients.length}
           </span>
           <Link
             href="/dashboard/client-settings"
-            className="text-xs font-mono font-semibold bg-blue-700 hover:bg-blue-800 text-white px-3.5 py-2 rounded-lg transition inline-flex items-center gap-1.5 shadow-sm"
+            className="text-xs font-mono font-semibold bg-blue-700 hover:bg-blue-800 text-white px-3.5 py-2.5 rounded-lg transition inline-flex items-center justify-center gap-1.5 shadow-sm min-h-[44px]"
           >
             <Settings className="size-3.5" />
             <span>Manage Profiles & Credentials</span>

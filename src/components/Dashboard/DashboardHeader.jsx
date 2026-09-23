@@ -18,6 +18,7 @@ import {
   Briefcase,
   Activity,
   ChevronRight,
+  Menu,
   Zap
 } from "lucide-react";
 
@@ -174,7 +175,7 @@ const routeConfig = {
   }
 };
 
-const DashboardHeader = () => {
+const DashboardHeader = ({ onOpenMobileNav }) => {
   const pathname = usePathname();
   const { role, activeClient } = useDashboard();
 
@@ -202,65 +203,78 @@ const DashboardHeader = () => {
   };
 
   const roleLabels = {
-    owner: "Owner / Admin View",
-    staff: "Staff Engineer View",
-    client: "Client Portal View"
+    owner: "Owner View",
+    staff: "Staff View",
+    client: "Client Portal"
   };
 
   return (
-    <header className="sticky top-0 z-20 w-full border-b border-neutral-200 bg-white/95 backdrop-blur-md px-8 py-4 transition-all">
-      <div className="max-w-7xl mx-auto flex flex-col gap-3">
+    <header className="sticky top-0 z-30 w-full border-b border-neutral-200/80 bg-white/95 backdrop-blur-md px-4 sm:px-8 py-3 sm:py-4 transition-all shadow-xs">
+      <div className="max-w-7xl mx-auto flex flex-col gap-2.5 sm:gap-3">
         {/* Top Meta Navigation & Badges Row */}
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          {/* Breadcrumb Trail */}
-          <div className="flex items-center gap-2 text-xs font-mono text-neutral-500">
-            <span className="text-neutral-400">Dashboard</span>
-            <ChevronRight className="size-3 text-neutral-300" />
-            <span className="text-neutral-400">{currentConfig.category}</span>
-            <ChevronRight className="size-3 text-neutral-300" />
-            <span className="font-semibold text-neutral-900">{currentConfig.title}</span>
+        <div className="flex items-center justify-between gap-2 sm:gap-4">
+          {/* Left: Mobile Drawer Button + Breadcrumb Trail */}
+          <div className="flex items-center gap-2 min-w-0">
+            {/* Mobile Hamburger Drawer Trigger (44px min touch target) */}
+            <button
+              onClick={onOpenMobileNav}
+              type="button"
+              className="lg:hidden p-2 -ml-1 rounded-lg text-slate-700 hover:text-blue-700 hover:bg-neutral-100 border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-blue-600 transition flex items-center justify-center shrink-0 min-w-[40px] min-h-[40px]"
+              aria-label="Open Navigation Menu"
+            >
+              <Menu className="size-5" />
+            </button>
+
+            {/* Breadcrumb Trail */}
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] sm:text-xs font-mono text-neutral-500 truncate">
+              <span className="text-neutral-400 hidden xs:inline">Dashboard</span>
+              <ChevronRight className="size-3 text-neutral-300 hidden xs:inline shrink-0" />
+              <span className="text-neutral-400 truncate max-w-[80px] sm:max-w-none">{currentConfig.category}</span>
+              <ChevronRight className="size-3 text-neutral-300 shrink-0" />
+              <span className="font-semibold text-neutral-900 truncate">{currentConfig.title}</span>
+            </div>
           </div>
 
           {/* Right Status & Role Metadata */}
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
             {/* Active Client Context Badge */}
             {activeClient && (
-              <span className="inline-flex items-center gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 px-2.5 py-1 text-[10px] font-mono text-neutral-700">
-                <span className="size-1.5 rounded-full bg-blue-600" />
-                <span className="font-semibold">{activeClient.name}</span>
+              <span className="inline-flex items-center gap-1 sm:gap-1.5 rounded-md border border-neutral-200 bg-neutral-50 px-2 sm:px-2.5 py-1 text-[10px] font-mono text-neutral-700 max-w-[120px] sm:max-w-none truncate">
+                <span className="size-1.5 rounded-full bg-blue-600 shrink-0" />
+                <span className="font-semibold truncate">{activeClient.shortName || activeClient.name}</span>
               </span>
             )}
 
             {/* Role Badge */}
             <span
-              className={`inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-[10px] font-mono font-bold tracking-wide uppercase ${
+              className={`inline-flex items-center gap-1 rounded-md border px-2 sm:px-2.5 py-1 text-[10px] font-mono font-bold tracking-wide uppercase ${
                 roleBadgeStyles[role] || roleBadgeStyles.owner
               }`}
             >
-              <Zap className="size-3" />
-              <span>{roleLabels[role] || "Dashboard View"}</span>
+              <Zap className="size-3 shrink-0" />
+              <span>{roleLabels[role] || "Dashboard"}</span>
             </span>
 
             {/* Live Status Pill */}
-            <span className="hidden sm:inline-flex items-center gap-1.5 rounded-md border border-emerald-200 bg-emerald-50/80 px-2 py-1 text-[10px] font-mono text-emerald-700">
+            <span className="hidden md:inline-flex items-center gap-1.5 rounded-md border border-emerald-200 bg-emerald-50/80 px-2 py-1 text-[10px] font-mono text-emerald-700">
               <span className="size-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Live Sync</span>
+              <span>Live</span>
             </span>
           </div>
         </div>
 
         {/* Page Title & Context Description Row */}
-        <div className="flex items-start justify-between gap-4 pt-1">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2.5">
-              <div className="p-1.5 rounded-lg bg-neutral-100 text-neutral-800">
-                <Icon className="size-5 text-blue-700" />
+        <div className="flex items-start justify-between gap-4">
+          <div className="space-y-0.5 sm:space-y-1 min-w-0">
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              <div className="p-1 sm:p-1.5 rounded-lg bg-neutral-100 text-neutral-800 shrink-0">
+                <Icon className="size-4 sm:size-5 text-blue-700" />
               </div>
-              <h1 className="text-xl sm:text-2xl font-mono font-bold tracking-tight text-neutral-900">
+              <h1 className="text-lg sm:text-2xl font-mono font-bold tracking-tight text-neutral-900 truncate">
                 {currentConfig.title}
               </h1>
             </div>
-            <p className="text-xs sm:text-sm font-inter text-neutral-600 leading-relaxed max-w-3xl">
+            <p className="text-xs sm:text-sm font-inter text-neutral-600 leading-relaxed max-w-3xl line-clamp-2 sm:line-clamp-none">
               {description}
             </p>
           </div>
