@@ -6,14 +6,14 @@ import JsonLd from "@/components/global/JsonLd";
 export const metadata = {
   title: "About Us & Engineering Foundations | Egostix Media",
   description:
-    "Egostix Media is an AI-native productized software and media studio operating under Egostix Engineering Pvt. Ltd. We build business websites, internal tools, and workflow automations.",
+    "Egostix Media is an AI-native productized software studio operating under Egostix Engineering. Discover our philosophy, standards, and delivery model.",
   alternates: {
     canonical: "https://media.egostix.com/about",
   },
   openGraph: {
     title: "About Us & Engineering Foundations | Egostix Media",
     description:
-      "Egostix Media is an AI-native software studio under Egostix Engineering. Discover our philosophy, engineering standards, and productized delivery model.",
+      "Egostix Media is an AI-native productized software studio operating under Egostix Engineering. Discover our philosophy, standards, and delivery model.",
     url: "https://media.egostix.com/about",
     type: "website",
   },

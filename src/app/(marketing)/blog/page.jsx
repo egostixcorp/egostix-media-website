@@ -2,6 +2,7 @@ import { promises as fs } from "fs";
 import path from "path";
 import { compileMDX } from "next-mdx-remote/rsc";
 import BlogList from "@/components/blog/BlogList";
+import JsonLd from "@/components/global/JsonLd";
 
 export const metadata = {
   title: "Blog & Engineering Insights | Egostix Media",
@@ -16,6 +17,20 @@ export const metadata = {
       "Systems-minded writing on AI-native websites, workflow automation, internal tools, and modern software architecture.",
     url: "https://media.egostix.com/blog",
     type: "website",
+  },
+};
+
+const blogSchema = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  name: "Blog & Engineering Insights | Egostix Media",
+  description:
+    "Systems-minded writing on AI-native websites, workflow automation, internal tools, and modern software architecture.",
+  url: "https://media.egostix.com/blog",
+  publisher: {
+    "@type": "Organization",
+    name: "Egostix Media",
+    url: "https://media.egostix.com",
   },
 };
 
@@ -50,6 +65,7 @@ export default async function Blog() {
 
   return (
     <main className="w-full px-6 py-24">
+      <JsonLd data={blogSchema} />
       <div className="mx-auto max-w-5xl space-y-16 pt-10">
         <section className="space-y-5">
           <p className="font-mono text-xs uppercase tracking-normal text-blue-600">

@@ -5,14 +5,14 @@ import JsonLd from "@/components/global/JsonLd";
 export const metadata = {
   title: "Contact Us & Scope Your System | Egostix Media",
   description:
-    "Get in touch with Egostix Media to scope your AI business website, custom internal tools, creator platform, or workflow automation. Functional prototypes in 1–2 weeks.",
+    "Connect with Egostix Media engineers to outline workflow bottlenecks, scope custom tools, and map out a fixed-timeline prototype.",
   alternates: {
     canonical: "https://media.egostix.com/contact",
   },
   openGraph: {
     title: "Contact Us & Scope Your System | Egostix Media",
     description:
-      "Scope your project with Egostix Media engineers. Rapid prototypes delivered in weeks for business websites, internal tools, and workflow automation.",
+      "Connect with Egostix Media engineers to outline workflow bottlenecks, scope custom tools, and map out a fixed-timeline prototype.",
     url: "https://media.egostix.com/contact",
     type: "website",
   },

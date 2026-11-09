@@ -7,14 +7,14 @@ import JsonLd from "@/components/global/JsonLd";
 export const metadata = {
   title: "Services & Systems Architecture | Egostix Media",
   description:
-    "Explore our 4 AI-native production systems: AI Business Websites, Custom Internal Tools, Creator Infrastructure, and Workflow Automation. Shipped in 2–4 weeks.",
+    "Explore our 4 production systems: AI Business Websites, Custom Internal Tools, Creator Infrastructure, and Workflow Automation. Shipped in 2–4 weeks.",
   alternates: {
     canonical: "https://media.egostix.com/service",
   },
   openGraph: {
     title: "Services & Systems Architecture | Egostix Media",
     description:
-      "Explore our 4 AI-native production systems: AI Business Websites, Custom Internal Tools, Creator Infrastructure, and Workflow Automation. Shipped in 2–4 weeks.",
+      "Explore our 4 production systems: AI Business Websites, Custom Internal Tools, Creator Infrastructure, and Workflow Automation. Shipped in 2–4 weeks.",
     url: "https://media.egostix.com/service",
     type: "website",
   },

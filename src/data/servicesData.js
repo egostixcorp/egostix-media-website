@@ -9,9 +9,9 @@ export const services = [
     tagline: "High-converting web systems engineered for speed, lead capture, and automated qualification.",
     description:
       "Modern websites designed as active business engines rather than static digital brochures. Built with sub-second Next.js edge performance, integrated conversational AI intake, automated calendar scheduling, and instant CRM synchronization.",
-    seoTitle: "AI Business Website Development | Next.js & AI Systems | Egostix Media",
+    seoTitle: "AI Business Website Development — Next.js & Conversational Intake",
     seoDescription:
-      "We engineer high-converting AI business websites in 2–3 weeks. Features sub-second load times, interactive AI intake, direct CRM sync, and built-in programmatic SEO pipelines.",
+      "High-converting Next.js business websites built in 2–3 weeks. Features sub-second load times, conversational AI intake, calendar booking, and CRM sync.",
     outcomes: [
       "Sub-second page delivery with Next.js edge architecture",
       "Interactive conversational AI intake and lead qualification",
@@ -82,9 +82,9 @@ export const services = [
     tagline: "Custom operational software, ERPs, and dashboards that eliminate manual spreadsheets and repetitive busywork.",
     description:
       "Tailor-made internal business software designed specifically around your operating bottlenecks. We build unified operations consoles, inventory dispatchers, secure customer portals, and AI data extraction pipelines that save teams 15+ hours weekly.",
-    seoTitle: "Custom Internal Tools & SMB Dashboards | AI Business Software | Egostix Media",
+    seoTitle: "Custom Internal Tools & Client Portals for SMBs",
     seoDescription:
-      "Custom operational software, admin consoles, and AI dashboards for growing businesses. Replace chaotic spreadsheets with secure, high-speed internal tools in 3–4 weeks.",
+      "Custom operational software for growing SMBs: admin panels, inventory trackers, client portals, and real-time dashboards built with React and Supabase.",
     outcomes: [
       "Eliminate repetitive manual data entry and brittle spreadsheets",
       "Role-based secure customer and staff portals with audit logs",
@@ -155,9 +155,9 @@ export const services = [
     tagline: "Independent membership portals, digital product engines, and publishing systems you own completely.",
     description:
       "Enterprise digital infrastructure engineered for creators, educators, authors, and media brands. Escape 10–30% platform take-rates with custom membership websites, automated digital product delivery, protected content vaults, and automated email broadcast pipelines.",
-    seoTitle: "Creator Infrastructure & Membership Platform Engineering | Egostix Media",
+    seoTitle: "Creator Infrastructure & Membership Platform Development",
     seoDescription:
-      "Custom digital platforms for creators, educators, and personal brands. Full Stripe integration, private content vaults, zero revenue take-rates, delivered in 2–3 weeks.",
+      "Custom digital product engines and subscription community platforms for creators, authors, and coaches. Powered by Next.js, Stripe, and MDX.",
     outcomes: [
       "Zero platform take-rate: retain 100% of your digital product revenue",
       "High-speed gated media streaming and member access portals",
@@ -228,9 +228,9 @@ export const services = [
     tagline: "End-to-end operational automation connecting WhatsApp, customer channels, CRM, and team communications.",
     description:
       "Intelligent workflow automation systems that connect support, sales qualification, scheduling, and internal reporting into autonomous loops. We deploy official WhatsApp Cloud API agents, multi-step CRM lead routing, and automated business alerts that execute 24/7.",
-    seoTitle: "AI Workflow Automation & WhatsApp Systems | Egostix Media",
+    seoTitle: "AI Workflow Automation & WhatsApp Systems Agency",
     seoDescription:
-      "Automate customer triage, WhatsApp booking, CRM sync, and operational tasks with production AI agents. Save hundreds of manual hours every month.",
+      "Eliminate repetitive operations. We build automated WhatsApp notifications, customer support bots, and CRM lead qualification pipelines in 1–2 weeks.",
     outcomes: [
       "Sub-3-second automated response times on WhatsApp, email, and web chat",
       "70%+ deflection of routine repetitive customer inquiries",

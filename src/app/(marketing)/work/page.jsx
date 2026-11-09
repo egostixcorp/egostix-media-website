@@ -2,22 +2,37 @@ import React from "react";
 import Link from "next/link";
 import WorkSection from "@/components/sections/WorkSection";
 import { getProjects } from "@/data/work";
+import JsonLd from "@/components/global/JsonLd";
 
 export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Our Work & Systems Portfolio | Egostix Media",
   description:
-    "Explore production AI systems, custom internal tools, workflow automations, and creator infrastructure shipped by Egostix Media.",
+    "Explore production AI systems, custom internal tools, workflow automations, and botanical e-commerce platforms shipped by Egostix Media.",
   alternates: {
     canonical: "https://media.egostix.com/work",
   },
   openGraph: {
     title: "Our Work & Systems Portfolio | Egostix Media",
     description:
-      "Explore production AI systems, custom internal tools, workflow automations, and creator infrastructure shipped by Egostix Media.",
+      "Explore production AI systems, custom internal tools, workflow automations, and botanical e-commerce platforms shipped by Egostix Media.",
     url: "https://media.egostix.com/work",
     type: "website",
+  },
+};
+
+const workCollectionSchema = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  name: "Our Work & Systems Portfolio | Egostix Media",
+  description:
+    "Explore production AI systems, custom internal tools, workflow automations, and botanical e-commerce platforms shipped by Egostix Media.",
+  url: "https://media.egostix.com/work",
+  provider: {
+    "@type": "Organization",
+    name: "Egostix Media",
+    url: "https://media.egostix.com",
   },
 };
 
@@ -26,6 +41,7 @@ const WorkPage = () => {
 
   return (
     <main className="w-full px-6 py-24">
+      <JsonLd data={workCollectionSchema} />
       <div className="mx-auto max-w-6xl space-y-16">
         {/* Render the Interactive Client Component */}
         <WorkSection projects={publicProjects} />

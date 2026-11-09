@@ -4,16 +4,16 @@ import { ArrowRight, CheckCircle2, ShieldCheck, Clock, Layers, Sparkles } from "
 import JsonLd from "@/components/global/JsonLd";
 
 export const metadata = {
-  title: "Our Engineering Approach & Delivery Model | Egostix Media",
+  title: "Our Approach — Discover, Prototype, Integrate, Scale | Egostix Media",
   description:
-    "We engineer business outcomes through a repeatable four-stage operating model: Discover, Prototype, Integrate, and Scale. Functional prototypes in 1–2 weeks.",
+    "How we turn complex business problems into reliable operational software in weeks without burying execution under agency process.",
   alternates: {
     canonical: "https://media.egostix.com/approach",
   },
   openGraph: {
-    title: "Our Engineering Approach & Delivery Model | Egostix Media",
+    title: "Our Approach — Discover, Prototype, Integrate, Scale | Egostix Media",
     description:
-      "Discover Egostix Media's 4-stage operating model (Discover, Prototype, Integrate, Scale). Fixed scopes, rapid sprint execution, and zero vendor lock-in.",
+      "How we turn complex business problems into reliable operational software in weeks without burying execution under agency process.",
     url: "https://media.egostix.com/approach",
     type: "website",
   },

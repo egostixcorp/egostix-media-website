@@ -19,15 +19,31 @@ export async function generateMetadata({ params }) {
 
   const canonicalUrl = `https://media.egostix.com/work/${project.slug}`;
 
+  const customMeta = {
+    "susmita-nursery": {
+      title: "Susmita Nursery — Botanical E-Commerce Case Study | Egostix Media",
+      description:
+        "How we engineered a Next.js e-commerce platform with interactive 3D desktop plant previews, resulting in +180% online sales growth.",
+    },
+    "yourmaker": {
+      title: "YourMaker — Agency Web Platform Case Study | Egostix Media",
+      description:
+        "How Egostix Media built a bespoke agency website with interactive pricing calculators and automated CRM sync, cutting onboarding time by 3x.",
+    },
+  }[project.slug];
+
+  const title = customMeta?.title || `${project.title} — Case Study | Egostix Media`;
+  const description = customMeta?.description || project.summary;
+
   return {
-    title: `${project.title} — Case Study | Egostix Media`,
-    description: project.summary,
+    title,
+    description,
     alternates: {
       canonical: canonicalUrl,
     },
     openGraph: {
-      title: `${project.title} — Case Study | Egostix Media`,
-      description: project.summary,
+      title,
+      description,
       url: canonicalUrl,
       type: "article",
       siteName: "Egostix Media",
@@ -42,8 +58,8 @@ export async function generateMetadata({ params }) {
     },
     twitter: {
       card: "summary_large_image",
-      title: `${project.title} — Case Study | Egostix Media`,
-      description: project.summary,
+      title,
+      description,
       creator: "@egostix",
     },
   };
@@ -634,7 +650,7 @@ const ProjectCaseStudy = ({ params }) => {
 
   const projectSchema = {
     "@context": "https://schema.org",
-    "@type": "CreativeWork",
+    "@type": ["CreativeWork", "Article"],
     "@id": `https://media.egostix.com/work/${project.slug}#case-study`,
     name: `${project.title} — Case Study`,
     headline: project.subtitle,

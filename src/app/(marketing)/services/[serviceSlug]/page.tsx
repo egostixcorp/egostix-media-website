@@ -82,7 +82,7 @@ export default function DedicatedServicePage({ params }: ServicePageProps) {
 
   const canonicalUrl = `https://media.egostix.com/services/${service.slug}`;
 
-  // Structured Data (Service + FAQPage)
+  // Structured Data (Service + FAQPage + BreadcrumbList)
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -95,9 +95,12 @@ export default function DedicatedServicePage({ params }: ServicePageProps) {
       name: "Egostix Media",
       url: "https://media.egostix.com",
     },
-    areaServed: {
-      "@type": "Place",
-      name: "Global",
+    areaServed: "Global",
+    offers: {
+      "@type": "Offer",
+      price: service.pricing?.usd?.split("–")[0]?.replace(/[^0-9]/g, "") || "2500",
+      priceCurrency: "USD",
+      description: service.pricing?.scope,
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
@@ -126,6 +129,31 @@ export default function DedicatedServicePage({ params }: ServicePageProps) {
     })),
   };
 
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "Home",
+        item: "https://media.egostix.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Services",
+        item: "https://media.egostix.com/service",
+      },
+      {
+        "@type": "ListItem",
+        position: 3,
+        name: service.title,
+        item: `https://media.egostix.com/services/${service.slug}`,
+      },
+    ],
+  };
+
   // Load related case studies
   const relatedProjects = (service.relatedCaseStudies || [])
     .map((slug: string) => getProjectBySlug(slug))
@@ -134,7 +162,8 @@ export default function DedicatedServicePage({ params }: ServicePageProps) {
   return (
     <main className="w-full px-6 py-24 bg-white text-slate-900">
       <JsonLd data={serviceSchema} />
-      <JsonLd data={faqSchema} />
+      {service.faqs?.length > 0 && <JsonLd data={faqSchema} />}
+      <JsonLd data={breadcrumbSchema} />
 
       <div className="mx-auto max-w-5xl space-y-20 pt-8">
         {/* Navigation Breadcrumbs */}

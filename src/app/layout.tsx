@@ -1,8 +1,14 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Playfair_Display, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import JsonLd from "@/components/global/JsonLd";
+
+export const viewport: Viewport = {
+  themeColor: "#1d4ed8",
+  width: "device-width",
+  initialScale: 1,
+};
 
 const inter = Inter({
   subsets: ["latin"],
@@ -23,21 +29,22 @@ const serif = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL("https://media.egostix.com"),
   title: {
-    default: "Egostix Media — Where Imagination Meets Intelligence",
+    default: "Egostix Media — AI Business Websites, Custom Internal Tools & Automation",
     template: "%s | Egostix Media",
   },
   description:
-    "Egostix Media is an AI-native software and media studio. We build production-grade AI business websites, custom internal tools, creator platforms, and workflow automations in weeks.",
+    "Egostix Media is an AI-native software studio. We engineer high-converting AI business websites, custom internal tools, and workflow automation systems in 2–4 weeks.",
   keywords: [
     "AI business websites",
-    "custom internal tools",
-    "workflow automation",
-    "creator infrastructure",
-    "Next.js web development studio",
-    "Supabase development",
-    "WhatsApp business automation",
+    "custom internal tools development",
+    "AI workflow automation agency",
+    "Next.js web development agency",
+    "WhatsApp automation for business",
+    "creator membership platform development",
+    "custom client portal development",
+    "SMB admin panel development",
+    "Supabase web application development",
     "Egostix Media",
-    "Egostix Engineering",
   ],
   authors: [{ name: "Egostix Media", url: "https://media.egostix.com" }],
   creator: "Egostix Engineering Pvt. Ltd.",
@@ -46,7 +53,7 @@ export const metadata: Metadata = {
     canonical: "./",
   },
   openGraph: {
-    title: "Egostix Media — Where Imagination Meets Intelligence",
+    title: "Egostix Media — AI Business Websites, Custom Internal Tools & Automation",
     description:
       "We engineer AI-powered business websites, custom internal tools, creator platforms, and workflow automations for fast-moving teams.",
     url: "https://media.egostix.com",
@@ -56,7 +63,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Egostix Media — Where Imagination Meets Intelligence",
+    title: "Egostix Media — AI Business Websites, Custom Internal Tools & Automation",
     description:
       "AI-native software studio building custom business websites, internal tools, and automated workflows.",
     creator: "@egostix",

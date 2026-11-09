@@ -1,13 +1,35 @@
 import React from "react";
+import JsonLd from "@/components/global/JsonLd";
 
 export const metadata = {
-  title: "Privacy Policy — Egostix Media",
-  description: "Privacy policy and data governance practices of Egostix Media, an Egostix Engineering company.",
+  title: "Privacy Policy | Egostix Media",
+  description:
+    "Data governance practices and engagement terms of Egostix Media, an Egostix Engineering company.",
+  alternates: {
+    canonical: "https://media.egostix.com/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | Egostix Media",
+    description:
+      "Data governance practices and engagement terms of Egostix Media, an Egostix Engineering company.",
+    url: "https://media.egostix.com/privacy",
+    type: "website",
+  },
+};
+
+const privacySchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Privacy Policy | Egostix Media",
+  description:
+    "Data governance practices and engagement terms of Egostix Media, an Egostix Engineering company.",
+  url: "https://media.egostix.com/privacy",
 };
 
 const PrivacyPage = () => {
   return (
     <main className="w-full px-6 py-24 bg-white text-slate-900">
+      <JsonLd data={privacySchema} />
       <div className="mx-auto max-w-4xl space-y-12">
         {/* Header Section */}
         <section className="space-y-4 border-b border-neutral-200 pb-8 pt-10">

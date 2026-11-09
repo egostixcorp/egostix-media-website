@@ -1,13 +1,35 @@
 import React from "react";
+import JsonLd from "@/components/global/JsonLd";
 
 export const metadata = {
-  title: "Terms of Service — Egostix Media",
-  description: "Terms of service and engagement guidelines of Egostix Media, an Egostix Engineering company.",
+  title: "Terms of Service | Egostix Media",
+  description:
+    "Data governance practices and engagement terms of Egostix Media, an Egostix Engineering company.",
+  alternates: {
+    canonical: "https://media.egostix.com/terms",
+  },
+  openGraph: {
+    title: "Terms of Service | Egostix Media",
+    description:
+      "Data governance practices and engagement terms of Egostix Media, an Egostix Engineering company.",
+    url: "https://media.egostix.com/terms",
+    type: "website",
+  },
+};
+
+const termsSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "Terms of Service | Egostix Media",
+  description:
+    "Data governance practices and engagement terms of Egostix Media, an Egostix Engineering company.",
+  url: "https://media.egostix.com/terms",
 };
 
 const TermsPage = () => {
   return (
     <main className="w-full px-6 py-24 bg-white text-slate-900">
+      <JsonLd data={termsSchema} />
       <div className="mx-auto max-w-4xl space-y-12">
         {/* Header Section */}
         <section className="space-y-4 border-b border-neutral-200 pb-8 pt-10">
