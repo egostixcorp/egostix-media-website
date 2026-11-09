@@ -96,9 +96,9 @@ export default function GpmConnectModal({
       />
 
       {/* Modal Dialog Card */}
-      <div className="relative w-full max-w-lg rounded-2xl bg-white border border-neutral-200 shadow-2xl overflow-hidden z-10 space-y-0">
+      <div className="relative w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 border border-neutral-200 dark:border-slate-800 shadow-2xl overflow-hidden z-10 space-y-0">
         {/* Header */}
-        <div className="p-5 sm:p-6 bg-slate-900 text-white flex items-start justify-between gap-4">
+        <div className="p-5 sm:p-6 bg-slate-900 dark:bg-slate-950 text-white flex items-start justify-between gap-4 border-b border-slate-800">
           <div className="flex items-center gap-3">
             <div className="size-10 rounded-xl bg-blue-600/30 border border-blue-500/40 text-blue-400 flex items-center justify-center shrink-0">
               <Radio className="size-5" />
@@ -116,7 +116,7 @@ export default function GpmConnectModal({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition min-h-[36px] min-w-[36px] flex items-center justify-center"
+            className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 dark:hover:bg-slate-800 transition min-h-[36px] min-w-[36px] flex items-center justify-center"
             aria-label="Close modal"
           >
             <X className="size-4" />
@@ -124,18 +124,18 @@ export default function GpmConnectModal({
         </div>
 
         {/* Content & Form */}
-        <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-5 bg-white text-xs">
+        <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-5 bg-white dark:bg-slate-900 text-xs">
           {/* Client Organization Pill */}
-          <div className="flex items-center justify-between p-3 rounded-xl bg-neutral-50 border border-neutral-200">
+          <div className="flex items-center justify-between p-3 rounded-xl bg-neutral-50 dark:bg-slate-800/60 border border-neutral-200 dark:border-slate-700">
             <div className="space-y-0.5">
-              <span className="text-[10px] font-mono uppercase text-slate-500 font-bold block">
+              <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold block">
                 Target Organization
               </span>
-              <p className="font-mono font-bold text-slate-900 text-xs">
+              <p className="font-mono font-bold text-slate-900 dark:text-slate-100 text-xs">
                 {clientName}
               </p>
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200 font-semibold">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50 font-semibold">
               Live Domain Context
             </span>
           </div>
@@ -143,7 +143,7 @@ export default function GpmConnectModal({
           {/* Property ID Input */}
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="block text-[11px] font-mono uppercase text-slate-700 font-bold">
+              <label className="block text-[11px] font-mono uppercase text-slate-700 dark:text-slate-300 font-bold">
                 Google Property ID / GA4 Measurement ID
               </label>
               <span className="text-[10px] text-slate-400 font-mono">
@@ -155,36 +155,36 @@ export default function GpmConnectModal({
               placeholder="e.g. G-XXXXXXXXXX or 432890123"
               value={gpmId}
               onChange={(e) => setGpmId(e.target.value)}
-              className="w-full rounded-lg border border-neutral-300 px-3.5 py-2.5 text-xs font-mono text-slate-900 focus:border-blue-700 focus:outline-none min-h-[44px]"
+              className="w-full rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3.5 py-2.5 text-xs font-mono text-slate-900 dark:text-slate-100 focus:border-blue-700 focus:outline-none min-h-[44px]"
             />
-            <p className="text-[11px] text-slate-500 font-inter">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 font-inter">
               Found in Google Analytics under <strong>Admin &gt; Data Streams &gt; Measurement ID</strong>.
             </p>
           </div>
 
           {/* Assistance Option */}
-          <div className="p-3.5 rounded-xl border border-neutral-200 bg-neutral-50/60 space-y-3">
+          <div className="p-3.5 rounded-xl border border-neutral-200 dark:border-slate-700 bg-neutral-50/60 dark:bg-slate-800/50 space-y-3">
             <label className="flex items-start gap-2.5 cursor-pointer select-none">
               <input
                 type="checkbox"
                 checked={needAssistance}
                 onChange={(e) => setNeedAssistance(e.target.checked)}
-                className="mt-0.5 size-4 rounded border-neutral-300 text-blue-600 focus:ring-blue-500"
+                className="mt-0.5 size-4 rounded border-neutral-300 dark:border-slate-600 text-blue-600 focus:ring-blue-500 bg-white dark:bg-slate-700"
               />
               <div className="space-y-0.5">
-                <span className="font-mono font-semibold text-xs text-slate-800 flex items-center gap-1.5">
-                  <Sparkles className="size-3.5 text-blue-600" />
+                <span className="font-mono font-semibold text-xs text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                  <Sparkles className="size-3.5 text-blue-600 dark:text-blue-400" />
                   Request Egostix Engineering Tag Setup
                 </span>
-                <p className="text-[11px] text-slate-500 font-inter leading-relaxed">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 font-inter leading-relaxed">
                   Check this if you need our engineering team to install Google Tag Manager / GA4 tracking tags on your domain.
                 </p>
               </div>
             </label>
 
             {needAssistance && (
-              <div className="space-y-1.5 pt-2 border-t border-neutral-200/80 animate-in fade-in duration-150">
-                <label className="block text-[10px] font-mono uppercase text-slate-600 font-bold">
+              <div className="space-y-1.5 pt-2 border-t border-neutral-200/80 dark:border-slate-700 animate-in fade-in duration-150">
+                <label className="block text-[10px] font-mono uppercase text-slate-600 dark:text-slate-300 font-bold">
                   Additional Notes / Access Instructions (Optional)
                 </label>
                 <textarea
@@ -192,7 +192,7 @@ export default function GpmConnectModal({
                   placeholder="e.g., Domain is hosted on Cloudflare; please verify DNS records."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full rounded-lg border border-neutral-300 px-3 py-2 text-xs font-inter focus:border-blue-700 focus:outline-none"
+                  className="w-full rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-2 text-xs font-inter text-slate-900 dark:text-slate-100 focus:border-blue-700 focus:outline-none"
                 />
               </div>
             )}
@@ -200,34 +200,34 @@ export default function GpmConnectModal({
 
           {/* Success Banner */}
           {success && (
-            <div className="flex items-center gap-2 text-xs font-mono text-emerald-800 bg-emerald-50 border border-emerald-200 p-3 rounded-xl">
-              <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
+            <div className="flex items-center gap-2 text-xs font-mono text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-900/50 p-3 rounded-xl">
+              <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
               <span>Google Property linked successfully! Streaming telemetry...</span>
             </div>
           )}
 
           {/* Error Banner */}
           {error && (
-            <div className="flex items-center gap-2 text-xs font-mono text-red-800 bg-red-50 border border-red-200 p-3 rounded-xl">
-              <AlertCircle className="size-4 text-red-500 shrink-0" />
+            <div className="flex items-center gap-2 text-xs font-mono text-red-800 dark:text-red-300 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 p-3 rounded-xl">
+              <AlertCircle className="size-4 text-red-500 dark:text-red-400 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
           {/* Actions */}
-          <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-neutral-100">
+          <div className="flex items-center justify-end gap-2.5 pt-2 border-t border-neutral-100 dark:border-slate-800">
             <button
               type="button"
               onClick={onClose}
               disabled={isSubmitting}
-              className="px-4 py-2.5 rounded-lg border border-neutral-200 bg-white hover:bg-neutral-50 text-slate-700 font-mono text-xs font-semibold transition min-h-[40px]"
+              className="px-4 py-2.5 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-neutral-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-mono text-xs font-semibold transition min-h-[40px]"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting || success}
-              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 active:scale-[0.98] disabled:opacity-50 text-white font-mono text-xs font-semibold shadow-xs transition min-h-[40px]"
+              className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 active:scale-[0.98] disabled:opacity-50 text-white font-mono text-xs font-semibold shadow-xs transition min-h-[40px]"
             >
               {isSubmitting ? (
                 <>

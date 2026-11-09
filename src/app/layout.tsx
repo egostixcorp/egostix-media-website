@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-// import Header from "@/components/global/Header";
-// import Footer from "@/components/global/Footer";
 import { Inter, Playfair_Display, Space_Mono } from "next/font/google";
-import { IBM_Plex_Serif } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import JsonLd from "@/components/global/JsonLd";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,9 +21,112 @@ const serif = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Egostix Media — Where Imagination Meets Intelligence",
+  metadataBase: new URL("https://media.egostix.com"),
+  title: {
+    default: "Egostix Media — Where Imagination Meets Intelligence",
+    template: "%s | Egostix Media",
+  },
   description:
-    "Egostix Media blends AI, creativity, and engineering to craft intelligent content and next-generation media systems.",
+    "Egostix Media is an AI-native software and media studio. We build production-grade AI business websites, custom internal tools, creator platforms, and workflow automations in weeks.",
+  keywords: [
+    "AI business websites",
+    "custom internal tools",
+    "workflow automation",
+    "creator infrastructure",
+    "Next.js web development studio",
+    "Supabase development",
+    "WhatsApp business automation",
+    "Egostix Media",
+    "Egostix Engineering",
+  ],
+  authors: [{ name: "Egostix Media", url: "https://media.egostix.com" }],
+  creator: "Egostix Engineering Pvt. Ltd.",
+  publisher: "Egostix Engineering Pvt. Ltd.",
+  alternates: {
+    canonical: "./",
+  },
+  openGraph: {
+    title: "Egostix Media — Where Imagination Meets Intelligence",
+    description:
+      "We engineer AI-powered business websites, custom internal tools, creator platforms, and workflow automations for fast-moving teams.",
+    url: "https://media.egostix.com",
+    siteName: "Egostix Media",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Egostix Media — Where Imagination Meets Intelligence",
+    description:
+      "AI-native software studio building custom business websites, internal tools, and automated workflows.",
+    creator: "@egostix",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+    apple: "/egostix-media-trans.png",
+  },
+};
+
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://media.egostix.com/#organization",
+  name: "Egostix Media",
+  legalName: "Egostix Engineering Pvt. Ltd.",
+  url: "https://media.egostix.com",
+  logo: "https://media.egostix.com/egostix-media-trans.png",
+  description:
+    "AI-native productized software and media studio engineering business websites, internal tools, creator infrastructure, and workflow automations.",
+  parentOrganization: {
+    "@type": "Organization",
+    name: "Egostix Engineering Pvt. Ltd.",
+    url: "https://egostix.com",
+  },
+  contactPoint: {
+    "@type": "ContactPoint",
+    telephone: "+91-73192-74817",
+    contactType: "customer service",
+    email: "contact@egostix.com",
+    areaServed: "Global",
+    availableLanguage: ["English", "Hindi", "Bengali"],
+  },
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: "Badkulla",
+    addressLocality: "Nadia",
+    addressRegion: "West Bengal",
+    postalCode: "741121",
+    addressCountry: "IN",
+  },
+  sameAs: [
+    "https://twitter.com/egostix",
+    "https://linkedin.com/company/egostix",
+    "https://github.com/egostix",
+  ],
+};
+
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://media.egostix.com/#website",
+  url: "https://media.egostix.com",
+  name: "Egostix Media",
+  description: "Where Imagination Meets Intelligence — AI-Native Software & Media Studio",
+  publisher: {
+    "@id": "https://media.egostix.com/#organization",
+  },
 };
 
 export default function RootLayout({
@@ -35,9 +137,23 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${inter.variable} ${serif.variable} ${mono.variable}`}
     >
-      <body className=" bg-white text-black font-inter">{children}</body>
+      <head>
+        <JsonLd data={organizationSchema} />
+        <JsonLd data={websiteSchema} />
+      </head>
+      <body className="bg-background text-foreground font-inter antialiased transition-colors duration-200">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }

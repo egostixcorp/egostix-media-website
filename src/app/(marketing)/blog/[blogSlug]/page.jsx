@@ -9,6 +9,7 @@ import { Quote } from "@/components/Md/Quote";
 import { Image } from "@/components/Md/Image";
 import { Callout } from "@/components/Md/Callout";
 import { Highlight } from "@/components/Md/Highlight";
+import JsonLd from "@/components/global/JsonLd";
 
 const components = {
   Quote,
@@ -30,9 +31,39 @@ export async function generateMetadata({ params }) {
     options: { parseFrontmatter: true },
   });
 
+  const canonicalUrl = `https://media.egostix.com/blog/${params.blogSlug}`;
+
   return {
     title: `${frontmatter.title} | Egostix Media`,
     description: frontmatter.description,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: `${frontmatter.title} | Egostix Media`,
+      description: frontmatter.description,
+      url: canonicalUrl,
+      type: "article",
+      publishedTime: frontmatter.publishedAt || frontmatter.date,
+      authors: ["Egostix Media"],
+      siteName: "Egostix Media",
+      images: frontmatter.coverImage
+        ? [
+            {
+              url: frontmatter.coverImage.startsWith("http")
+                ? frontmatter.coverImage
+                : `https://media.egostix.com${frontmatter.coverImage}`,
+              alt: frontmatter.title,
+            },
+          ]
+        : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${frontmatter.title} | Egostix Media`,
+      description: frontmatter.description,
+      creator: "@egostix",
+    },
   };
 }
 
@@ -61,8 +92,31 @@ const BlogPost = async ({ params }) => {
     components,
   });
 
+  const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: frontmatter.title,
+    description: frontmatter.description,
+    datePublished: frontmatter.publishedAt || frontmatter.date,
+    author: {
+      "@type": "Organization",
+      name: "Egostix Media",
+      url: "https://media.egostix.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Egostix Engineering Pvt. Ltd.",
+      url: "https://egostix.com",
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://media.egostix.com/blog/${blogSlug}`,
+    },
+  };
+
   return (
     <main className="w-full px-6 py-24">
+      <JsonLd data={articleSchema} />
       <article className="mx-auto max-w-3xl pt-10">
         <Link
           href="/blog"

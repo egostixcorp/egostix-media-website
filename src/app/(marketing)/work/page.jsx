@@ -6,8 +6,19 @@ import { getProjects } from "@/data/work";
 export const dynamic = "force-dynamic";
 
 export const metadata = {
-  title: "Our Work | Egostix Media",
-  description: "Explore our portfolio of AI-powered systems, custom internal tools, workflow automations, and creator infrastructure.",
+  title: "Our Work & Systems Portfolio | Egostix Media",
+  description:
+    "Explore production AI systems, custom internal tools, workflow automations, and creator infrastructure shipped by Egostix Media.",
+  alternates: {
+    canonical: "https://media.egostix.com/work",
+  },
+  openGraph: {
+    title: "Our Work & Systems Portfolio | Egostix Media",
+    description:
+      "Explore production AI systems, custom internal tools, workflow automations, and creator infrastructure shipped by Egostix Media.",
+    url: "https://media.egostix.com/work",
+    type: "website",
+  },
 };
 
 const WorkPage = () => {

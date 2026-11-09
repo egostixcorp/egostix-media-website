@@ -48,37 +48,37 @@ export default function RoleRouteGuard({ children }) {
   if (routeConfig && !routeConfig.allowedRoles.includes(role)) {
     return (
       <div className="min-h-[70vh] flex items-center justify-center p-4 sm:p-8 font-inter animate-in fade-in duration-200">
-        <div className="max-w-lg w-full bg-white rounded-2xl border border-neutral-200 shadow-sm p-6 sm:p-8 text-center space-y-6">
+        <div className="max-w-lg w-full bg-white dark:bg-slate-900 rounded-2xl border border-neutral-200 dark:border-slate-800 shadow-sm p-6 sm:p-8 text-center space-y-6">
           {/* Security Icon Badge */}
-          <div className="size-16 rounded-2xl bg-amber-50 border border-amber-200 text-amber-600 flex items-center justify-center mx-auto shadow-xs">
+          <div className="size-16 rounded-2xl bg-amber-50 dark:bg-amber-950/50 border border-amber-200 dark:border-amber-900/50 text-amber-600 dark:text-amber-400 flex items-center justify-center mx-auto shadow-xs">
             <ShieldAlert className="size-8" />
           </div>
 
           {/* Alert Content */}
           <div className="space-y-2">
-            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-amber-100 text-amber-800 uppercase tracking-wider">
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-mono font-bold bg-amber-100 dark:bg-amber-950/60 text-amber-800 dark:text-amber-300 uppercase tracking-wider border border-amber-200 dark:border-amber-800">
               <Lock className="size-3" />
               Access Restricted
             </span>
-            <h2 className="text-lg sm:text-xl font-mono font-bold text-slate-900">
+            <h2 className="text-lg sm:text-xl font-mono font-bold text-slate-900 dark:text-slate-100">
               {routeConfig.routeName}
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 font-inter leading-relaxed">
-              This administrative area is restricted to <strong className="text-slate-800">{routeConfig.roleLabel}</strong> accounts.
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 font-inter leading-relaxed">
+              This administrative area is restricted to <strong className="text-slate-800 dark:text-slate-200">{routeConfig.roleLabel}</strong> accounts.
             </p>
           </div>
 
           {/* Current Session Metadata Box */}
-          <div className="p-3.5 rounded-xl bg-neutral-50 border border-neutral-200 text-left font-mono text-xs space-y-1.5">
-            <div className="flex justify-between items-center text-slate-500">
+          <div className="p-3.5 rounded-xl bg-neutral-50 dark:bg-slate-800/60 border border-neutral-200 dark:border-slate-700 text-left font-mono text-xs space-y-1.5">
+            <div className="flex justify-between items-center text-slate-500 dark:text-slate-400">
               <span>Current Account</span>
-              <span className="text-slate-800 font-semibold truncate max-w-[200px]">
+              <span className="text-slate-800 dark:text-slate-200 font-semibold truncate max-w-[200px]">
                 {currentUser?.email || "User Account"}
               </span>
             </div>
-            <div className="flex justify-between items-center text-slate-500">
+            <div className="flex justify-between items-center text-slate-500 dark:text-slate-400">
               <span>Assigned Role</span>
-              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-50 text-blue-700 border border-blue-200">
+              <span className="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400 border border-blue-200 dark:border-blue-900/50">
                 {role} View
               </span>
             </div>
@@ -88,14 +88,14 @@ export default function RoleRouteGuard({ children }) {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-2.5 pt-2">
             <Link
               href="/dashboard"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 active:scale-[0.98] text-white font-mono text-xs font-semibold shadow-xs transition min-h-[44px]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 active:scale-[0.98] text-white font-mono text-xs font-semibold shadow-xs transition min-h-[44px]"
             >
               <LayoutDashboard className="size-4" />
               <span>Return to Overview</span>
             </Link>
             <Link
               href="/dashboard/analysis"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-neutral-200 bg-white hover:bg-neutral-50 text-slate-700 font-mono text-xs font-semibold transition min-h-[44px]"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-neutral-50 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 font-mono text-xs font-semibold transition min-h-[44px]"
             >
               <ArrowLeft className="size-4" />
               <span>System Analysis</span>

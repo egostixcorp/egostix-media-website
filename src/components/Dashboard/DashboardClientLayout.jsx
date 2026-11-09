@@ -10,7 +10,7 @@ const DashboardShell = ({ children }) => {
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-neutral-50 flex text-slate-900 font-inter relative">
+    <div className="min-h-screen bg-neutral-50 dark:bg-slate-950 flex text-slate-900 dark:text-slate-100 font-inter relative transition-colors duration-200">
       {/* Left Sidebar Menu (Slide-out Drawer on Mobile, Fixed on Desktop) */}
       <Sidebar
         isOpen={isMobileNavOpen}

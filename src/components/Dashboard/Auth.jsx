@@ -10,6 +10,7 @@ import {
   Building2,
   ArrowRight,
   Loader2,
+  AlertCircle
 } from "lucide-react";
 import Image from "next/image";
 
@@ -86,9 +87,9 @@ const Auth = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-neutral-50 flex flex-col items-center justify-center p-6">
+    <div className="w-full min-h-screen bg-neutral-50 dark:bg-slate-950 flex flex-col items-center justify-center p-6">
       {/* Container */}
-      <div className="w-full max-w-md bg-white rounded-lg border border-neutral-200 shadow-md p-8 space-y-6">
+      <div className="w-full max-w-md bg-white dark:bg-slate-900 rounded-lg border border-neutral-200 dark:border-slate-800 shadow-md p-8 space-y-6">
         {/* Logo and Header */}
         <div className="flex flex-col items-center text-center space-y-2">
           <div className="h-12 w-32 relative overflow-hidden flex items-center justify-center">
@@ -97,20 +98,20 @@ const Auth = () => {
               alt="Egostix Logo"
               width={140}
               height={42}
-              className="object-contain"
+              className="object-contain dark:brightness-200"
             />
           </div>
-          <h2 className="text-xl font-mono tracking-tight font-bold text-slate-900 mt-2">
+          <h2 className="text-xl font-mono tracking-tight font-bold text-slate-900 dark:text-slate-100 mt-2">
             Operations & Analytics Portal
           </h2>
-          <p className="text-xs text-slate-500 font-inter max-w-xs leading-normal">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-inter max-w-xs leading-normal">
             Qualify demand, review transcripts, sync files, and manage
             development pipelines.
           </p>
         </div>
 
         {/* View Switcher Pills */}
-        <div className="flex bg-neutral-100 p-1 rounded-md border border-neutral-200">
+        <div className="flex bg-neutral-100 dark:bg-slate-800 p-1 rounded-md border border-neutral-200 dark:border-slate-700">
           <button
             onClick={() => {
               setIsLoginView(true);
@@ -118,8 +119,8 @@ const Auth = () => {
             }}
             className={`flex-1 py-1.5 text-xs font-mono font-medium rounded transition-all ${
               isLoginView
-                ? "bg-white text-slate-950 shadow-sm"
-                : "text-slate-500 hover:text-slate-900"
+                ? "bg-white dark:bg-slate-900 text-slate-950 dark:text-slate-100 shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
             }`}
           >
             Login Portal
@@ -131,8 +132,8 @@ const Auth = () => {
             }}
             className={`flex-1 py-1.5 text-xs font-mono font-medium rounded transition-all ${
               !isLoginView
-                ? "bg-white text-slate-950 shadow-sm"
-                : "text-slate-500 hover:text-slate-900"
+                ? "bg-white dark:bg-slate-900 text-slate-950 dark:text-slate-100 shadow-sm"
+                : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
             }`}
           >
             Register Client
@@ -141,8 +142,8 @@ const Auth = () => {
 
         {/* Error message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 text-xs font-inter p-3 rounded flex items-start gap-2.5">
-            <AlertCircle className="size-4 shrink-0 text-red-500 mt-0.5" />
+          <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 text-red-700 dark:text-red-300 text-xs font-inter p-3 rounded flex items-start gap-2.5">
+            <AlertCircle className="size-4 shrink-0 text-red-500 dark:text-red-400 mt-0.5" />
             <span>{error}</span>
           </div>
         )}
@@ -153,7 +154,7 @@ const Auth = () => {
             <>
               {/* Full Name */}
               <div className="space-y-1">
-                <label className="block text-[10px] font-mono font-bold uppercase text-slate-600">
+                <label className="block text-[10px] font-mono font-bold uppercase text-slate-600 dark:text-slate-400">
                   Full Name
                 </label>
                 <div className="relative">
@@ -165,7 +166,7 @@ const Auth = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, name: e.target.value })
                     }
-                    className="w-full rounded border border-neutral-300 bg-white pl-9 pr-3 py-2 text-xs font-inter text-slate-900 focus:border-blue-700 focus:outline-none"
+                    className="w-full rounded border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 pl-9 pr-3 py-2 text-xs font-inter text-slate-900 dark:text-slate-100 focus:border-blue-700 focus:outline-none"
                   />
                   <User className="absolute left-3 top-2.5 size-4 text-slate-400" />
                 </div>
@@ -173,7 +174,7 @@ const Auth = () => {
 
               {/* Company / Brand Name */}
               <div className="space-y-1">
-                <label className="block text-[10px] font-mono font-bold uppercase text-slate-600">
+                <label className="block text-[10px] font-mono font-bold uppercase text-slate-600 dark:text-slate-400">
                   Company / Brand Name
                 </label>
                 <div className="relative">
@@ -185,7 +186,7 @@ const Auth = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, companyName: e.target.value })
                     }
-                    className="w-full rounded border border-neutral-300 bg-white pl-9 pr-3 py-2 text-xs font-inter text-slate-900 focus:border-blue-700 focus:outline-none"
+                    className="w-full rounded border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 pl-9 pr-3 py-2 text-xs font-inter text-slate-900 dark:text-slate-100 focus:border-blue-700 focus:outline-none"
                   />
                   <Building2 className="absolute left-3 top-2.5 size-4 text-slate-400" />
                 </div>
@@ -195,7 +196,7 @@ const Auth = () => {
 
           {/* Email */}
           <div className="space-y-1">
-            <label className="block text-[10px] font-mono font-bold uppercase text-slate-600">
+            <label className="block text-[10px] font-mono font-bold uppercase text-slate-600 dark:text-slate-400">
               Work Email Address
             </label>
             <div className="relative">
@@ -207,7 +208,7 @@ const Auth = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full rounded border border-neutral-300 bg-white pl-9 pr-3 py-2 text-xs font-inter text-slate-900 focus:border-blue-700 focus:outline-none"
+                className="w-full rounded border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 pl-9 pr-3 py-2 text-xs font-inter text-slate-900 dark:text-slate-100 focus:border-blue-700 focus:outline-none"
               />
               <Mail className="absolute left-3 top-2.5 size-4 text-slate-400" />
             </div>
@@ -216,7 +217,7 @@ const Auth = () => {
           {/* Password */}
           <div className="space-y-1">
             <div className="flex justify-between items-center">
-              <label className="block text-[10px] font-mono font-bold uppercase text-slate-600">
+              <label className="block text-[10px] font-mono font-bold uppercase text-slate-600 dark:text-slate-400">
                 System Password
               </label>
             </div>
@@ -229,7 +230,7 @@ const Auth = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, password: e.target.value })
                 }
-                className="w-full rounded border border-neutral-300 bg-white pl-9 pr-3 py-2 text-xs font-inter text-slate-900 focus:border-blue-700 focus:outline-none"
+                className="w-full rounded border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 pl-9 pr-3 py-2 text-xs font-inter text-slate-900 dark:text-slate-100 focus:border-blue-700 focus:outline-none"
               />
               <Lock className="absolute left-3 top-2.5 size-4 text-slate-400" />
             </div>
@@ -239,7 +240,7 @@ const Auth = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full rounded bg-blue-700 px-4 py-2.5 font-mono text-xs font-semibold text-white hover:bg-blue-800 disabled:opacity-50 transition shadow-sm flex items-center justify-center gap-1.5"
+            className="w-full rounded bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-500 px-4 py-2.5 font-mono text-xs font-semibold text-white disabled:opacity-50 transition shadow-sm flex items-center justify-center gap-1.5 min-h-[42px]"
           >
             {isLoading ? (
               <>
@@ -258,22 +259,5 @@ const Auth = () => {
     </div>
   );
 };
-
-// Simple icon replacement helper for file scope validation
-const AlertCircle = ({ className }) => (
-  <svg
-    className={className}
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="12" cy="12" r="10" />
-    <line x1="12" y1="8" x2="12" y2="12" />
-    <line x1="12" y1="16" x2="12.01" y2="16" />
-  </svg>
-);
 
 export default Auth;

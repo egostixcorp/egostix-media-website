@@ -325,6 +325,92 @@ const ContactFormContent = () => {
   );
 };
 
+const ContactFallback = () => {
+  return (
+    <div className="grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-stretch">
+      {/* Left Column: Studio Contact & Location Info */}
+      <div className="flex flex-col justify-between rounded-xl border border-neutral-300 bg-neutral-50 p-6 tablet:p-8 space-y-8 h-full">
+        <div className="space-y-6">
+          <div className="space-y-3">
+            <p className="text-xs font-mono uppercase tracking-normal text-blue-600 flex items-center gap-1.5 font-bold">
+              <Sparkles className="size-3.5 text-blue-600" />
+              <span>Get In Touch</span>
+            </p>
+            <h2 className="text-2xl font-mono tracking-tight tablet:text-3xl laptop:text-4xl text-slate-900 leading-tight">
+              Let&apos;s build your next project together.
+            </h2>
+            <p className="text-sm font-inter leading-relaxed text-slate-700">
+              Get in touch with our engineering team to scope your AI business website, custom internal tools, creator platform, or workflow automation.
+            </p>
+          </div>
+
+          <div className="font-mono text-sm space-y-4 pt-6 border-t border-neutral-200">
+            <div>
+              <p className="text-xs uppercase text-slate-400 font-semibold mb-1">
+                Direct Email
+              </p>
+              <a
+                href="mailto:contact@egostix.com"
+                className="text-blue-600 hover:text-blue-700 font-medium"
+              >
+                contact@egostix.com
+              </a>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase text-slate-400 font-semibold mb-1">
+                Studio Phone
+              </p>
+              <a
+                href="tel:+917319274817"
+                className="text-blue-600 hover:text-blue-700 font-medium"
+              >
+                +91 73192 74817
+              </a>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase text-slate-400 font-semibold mb-1">
+                Studio Coordinates
+              </p>
+              <p className="text-slate-700">Badkulla, Nadia, West Bengal, India - 741121</p>
+              <p className="text-xs text-slate-500 pt-0.5">Egostix Engineering Pvt. Ltd.</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-neutral-200 bg-white p-4 font-mono text-xs text-slate-600 space-y-1">
+          <p className="font-bold text-slate-900 uppercase">Response SLA</p>
+          <p>Direct proposal within 24–48 hours. Functional prototypes in 1–2 weeks.</p>
+        </div>
+      </div>
+
+      {/* Right Column: Accessible Form Placeholder for SSR & Crawlers */}
+      <div className="rounded-xl border border-neutral-300 bg-white p-6 tablet:p-8 space-y-6">
+        <div className="border-b border-neutral-100 pb-4">
+          <h3 className="font-mono text-lg font-bold text-slate-900">
+            Scope Your System
+          </h3>
+          <p className="text-xs font-inter text-slate-500 mt-1">
+            Fill in your project requirements below to receive an architectural scope.
+          </p>
+        </div>
+
+        <div className="space-y-4 animate-pulse">
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div className="h-10 bg-neutral-100 rounded-md" />
+            <div className="h-10 bg-neutral-100 rounded-md" />
+          </div>
+          <div className="h-10 bg-neutral-100 rounded-md" />
+          <div className="h-12 bg-neutral-100 rounded-md" />
+          <div className="h-28 bg-neutral-100 rounded-md" />
+          <div className="h-12 bg-blue-100 rounded-md" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const ContactSection = () => {
   return (
     <section
@@ -333,7 +419,7 @@ const ContactSection = () => {
       aria-labelledby="contact-heading"
     >
       <div className="mx-auto max-w-6xl">
-        <Suspense fallback={<div className="font-mono text-sm text-slate-500">Loading form...</div>}>
+        <Suspense fallback={<ContactFallback />}>
           <ContactFormContent />
         </Suspense>
       </div>

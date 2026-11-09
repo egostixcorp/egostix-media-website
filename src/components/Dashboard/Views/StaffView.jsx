@@ -896,6 +896,7 @@ const StaffView = () => {
                         <option value="HubSpot">HubSpot CRM</option>
                         <option value="Salesforce">Salesforce</option>
                         <option value="Zoho">Zoho CRM</option>
+                        <option value="Custom CRM Webhook">Custom CRM / API</option>
                       </select>
                     </div>
                   </div>
@@ -938,6 +939,13 @@ const StaffView = () => {
                           <div>[2026-07-22 15:10] Zoho CRM module listener connected...</div>
                           <div>[2026-07-22 15:10] POST lead parameters {"->"} Zoho API: 201 Created</div>
                           <div>[2026-07-22 15:05] Synced Zoho lead: Robert Henderson {"->"} Success</div>
+                        </>
+                      )}
+                      {crmProvider === "Custom CRM Webhook" && (
+                        <>
+                          <div>[2026-07-22 15:10] Custom CRM webhook endpoint listening...</div>
+                          <div>[2026-07-22 15:10] POST JSON payload {"->"} Custom CRM Gateway: 200 OK</div>
+                          <div>[2026-07-22 15:05] Synced client lead: Robert Henderson {"->"} Delivered</div>
                         </>
                       )}
                     </div>

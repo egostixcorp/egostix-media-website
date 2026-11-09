@@ -4,6 +4,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight, CheckCircle2, AlertCircle, Zap, Globe, ExternalLink } from "lucide-react";
 import { getAllProjects, getProjects } from "@/data/work";
+import JsonLd from "@/components/global/JsonLd";
 
 export const dynamic = "force-dynamic";
 
@@ -16,9 +17,35 @@ export async function generateMetadata({ params }) {
     };
   }
 
+  const canonicalUrl = `https://media.egostix.com/work/${project.slug}`;
+
   return {
-    title: `${project.title} - Case Study | Egostix Media`,
+    title: `${project.title} — Case Study | Egostix Media`,
     description: project.summary,
+    alternates: {
+      canonical: canonicalUrl,
+    },
+    openGraph: {
+      title: `${project.title} — Case Study | Egostix Media`,
+      description: project.summary,
+      url: canonicalUrl,
+      type: "article",
+      siteName: "Egostix Media",
+      images: [
+        {
+          url: project.image?.startsWith("http")
+            ? project.image
+            : `https://media.egostix.com${project.image || "/egostix-media-trans.png"}`,
+          alt: project.title,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} — Case Study | Egostix Media`,
+      description: project.summary,
+      creator: "@egostix",
+    },
   };
 }
 
@@ -605,8 +632,31 @@ const ProjectCaseStudy = ({ params }) => {
     ? publicProjects[(currentPublicIndex + 1) % publicProjects.length]
     : null;
 
+  const projectSchema = {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": `https://media.egostix.com/work/${project.slug}#case-study`,
+    name: `${project.title} — Case Study`,
+    headline: project.subtitle,
+    description: project.summary,
+    creator: {
+      "@type": "Organization",
+      name: "Egostix Media",
+      url: "https://media.egostix.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "Egostix Engineering Pvt. Ltd.",
+      url: "https://egostix.com",
+    },
+    dateCreated: project.year,
+    genre: project.service,
+    keywords: project.tags ? project.tags.join(", ") : undefined,
+  };
+
   return (
     <main className="w-full px-6 py-24">
+      <JsonLd data={projectSchema} />
       <div className="mx-auto max-w-4xl space-y-16">
         {/* Back Link */}
         <div className="pt-6">

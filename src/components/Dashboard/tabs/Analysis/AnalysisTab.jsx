@@ -53,13 +53,13 @@ export default function AnalysisTab() {
   return (
     <div className="space-y-6 sm:space-y-8 animate-in fade-in duration-200 font-inter">
       {/* Context Banner */}
-      <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 shadow-sm">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 p-4 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 sm:gap-6 shadow-sm">
         <div className="space-y-1 sm:space-y-1.5">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 sm:p-2 rounded-lg bg-blue-50 border border-blue-100 text-blue-700 shrink-0">
+            <span className="p-1.5 sm:p-2 rounded-lg bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800/80 text-blue-700 dark:text-blue-300 shrink-0">
               <Activity className="size-4 sm:size-5" />
             </span>
-            <h3 className="text-lg sm:text-xl font-mono text-slate-900 font-bold">
+            <h3 className="text-lg sm:text-xl font-mono text-slate-900 dark:text-slate-100 font-bold">
               {role === "owner"
                 ? "Admin Operations & System Analysis"
                 : role === "staff"
@@ -67,7 +67,7 @@ export default function AnalysisTab() {
                 : "Business Traffic & System Analytics"}
             </h3>
           </div>
-          <p className="text-xs text-slate-600 max-w-2xl font-inter leading-relaxed">
+          <p className="text-xs text-slate-600 dark:text-slate-400 max-w-2xl font-inter leading-relaxed">
             Monitoring active client infrastructure, live HTTP traffic streams, lead conversion metrics, and AI node latencies across Egostix cloud nodes.
           </p>
         </div>
@@ -76,7 +76,7 @@ export default function AnalysisTab() {
           {activeClient?.activeServices?.map((service, index) => (
             <span
               key={index}
-              className="rounded-md bg-blue-50 border border-blue-100 text-[10px] font-mono font-semibold text-blue-700 px-2.5 py-1"
+              className="rounded-md bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800/80 text-[10px] font-mono font-semibold text-blue-700 dark:text-blue-300 px-2.5 py-1"
             >
               {service}
             </span>
@@ -86,70 +86,70 @@ export default function AnalysisTab() {
 
       {/* Metrics Cards */}
       <div className="grid gap-4 sm:gap-6 grid-cols-2 lg:grid-cols-4">
-        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
+            <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold truncate mr-1">
               Web Inbound Traffic
             </span>
-            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5 shrink-0">
+            <span className="text-[9px] font-mono font-bold bg-green-100 dark:bg-green-950/60 text-green-700 dark:text-green-300 border border-transparent dark:border-green-800/80 rounded px-1.5 py-0.5 shrink-0">
               {activeClient?.metrics?.trafficChange || "+12%"}
             </span>
           </div>
-          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900 dark:text-slate-100">
             {activeClient?.metrics?.traffic || "0"}
           </div>
-          <p className="text-[10px] text-slate-500 leading-tight">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
             Unique visitors browsing platform nodes this month.
           </p>
         </div>
 
-        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
+            <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold truncate mr-1">
               AI Captured Leads
             </span>
-            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5 shrink-0">
+            <span className="text-[9px] font-mono font-bold bg-green-100 dark:bg-green-950/60 text-green-700 dark:text-green-300 border border-transparent dark:border-green-800/80 rounded px-1.5 py-0.5 shrink-0">
               {activeClient?.metrics?.leadsChange || "+18%"}
             </span>
           </div>
-          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900 dark:text-slate-100">
             {activeClient?.metrics?.leads || "0"}
           </div>
-          <p className="text-[10px] text-slate-500 leading-tight">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
             Qualified leads automatically registered in CRM.
           </p>
         </div>
 
-        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
+            <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold truncate mr-1">
               System Conversion
             </span>
-            <span className="text-[9px] font-mono font-bold bg-green-100 text-green-700 rounded px-1.5 py-0.5 shrink-0">
+            <span className="text-[9px] font-mono font-bold bg-green-100 dark:bg-green-950/60 text-green-700 dark:text-green-300 border border-transparent dark:border-green-800/80 rounded px-1.5 py-0.5 shrink-0">
               {activeClient?.metrics?.conversionChange || "+0.8%"}
             </span>
           </div>
-          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900 dark:text-slate-100">
             {activeClient?.metrics?.conversionRate || "5.4%"}
           </div>
-          <p className="text-[10px] text-slate-500 leading-tight">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
             Percent of visitors booking service & viewing nodes.
           </p>
         </div>
 
-        <div className="bg-white rounded-xl border border-neutral-200 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
+        <div className="bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 p-4 sm:p-5 shadow-sm space-y-2.5 sm:space-y-3">
           <div className="flex justify-between items-start">
-            <span className="text-[10px] font-mono uppercase text-slate-500 font-bold truncate mr-1">
+            <span className="text-[10px] font-mono uppercase text-slate-500 dark:text-slate-400 font-bold truncate mr-1">
               AI Concierge Latency
             </span>
-            <span className="text-[9px] font-mono font-bold bg-blue-100 text-blue-700 rounded px-1.5 py-0.5 shrink-0">
+            <span className="text-[9px] font-mono font-bold bg-blue-100 dark:bg-blue-950/60 text-blue-700 dark:text-blue-300 border border-transparent dark:border-blue-800/80 rounded px-1.5 py-0.5 shrink-0">
               Active
             </span>
           </div>
-          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900">
+          <div className="text-xl sm:text-2xl font-mono font-bold text-slate-900 dark:text-slate-100">
             {activeClient?.metrics?.aiChatResponseTime || "1.2s"}
           </div>
-          <p className="text-[10px] text-slate-500 leading-tight">
+          <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-tight">
             Average response latency on customer chatbot node.
           </p>
         </div>
@@ -158,17 +158,17 @@ export default function AnalysisTab() {
       {/* Traffic Chart & Live Active Users (Grid with overflow protection) */}
       <div className="grid gap-6 lg:grid-cols-3 w-full min-w-0">
         {/* Weekly Pageview Dynamics Card (Mobile-Optimized & Contained) */}
-        <div className="lg:col-span-2 bg-white rounded-xl border border-neutral-200 p-4 sm:p-6 shadow-sm space-y-4 w-full min-w-0 overflow-hidden">
+        <div className="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 p-4 sm:p-6 shadow-sm space-y-4 w-full min-w-0 overflow-hidden">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div>
-              <h4 className="text-sm font-mono font-bold text-slate-900">
+              <h4 className="text-sm font-mono font-bold text-slate-900 dark:text-slate-100">
                 Weekly Pageview Dynamics
               </h4>
-              <p className="text-[11px] text-slate-500 font-inter">
+              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-inter">
                 7-day traffic trend telemetry across production routes.
               </p>
             </div>
-            <div className="flex items-center gap-1.5 text-xs font-mono text-blue-700 font-semibold bg-blue-50 border border-blue-100 px-2.5 py-1 rounded-md">
+            <div className="flex items-center gap-1.5 text-xs font-mono text-blue-700 dark:text-blue-300 font-semibold bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800/80 px-2.5 py-1 rounded-md">
               <TrendingUp className="size-3.5" />
               <span>Real-Time Sync</span>
             </div>
@@ -183,7 +183,7 @@ export default function AnalysisTab() {
                     <stop offset="95%" stopColor="#2563eb" stopOpacity={0.0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="text-neutral-100 dark:text-slate-800" />
                 <XAxis dataKey="day" stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
                 <YAxis stroke="#94a3b8" fontSize={11} tickLine={false} axisLine={false} />
                 <ChartTooltip content={<ChartTooltipContent />} />
@@ -194,7 +194,7 @@ export default function AnalysisTab() {
         </div>
 
         {/* Live Active Visitor / GPM Connection Card */}
-        <div className="bg-slate-900 text-white rounded-xl p-5 sm:p-6 shadow-sm flex flex-col justify-between space-y-6 min-w-0 overflow-hidden">
+        <div className="bg-slate-900 dark:bg-slate-950 border border-slate-800 text-white rounded-xl p-5 sm:p-6 shadow-sm flex flex-col justify-between space-y-6 min-w-0 overflow-hidden">
           {isGpmConnected ? (
             <>
               {/* Connected GPM State */}
@@ -293,39 +293,39 @@ export default function AnalysisTab() {
       </div>
 
       {/* Google Search Console & Keyword Positions Card */}
-      <div className="bg-white rounded-xl border border-neutral-200 shadow-sm p-4 sm:p-6 space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-100 pb-3">
+      <div className="bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 shadow-sm p-4 sm:p-6 space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-neutral-100 dark:border-slate-800 pb-3">
           <div>
-            <h4 className="text-sm font-mono font-bold text-slate-900 flex items-center gap-2">
-              <Search className="size-4 text-blue-700" />
+            <h4 className="text-sm font-mono font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
+              <Search className="size-4 text-blue-700 dark:text-blue-400" />
               Google Search Console & Organic Indexing
             </h4>
-            <p className="text-[11px] text-slate-500">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400">
               Query indexing rankings, search click-through rates, and Google organic keyword telemetry.
             </p>
           </div>
           <span className={`text-[10px] font-mono px-2.5 py-1 rounded-full font-bold border self-start sm:self-auto ${
             isGpmConnected
-              ? "bg-emerald-50 text-emerald-700 border-emerald-200"
-              : "bg-neutral-100 text-slate-600 border-neutral-200"
+              ? "bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200 dark:border-emerald-800/80"
+              : "bg-neutral-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 border-neutral-200 dark:border-slate-700"
           }`}>
             {isGpmConnected ? `Property Linked: ${gpmPropertyId}` : "Search Console Not Connected"}
           </span>
         </div>
 
         {isGpmConnected ? (
-          <div className="p-6 rounded-xl bg-neutral-50/60 border border-neutral-200 space-y-3">
-            <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-900">
-              <CheckCircle2 className="size-4 text-emerald-600" />
+          <div className="p-6 rounded-xl bg-neutral-50/60 dark:bg-slate-800/40 border border-neutral-200 dark:border-slate-800 space-y-3">
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-slate-900 dark:text-slate-100">
+              <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400" />
               <span>Google Property ID & Search Console Pipeline Active</span>
             </div>
-            <p className="text-xs text-slate-600 font-inter leading-relaxed max-w-2xl">
-              Real-time Google search indexing is synchronizing with domain <strong className="text-slate-900">{activeClient?.name}</strong>. Clicks, impressions, and search query positions will refresh continuously on Google crawler cycles.
+            <p className="text-xs text-slate-600 dark:text-slate-400 font-inter leading-relaxed max-w-2xl">
+              Real-time Google search indexing is synchronizing with domain <strong className="text-slate-900 dark:text-slate-100">{activeClient?.name}</strong>. Clicks, impressions, and search query positions will refresh continuously on Google crawler cycles.
             </p>
             <div className="flex flex-wrap gap-2 pt-2">
               <Link
                 href="/dashboard/service-websites"
-                className="text-xs font-mono font-semibold text-blue-700 bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition inline-flex items-center gap-1"
+                className="text-xs font-mono font-semibold text-blue-700 dark:text-blue-300 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 px-3 py-1.5 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/50 transition inline-flex items-center gap-1"
               >
                 <span>View SEO Pipeline</span>
                 <ArrowUpRight className="size-3" />
@@ -333,15 +333,15 @@ export default function AnalysisTab() {
             </div>
           </div>
         ) : (
-          <div className="p-6 rounded-xl bg-neutral-50/60 border border-dashed border-neutral-300 text-center space-y-3">
-            <div className="size-10 rounded-full bg-blue-50 border border-blue-100 text-blue-600 flex items-center justify-center mx-auto">
+          <div className="p-6 rounded-xl bg-neutral-50/60 dark:bg-slate-800/40 border border-dashed border-neutral-300 dark:border-slate-700 text-center space-y-3">
+            <div className="size-10 rounded-full bg-blue-50 dark:bg-blue-950/60 border border-blue-100 dark:border-blue-800/80 text-blue-600 dark:text-blue-400 flex items-center justify-center mx-auto">
               <Search className="size-5" />
             </div>
             <div className="space-y-1">
-              <h5 className="font-mono text-xs font-bold text-slate-800">
+              <h5 className="font-mono text-xs font-bold text-slate-800 dark:text-slate-200">
                 No Search Console / GPM ID Configured
               </h5>
-              <p className="text-xs text-slate-500 font-inter max-w-md mx-auto leading-relaxed">
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-inter max-w-md mx-auto leading-relaxed">
                 Connect your Google Search Console Property or GPM ID to view real organic search query impressions, keyword positioning, and organic CTR.
               </p>
             </div>

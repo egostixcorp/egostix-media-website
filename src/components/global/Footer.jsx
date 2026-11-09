@@ -13,10 +13,10 @@ const navigationLinks = [
 ];
 
 const serviceLinks = [
-  { label: "AI Business Websites", route: "/service#websites" },
-  { label: "AI Internal Tools", route: "/service#tools" },
-  { label: "Creator Infrastructure", route: "/service#creator" },
-  { label: "AI Workflow Automation", route: "/service#automation" },
+  { label: "AI Business Websites", route: "/services/ai-business-websites" },
+  { label: "AI Internal Tools", route: "/services/custom-internal-tools" },
+  { label: "Creator Infrastructure", route: "/services/creator-platforms" },
+  { label: "AI Workflow Automation", route: "/services/workflow-automation" },
 ];
 
 const Footer = () => {

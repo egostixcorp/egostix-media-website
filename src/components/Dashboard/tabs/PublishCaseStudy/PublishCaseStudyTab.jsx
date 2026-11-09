@@ -177,14 +177,14 @@ function ImageUploader({ label, value, onChange, slug, imageType = "cover" }) {
   return (
     <div className="space-y-2 font-inter">
       <div className="flex items-center justify-between">
-        <label className="block text-xs font-mono font-semibold text-slate-700">
+        <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
           {label}
         </label>
         <div className="flex items-center gap-2">
           <button
             type="button"
             onClick={() => setMode(mode === "dropzone" ? "url" : "dropzone")}
-            className="text-[10px] font-mono text-blue-600 hover:underline flex items-center gap-1"
+            className="text-[10px] font-mono text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
           >
             {mode === "dropzone" ? <LinkIcon className="size-3" /> : <CloudUpload className="size-3" />}
             <span>{mode === "dropzone" ? "Switch to URL input" : "Switch to Drag & Drop"}</span>
@@ -199,7 +199,7 @@ function ImageUploader({ label, value, onChange, slug, imageType = "cover" }) {
             placeholder="/work/synth-academy/cover.png or https://..."
             value={value}
             onChange={(e) => onChange(e.target.value)}
-            className="flex-1 px-3 py-2 rounded-lg border border-neutral-300 text-xs font-mono text-slate-900 focus:outline-none focus:border-blue-600"
+            className="flex-1 px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
           />
         </div>
       ) : (
@@ -210,10 +210,10 @@ function ImageUploader({ label, value, onChange, slug, imageType = "cover" }) {
           onClick={() => fileInputRef.current?.click()}
           className={`relative border-2 border-dashed rounded-xl p-4 text-center cursor-pointer transition flex flex-col items-center justify-center gap-2 ${
             isDragging
-              ? "border-blue-600 bg-blue-50/80"
+              ? "border-blue-600 bg-blue-50/80 dark:bg-blue-950/40"
               : value
-              ? "border-emerald-300 bg-emerald-50/20"
-              : "border-neutral-300 hover:border-blue-500 bg-neutral-50/50"
+              ? "border-emerald-300 dark:border-emerald-700 bg-emerald-50/20 dark:bg-emerald-950/20"
+              : "border-neutral-300 dark:border-slate-700 hover:border-blue-500 bg-neutral-50/50 dark:bg-slate-800/40"
           }`}
         >
           <input
@@ -229,14 +229,14 @@ function ImageUploader({ label, value, onChange, slug, imageType = "cover" }) {
           />
 
           {isUploading ? (
-            <div className="py-2 flex items-center gap-2 text-xs font-mono text-blue-600">
+            <div className="py-2 flex items-center gap-2 text-xs font-mono text-blue-600 dark:text-blue-400">
               <RefreshCw className="size-4 animate-spin" />
               <span>Uploading image file...</span>
             </div>
           ) : value ? (
             <div className="w-full flex items-center justify-between gap-4 p-1">
               <div className="flex items-center gap-3 min-w-0">
-                <div className="relative size-12 rounded-lg border border-neutral-200 overflow-hidden bg-neutral-900 shrink-0">
+                <div className="relative size-12 rounded-lg border border-neutral-200 dark:border-slate-700 overflow-hidden bg-neutral-900 shrink-0">
                   <Image
                     src={value}
                     alt="Preview"
@@ -246,10 +246,10 @@ function ImageUploader({ label, value, onChange, slug, imageType = "cover" }) {
                   />
                 </div>
                 <div className="min-w-0 text-left">
-                  <p className="text-xs font-mono font-bold text-slate-800 truncate">
+                  <p className="text-xs font-mono font-bold text-slate-800 dark:text-slate-200 truncate">
                     {value.split("/").pop()}
                   </p>
-                  <p className="text-[10px] font-mono text-emerald-600 font-semibold flex items-center gap-1">
+                  <p className="text-[10px] font-mono text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
                     <CheckCircle2 className="size-3" /> Uploaded & Linked
                   </p>
                 </div>
@@ -261,18 +261,18 @@ function ImageUploader({ label, value, onChange, slug, imageType = "cover" }) {
                   e.stopPropagation();
                   onChange("");
                 }}
-                className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 transition"
+                className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/40 hover:bg-red-100 dark:hover:bg-red-900/50 border border-red-200 dark:border-red-900/50 transition"
               >
                 Change / Remove
               </button>
             </div>
           ) : (
             <div className="py-3 space-y-1">
-              <CloudUpload className="size-8 text-blue-600 mx-auto" />
-              <p className="text-xs font-mono font-semibold text-slate-700">
-                Drag & Drop Image File Here, or <span className="text-blue-600 underline">Browse</span>
+              <CloudUpload className="size-8 text-blue-600 dark:text-blue-400 mx-auto" />
+              <p className="text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
+                Drag & Drop Image File Here, or <span className="text-blue-600 dark:text-blue-400 underline">Browse</span>
               </p>
-              <p className="text-[10px] text-slate-500 font-inter">
+              <p className="text-[10px] text-slate-500 dark:text-slate-400 font-inter">
                 Supports PNG, JPG, WebP (Saved to /public/work/{slug || "<slug>"})
               </p>
             </div>
@@ -459,17 +459,17 @@ export default function PublishCaseStudyTab() {
   return (
     <div className="flex-1 p-6 md:p-8 overflow-y-auto max-w-7xl w-full mx-auto space-y-8 font-inter">
       {/* Top Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-200 pb-6">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-neutral-200 dark:border-slate-800 pb-6">
         <div>
           <div className="flex items-center gap-2 mb-1">
-            <span className="p-1.5 rounded-lg bg-blue-100 text-blue-700">
+            <span className="p-1.5 rounded-lg bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400">
               <FileCode className="size-5" />
             </span>
-            <h1 className="text-2xl font-mono font-bold text-slate-900 tracking-tight">
+            <h1 className="text-2xl font-mono font-bold text-slate-900 dark:text-slate-100 tracking-tight">
               Publish Case Studies & Study Pages
             </h1>
           </div>
-          <p className="text-xs text-slate-500 font-inter max-w-2xl">
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-inter max-w-2xl">
             Create, edit, and publish high-converting client case study pages. Supports Public/Private visibility status, drag & drop image uploads, interactive metric builders, and client portal provisioning.
           </p>
         </div>
@@ -477,15 +477,15 @@ export default function PublishCaseStudyTab() {
         <div className="flex items-center gap-2 self-start sm:self-auto">
           <button
             onClick={() => setIsClientModalOpen(true)}
-            className="px-4 py-2 rounded-lg border border-neutral-300 bg-white hover:bg-neutral-50 text-slate-800 text-xs font-mono font-semibold flex items-center gap-2 transition shadow-xs"
+            className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-neutral-50 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-mono font-semibold flex items-center gap-2 transition shadow-xs min-h-[40px]"
           >
-            <Upload className="size-4 text-blue-600" />
+            <Upload className="size-4 text-blue-600 dark:text-blue-400" />
             <span>Upload Client Page</span>
           </button>
 
           <button
             onClick={handleOpenCreate}
-            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-mono font-bold flex items-center gap-2 transition shadow-sm"
+            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-mono font-bold flex items-center gap-2 transition shadow-sm min-h-[40px]"
           >
             <Plus className="size-4" />
             <span>Publish Case Study</span>
@@ -495,73 +495,73 @@ export default function PublishCaseStudyTab() {
 
       {/* Metrics & Analytics Overview Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-5 rounded-xl border border-neutral-200 bg-white shadow-xs space-y-2">
+        <div className="p-5 rounded-xl border border-neutral-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold uppercase text-slate-500">
+            <span className="text-xs font-mono font-bold uppercase text-slate-500 dark:text-slate-400">
               Published Study Pages
             </span>
-            <span className="p-1.5 rounded-md bg-blue-50 text-blue-600">
+            <span className="p-1.5 rounded-md bg-blue-50 dark:bg-blue-950/50 text-blue-600 dark:text-blue-400">
               <Layers className="size-4" />
             </span>
           </div>
-          <div className="text-3xl font-mono font-extrabold text-slate-900">
+          <div className="text-3xl font-mono font-extrabold text-slate-900 dark:text-slate-100">
             {projects.length}
           </div>
-          <p className="text-[11px] text-slate-500">Active portfolio entries</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">Active portfolio entries</p>
         </div>
 
-        <div className="p-5 rounded-xl border border-neutral-200 bg-white shadow-xs space-y-2">
+        <div className="p-5 rounded-xl border border-neutral-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold uppercase text-slate-500">
+            <span className="text-xs font-mono font-bold uppercase text-slate-500 dark:text-slate-400">
               Client Deliveries
             </span>
-            <span className="p-1.5 rounded-md bg-emerald-50 text-emerald-600">
+            <span className="p-1.5 rounded-md bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400">
               <Building2 className="size-4" />
             </span>
           </div>
-          <div className="text-3xl font-mono font-extrabold text-emerald-600">
+          <div className="text-3xl font-mono font-extrabold text-emerald-600 dark:text-emerald-400">
             {realWorldCount}
           </div>
-          <p className="text-[11px] text-slate-500">Real-world production case studies</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">Real-world production case studies</p>
         </div>
 
-        <div className="p-5 rounded-xl border border-neutral-200 bg-white shadow-xs space-y-2">
+        <div className="p-5 rounded-xl border border-neutral-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xs space-y-2">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-mono font-bold uppercase text-slate-500">
+            <span className="text-xs font-mono font-bold uppercase text-slate-500 dark:text-slate-400">
               Skill Prototypes
             </span>
-            <span className="p-1.5 rounded-md bg-purple-50 text-purple-600">
+            <span className="p-1.5 rounded-md bg-purple-50 dark:bg-purple-950/50 text-purple-600 dark:text-purple-400">
               <Sparkles className="size-4" />
             </span>
           </div>
-          <div className="text-3xl font-mono font-extrabold text-purple-600">
+          <div className="text-3xl font-mono font-extrabold text-purple-600 dark:text-purple-400">
             {skillCount}
           </div>
-          <p className="text-[11px] text-slate-500">Egostix Labs demonstration builds</p>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400">Egostix Labs demonstration builds</p>
         </div>
       </div>
 
       {/* Filter and Search Toolbar */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-neutral-50/80 p-3 rounded-xl border border-neutral-200">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-neutral-50/80 dark:bg-slate-900/60 p-3 rounded-xl border border-neutral-200 dark:border-slate-800">
         <div className="relative w-full sm:w-80">
-          <Search className="absolute left-3 top-2.5 size-4 text-slate-400" />
+          <Search className="absolute left-3 top-2.5 size-4 text-slate-400 dark:text-slate-500" />
           <input
             type="text"
             placeholder="Search by title, client, or slug..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-2 rounded-lg border border-neutral-300 bg-white text-xs text-slate-900 focus:outline-none focus:border-blue-600"
+            className="w-full pl-9 pr-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
           />
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto justify-between sm:justify-end">
-          <div className="flex items-center bg-white p-1 rounded-lg border border-neutral-200">
+          <div className="flex items-center bg-white dark:bg-slate-800 p-1 rounded-lg border border-neutral-200 dark:border-slate-700">
             <button
               onClick={() => setFilterCategory("all")}
               className={`px-3 py-1 rounded text-xs font-mono font-medium transition ${
                 filterCategory === "all"
-                  ? "bg-blue-50 text-blue-700 font-bold"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 font-bold"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
               }`}
             >
               All ({projects.length})
@@ -570,8 +570,8 @@ export default function PublishCaseStudyTab() {
               onClick={() => setFilterCategory("real-world")}
               className={`px-3 py-1 rounded text-xs font-mono font-medium transition ${
                 filterCategory === "real-world"
-                  ? "bg-blue-50 text-blue-700 font-bold"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 font-bold"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
               }`}
             >
               Client Work ({realWorldCount})
@@ -580,8 +580,8 @@ export default function PublishCaseStudyTab() {
               onClick={() => setFilterCategory("skill-display")}
               className={`px-3 py-1 rounded text-xs font-mono font-medium transition ${
                 filterCategory === "skill-display"
-                  ? "bg-blue-50 text-blue-700 font-bold"
-                  : "text-slate-600 hover:text-slate-900"
+                  ? "bg-blue-50 dark:bg-blue-950/60 text-blue-700 dark:text-blue-400 font-bold"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
               }`}
             >
               Prototypes ({skillCount})
@@ -590,10 +590,10 @@ export default function PublishCaseStudyTab() {
 
           <button
             onClick={loadCaseStudies}
-            className="p-2 rounded-lg border border-neutral-300 bg-white hover:bg-neutral-100 text-slate-700 transition"
+            className="p-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-neutral-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 transition"
             title="Refresh List"
           >
-            <RefreshCw className={`size-4 ${loading ? "animate-spin text-blue-600" : ""}`} />
+            <RefreshCw className={`size-4 ${loading ? "animate-spin text-blue-600 dark:text-blue-400" : ""}`} />
           </button>
         </div>
       </div>
@@ -601,21 +601,21 @@ export default function PublishCaseStudyTab() {
       {/* Case Studies Grid List */}
       {loading ? (
         <div className="py-16 text-center space-y-3">
-          <RefreshCw className="size-8 text-blue-600 animate-spin mx-auto" />
-          <p className="text-xs font-mono text-slate-500">Loading published case study pages...</p>
+          <RefreshCw className="size-8 text-blue-600 dark:text-blue-400 animate-spin mx-auto" />
+          <p className="text-xs font-mono text-slate-500 dark:text-slate-400">Loading published case study pages...</p>
         </div>
       ) : filteredProjects.length === 0 ? (
-        <div className="p-12 text-center bg-white rounded-xl border border-neutral-200 space-y-4">
-          <FileCode className="size-12 text-slate-300 mx-auto" />
+        <div className="p-12 text-center bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 space-y-4">
+          <FileCode className="size-12 text-slate-300 dark:text-slate-600 mx-auto" />
           <div>
-            <h3 className="text-base font-mono font-bold text-slate-800">No case studies found</h3>
-            <p className="text-xs text-slate-500 max-w-md mx-auto mt-1">
+            <h3 className="text-base font-mono font-bold text-slate-800 dark:text-slate-100">No case studies found</h3>
+            <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mx-auto mt-1">
               No published case studies match your current search query or category filter.
             </p>
           </div>
           <button
             onClick={handleOpenCreate}
-            className="px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-mono font-bold inline-flex items-center gap-2"
+            className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-mono font-bold inline-flex items-center gap-2"
           >
             <Plus className="size-4" />
             <span>Create First Case Study</span>
@@ -626,43 +626,43 @@ export default function PublishCaseStudyTab() {
           {filteredProjects.map((project) => (
             <div
               key={project.slug}
-              className="bg-white rounded-xl border border-neutral-200 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between"
+              className="bg-white dark:bg-slate-900 rounded-xl border border-neutral-200 dark:border-slate-800 overflow-hidden shadow-xs hover:shadow-md transition flex flex-col justify-between"
             >
               <div className="p-6 space-y-4">
                 {/* Header row */}
                 <div className="flex items-start justify-between gap-3">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono font-bold uppercase text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-mono font-bold uppercase text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900/50 px-2 py-0.5 rounded">
                         {project.service}
                       </span>
-                      <span className="text-[10px] font-mono font-semibold uppercase text-slate-500 bg-slate-100 px-2 py-0.5 rounded">
+                      <span className="text-[10px] font-mono font-semibold uppercase text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded">
                         {project.category === "real-world" ? "Client Work" : "Prototype"}
                       </span>
                     </div>
-                    <h3 className="text-lg font-mono font-bold text-slate-900 leading-snug pt-1">
+                    <h3 className="text-lg font-mono font-bold text-slate-900 dark:text-slate-100 leading-snug pt-1">
                       {project.title}
                     </h3>
                   </div>
 
-                  <span className="text-xs font-mono font-bold text-slate-400 bg-neutral-100 px-2.5 py-1 rounded">
+                  <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-400 bg-neutral-100 dark:bg-slate-800 px-2.5 py-1 rounded">
                     {project.year}
                   </span>
                 </div>
 
-                <p className="text-xs font-inter text-slate-600 line-clamp-2 leading-relaxed">
+                <p className="text-xs font-inter text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
                   {project.subtitle || project.summary}
                 </p>
 
                 {/* Metrics Badges */}
                 {project.metrics && project.metrics.length > 0 && (
-                  <div className="grid grid-cols-3 gap-2 bg-neutral-50 p-3 rounded-lg border border-neutral-150 text-center">
+                  <div className="grid grid-cols-3 gap-2 bg-neutral-50 dark:bg-slate-800/60 p-3 rounded-lg border border-neutral-150 dark:border-slate-700 text-center">
                     {project.metrics.slice(0, 3).map((metric, idx) => (
                       <div key={idx} className="space-y-0.5">
-                        <div className="font-mono text-sm font-bold text-blue-700">
+                        <div className="font-mono text-sm font-bold text-blue-700 dark:text-blue-400">
                           {metric.value}
                         </div>
-                        <div className="text-[9px] font-inter text-slate-500 truncate">
+                        <div className="text-[9px] font-inter text-slate-500 dark:text-slate-400 truncate">
                           {metric.label}
                         </div>
                       </div>
@@ -671,29 +671,29 @@ export default function PublishCaseStudyTab() {
                 )}
 
                 {/* Info Metadata */}
-                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-slate-500 pt-1">
-                  <span>Client: <strong className="text-slate-800">{project.client}</strong></span>
-                  <span>Slug: <code className="bg-neutral-100 text-slate-700 px-1.5 py-0.5 rounded text-[11px]">{project.slug}</code></span>
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs font-mono text-slate-500 dark:text-slate-400 pt-1">
+                  <span>Client: <strong className="text-slate-800 dark:text-slate-200">{project.client}</strong></span>
+                  <span>Slug: <code className="bg-neutral-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 px-1.5 py-0.5 rounded text-[11px]">{project.slug}</code></span>
                 </div>
               </div>
 
               {/* Card Footer Actions */}
-              <div className="bg-neutral-50 px-6 py-3 border-t border-neutral-200 flex items-center justify-between gap-2">
+              <div className="bg-neutral-50 dark:bg-slate-800/70 px-6 py-3 border-t border-neutral-200 dark:border-slate-800 flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <Link
                     href={`/work/${project.slug}`}
                     target="_blank"
-                    className="px-3 py-1.5 rounded-lg border border-neutral-300 bg-white hover:bg-blue-50 hover:text-blue-700 hover:border-blue-200 text-slate-700 text-xs font-mono font-semibold flex items-center gap-1.5 transition"
+                    className="px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-700 dark:hover:text-blue-400 hover:border-blue-200 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300 text-xs font-mono font-semibold flex items-center gap-1.5 transition"
                   >
-                    <ExternalLink className="size-3.5 text-blue-600" />
+                    <ExternalLink className="size-3.5 text-blue-600 dark:text-blue-400" />
                     <span>Review Live</span>
                   </Link>
 
                   <button
                     onClick={() => setPreviewProject(project)}
-                    className="px-3 py-1.5 rounded-lg border border-neutral-300 bg-white hover:bg-slate-100 text-slate-700 text-xs font-mono font-medium flex items-center gap-1.5 transition"
+                    className="px-3 py-1.5 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-mono font-medium flex items-center gap-1.5 transition"
                   >
-                    <Eye className="size-3.5 text-slate-500" />
+                    <Eye className="size-3.5 text-slate-500 dark:text-slate-400" />
                     <span>Quick Preview</span>
                   </button>
                 </div>
@@ -704,19 +704,19 @@ export default function PublishCaseStudyTab() {
                     onClick={() => handleToggleVisibility(project.slug, !project.isPrivate)}
                     className={`px-2.5 py-1.5 rounded-lg border text-xs font-mono font-semibold flex items-center gap-1.5 transition ${
                       project.isPrivate
-                        ? "bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100"
-                        : "bg-emerald-50 border-emerald-200 text-emerald-800 hover:bg-emerald-100"
+                        ? "bg-amber-50 dark:bg-amber-950/50 border-amber-200 dark:border-amber-900/50 text-amber-800 dark:text-amber-300 hover:bg-amber-100 dark:hover:bg-amber-900/50"
+                        : "bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-300 hover:bg-emerald-100 dark:hover:bg-emerald-900/50"
                     }`}
                     title={project.isPrivate ? "Private Draft (Hidden on website). Click to make Public." : "Public Live (Visible on website). Click to make Private."}
                   >
                     {project.isPrivate ? (
                       <>
-                        <EyeOff className="size-3.5 text-amber-600" />
+                        <EyeOff className="size-3.5 text-amber-600 dark:text-amber-400" />
                         <span>Private</span>
                       </>
                     ) : (
                       <>
-                        <Globe className="size-3.5 text-emerald-600" />
+                        <Globe className="size-3.5 text-emerald-600 dark:text-emerald-400" />
                         <span>Public</span>
                       </>
                     )}
@@ -724,14 +724,14 @@ export default function PublishCaseStudyTab() {
 
                   <button
                     onClick={() => handleOpenEdit(project)}
-                    className="p-1.5 rounded-lg border border-neutral-200 bg-white hover:bg-blue-50 hover:border-blue-300 text-slate-700 hover:text-blue-700 transition"
+                    className="p-1.5 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-blue-50 dark:hover:bg-slate-700 hover:border-blue-300 dark:hover:border-slate-600 text-slate-700 dark:text-slate-300 hover:text-blue-700 dark:hover:text-blue-400 transition"
                     title="Edit Case Study"
                   >
                     <Edit className="size-3.5" />
                   </button>
                   <button
                     onClick={() => handleDelete(project.slug, project.title)}
-                    className="p-1.5 rounded-lg border border-neutral-200 bg-white hover:bg-red-50 hover:border-red-300 text-slate-700 hover:text-red-700 transition"
+                    className="p-1.5 rounded-lg border border-neutral-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-950/50 hover:border-red-300 dark:hover:border-red-900/50 text-slate-700 dark:text-slate-300 hover:text-red-700 dark:hover:text-red-400 transition"
                     title="Delete Case Study"
                   >
                     <Trash2 className="size-3.5" />
@@ -746,18 +746,18 @@ export default function PublishCaseStudyTab() {
       {/* PUBLISH / EDIT CASE STUDY MODAL */}
       {isPublishModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl border border-neutral-200 shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-neutral-200 dark:border-slate-800 shadow-2xl max-w-4xl w-full max-h-[90vh] flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
             {/* Modal Header */}
-            <div className="px-6 py-4 border-b border-neutral-200 flex items-center justify-between bg-neutral-50">
+            <div className="px-6 py-4 border-b border-neutral-200 dark:border-slate-800 flex items-center justify-between bg-neutral-50 dark:bg-slate-800/70">
               <div className="flex items-center gap-2">
-                <span className="p-2 rounded-lg bg-blue-100 text-blue-700">
+                <span className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400">
                   <FileCode className="size-5" />
                 </span>
                 <div>
-                  <h2 className="text-base font-mono font-bold text-slate-900">
+                  <h2 className="text-base font-mono font-bold text-slate-900 dark:text-slate-100">
                     {editingSlug ? `Edit Case Study: ${formData.title}` : "Publish New Study Page"}
                   </h2>
-                  <p className="text-xs text-slate-500 font-inter">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-inter">
                     Configure case study metadata, public/private visibility status, image assets, metrics, and storyline.
                   </p>
                 </div>
@@ -765,7 +765,7 @@ export default function PublishCaseStudyTab() {
 
               <button
                 onClick={() => setIsPublishModalOpen(false)}
-                className="p-2 rounded-lg hover:bg-neutral-200 text-slate-500 transition"
+                className="p-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition"
               >
                 <X className="size-5" />
               </button>
@@ -777,14 +777,14 @@ export default function PublishCaseStudyTab() {
                 <div
                   className={`p-4 rounded-xl border text-xs font-mono flex items-center gap-3 ${
                     statusMessage.type === "success"
-                      ? "bg-emerald-50 border-emerald-200 text-emerald-800"
-                      : "bg-red-50 border-red-200 text-red-800"
+                      ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-300"
+                      : "bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/50 text-red-800 dark:text-red-300"
                   }`}
                 >
                   {statusMessage.type === "success" ? (
-                    <CheckCircle2 className="size-5 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="size-5 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   ) : (
-                    <AlertCircle className="size-5 text-red-600 shrink-0" />
+                    <AlertCircle className="size-5 text-red-600 dark:text-red-400 shrink-0" />
                   )}
                   <span>{statusMessage.text}</span>
                 </div>
@@ -792,13 +792,13 @@ export default function PublishCaseStudyTab() {
 
               {/* Section 1: Basic Identifiers */}
               <div className="space-y-4">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-neutral-200 pb-2">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-neutral-200 dark:border-slate-800 pb-2">
                   01. Project Identifiers & Visibility
                 </h3>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Project Title *
                     </label>
                     <input
@@ -807,12 +807,12 @@ export default function PublishCaseStudyTab() {
                       placeholder="e.g., Apex Realty Platform"
                       value={formData.title}
                       onChange={(e) => handleTitleChange(e.target.value)}
-                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       URL Slug *
                     </label>
                     <input
@@ -824,12 +824,12 @@ export default function PublishCaseStudyTab() {
                       onChange={(e) =>
                         setFormData((prev) => ({ ...prev, slug: e.target.value }))
                       }
-                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 bg-neutral-50 text-xs font-mono text-slate-900 focus:outline-none focus:border-blue-600 disabled:opacity-60"
+                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-neutral-50 dark:bg-slate-800/60 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600 disabled:opacity-60"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Client Name *
                     </label>
                     <input
@@ -840,12 +840,12 @@ export default function PublishCaseStudyTab() {
                       onChange={(e) =>
                         setFormData((prev) => ({ ...prev, client: e.target.value }))
                       }
-                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Year *
                     </label>
                     <input
@@ -856,12 +856,12 @@ export default function PublishCaseStudyTab() {
                       onChange={(e) =>
                         setFormData((prev) => ({ ...prev, year: e.target.value }))
                       }
-                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-mono text-slate-900 focus:outline-none focus:border-blue-600"
+                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Category
                     </label>
                     <select
@@ -869,7 +869,7 @@ export default function PublishCaseStudyTab() {
                       onChange={(e) =>
                         setFormData((prev) => ({ ...prev, category: e.target.value }))
                       }
-                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600 bg-white"
+                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600 bg-white dark:bg-slate-800"
                     >
                       <option value="real-world">Client Work (Real-World Delivery)</option>
                       <option value="skill-display">Skill Showcase (Lab Prototype)</option>
@@ -877,7 +877,7 @@ export default function PublishCaseStudyTab() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Visibility Status
                     </label>
                     <select
@@ -885,7 +885,7 @@ export default function PublishCaseStudyTab() {
                       onChange={(e) =>
                         setFormData((prev) => ({ ...prev, isPrivate: e.target.value === "private" }))
                       }
-                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-mono font-semibold text-slate-900 focus:outline-none focus:border-blue-600 bg-white"
+                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 text-xs font-mono font-semibold text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600 bg-white dark:bg-slate-800"
                     >
                       <option value="public">🌐 Public (Visible on Website & Portfolio)</option>
                       <option value="private">🔒 Private (Draft - Dashboard Only)</option>
@@ -893,7 +893,7 @@ export default function PublishCaseStudyTab() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                    <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                       Service Module
                     </label>
                     <select
@@ -901,7 +901,7 @@ export default function PublishCaseStudyTab() {
                       onChange={(e) =>
                         setFormData((prev) => ({ ...prev, service: e.target.value }))
                       }
-                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600 bg-white"
+                      className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600 bg-white dark:bg-slate-800"
                     >
                       <option value="AI-Powered Business Websites">AI-Powered Business Websites</option>
                       <option value="AI Internal Tools for SMBs">AI Internal Tools for SMBs</option>
@@ -912,7 +912,7 @@ export default function PublishCaseStudyTab() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Subtitle / Tagline *
                   </label>
                   <input
@@ -923,13 +923,13 @@ export default function PublishCaseStudyTab() {
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, subtitle: e.target.value }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1 flex items-center gap-1.5">
-                    <Globe className="size-3.5 text-blue-600" />
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1 flex items-center gap-1.5">
+                    <Globe className="size-3.5 text-blue-600 dark:text-blue-400" />
                     <span>Live Website Preview Link (URL)</span>
                   </label>
                   <input
@@ -939,12 +939,12 @@ export default function PublishCaseStudyTab() {
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, liveUrl: e.target.value }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-mono text-slate-900 focus:outline-none focus:border-blue-600 bg-white"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600 bg-white dark:bg-slate-800"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Executive Summary Paragraph *
                   </label>
                   <textarea
@@ -955,14 +955,14 @@ export default function PublishCaseStudyTab() {
                     onChange={(e) =>
                       setFormData((prev) => ({ ...prev, summary: e.target.value }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   />
                 </div>
               </div>
 
               {/* Section 2: Cover & Hero Image Upload Options */}
               <div className="space-y-4">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-neutral-200 pb-2">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-neutral-200 dark:border-slate-800 pb-2">
                   02. Cover Image & Asset Upload Options
                 </h3>
 
@@ -977,8 +977,8 @@ export default function PublishCaseStudyTab() {
 
               {/* Section 3: Key Impact Metrics */}
               <div className="space-y-3">
-                <div className="flex items-center justify-between border-b border-neutral-200 pb-2">
-                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                <div className="flex items-center justify-between border-b border-neutral-200 dark:border-slate-800 pb-2">
+                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                     03. Key Impact Metrics (3 items)
                   </h3>
                   <button
@@ -989,7 +989,7 @@ export default function PublishCaseStudyTab() {
                         metrics: [...prev.metrics, { value: "+100%", label: "New Metric" }]
                       }))
                     }
-                    className="text-xs font-mono text-blue-600 font-semibold flex items-center gap-1 hover:underline"
+                    className="text-xs font-mono text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1 hover:underline"
                   >
                     <Plus className="size-3.5" />
                     <span>Add Metric</span>
@@ -998,7 +998,7 @@ export default function PublishCaseStudyTab() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {formData.metrics.map((metric, idx) => (
-                    <div key={idx} className="p-3 rounded-lg border border-neutral-200 bg-neutral-50 space-y-2 relative">
+                    <div key={idx} className="p-3 rounded-lg border border-neutral-200 dark:border-slate-700 bg-neutral-50 dark:bg-slate-800/60 space-y-2 relative">
                       <button
                         type="button"
                         onClick={() =>
@@ -1007,13 +1007,13 @@ export default function PublishCaseStudyTab() {
                             metrics: prev.metrics.filter((_, i) => i !== idx)
                           }))
                         }
-                        className="absolute right-2 top-2 text-slate-400 hover:text-red-600 transition"
+                        className="absolute right-2 top-2 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 transition"
                       >
                         <X className="size-3.5" />
                       </button>
 
                       <div>
-                        <label className="block text-[10px] font-mono text-slate-500">Metric Value</label>
+                        <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">Metric Value</label>
                         <input
                           type="text"
                           value={metric.value}
@@ -1022,12 +1022,12 @@ export default function PublishCaseStudyTab() {
                             newMetrics[idx].value = e.target.value;
                             setFormData((prev) => ({ ...prev, metrics: newMetrics }));
                           }}
-                          className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-mono font-bold text-blue-700 bg-white"
+                          className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-mono font-bold text-blue-700 dark:text-blue-400 bg-white dark:bg-slate-700"
                         />
                       </div>
 
                       <div>
-                        <label className="block text-[10px] font-mono text-slate-500">Metric Label</label>
+                        <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">Metric Label</label>
                         <input
                           type="text"
                           value={metric.label}
@@ -1036,7 +1036,7 @@ export default function PublishCaseStudyTab() {
                             newMetrics[idx].label = e.target.value;
                             setFormData((prev) => ({ ...prev, metrics: newMetrics }));
                           }}
-                          className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-inter text-slate-800 bg-white"
+                          className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-inter text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700"
                         />
                       </div>
                     </div>
@@ -1046,21 +1046,21 @@ export default function PublishCaseStudyTab() {
 
               {/* Section 4: System Interface & Mobile Mockups */}
               <div className="space-y-6">
-                <div className="border-b border-neutral-200 pb-2">
-                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400">
+                <div className="border-b border-neutral-200 dark:border-slate-800 pb-2">
+                  <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                     04. System Interface & Mobile Mockup Uploads
                   </h3>
-                  <p className="text-[11px] font-inter text-slate-500 mt-0.5">
+                  <p className="text-[11px] font-inter text-slate-500 dark:text-slate-400 mt-0.5">
                     Provide desktop/laptop system screenshots and mobile application mockups for public showcase.
                   </p>
                 </div>
 
                 {/* 04-A: Desktop / Laptop System Mockups */}
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between bg-blue-50/70 p-2.5 rounded-lg border border-blue-100">
+                  <div className="flex items-center justify-between bg-blue-50/70 dark:bg-blue-950/40 p-2.5 rounded-lg border border-blue-100 dark:border-blue-900/50">
                     <div className="flex items-center gap-2">
-                      <Monitor className="size-4 text-blue-600" />
-                      <h4 className="text-xs font-mono font-bold text-blue-900 uppercase">
+                      <Monitor className="size-4 text-blue-600 dark:text-blue-400" />
+                      <h4 className="text-xs font-mono font-bold text-blue-900 dark:text-blue-300 uppercase">
                         04-A. Desktop & Laptop System Mockups (Top Showcase)
                       </h4>
                     </div>
@@ -1081,7 +1081,7 @@ export default function PublishCaseStudyTab() {
                           ]
                         }))
                       }
-                      className="text-[11px] font-mono text-blue-600 font-semibold flex items-center gap-1 hover:underline"
+                      className="text-[11px] font-mono text-blue-600 dark:text-blue-400 font-semibold flex items-center gap-1 hover:underline"
                     >
                       <Plus className="size-3.5" />
                       <span>Add Desktop Mockup Slot</span>
@@ -1092,7 +1092,7 @@ export default function PublishCaseStudyTab() {
                     {formData.mockups.map((mockup, idx) => {
                       if (mockup.type === "mobile") return null;
                       return (
-                        <div key={idx} className="p-4 rounded-xl border border-neutral-200 bg-neutral-50 space-y-3 relative">
+                        <div key={idx} className="p-4 rounded-xl border border-neutral-200 dark:border-slate-700 bg-neutral-50 dark:bg-slate-800/60 space-y-3 relative">
                           <button
                             type="button"
                             onClick={() =>
@@ -1101,14 +1101,14 @@ export default function PublishCaseStudyTab() {
                                 mockups: prev.mockups.filter((_, i) => i !== idx)
                               }))
                             }
-                            className="absolute right-2 top-2 text-slate-400 hover:text-red-600 transition"
+                            className="absolute right-2 top-2 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 transition"
                             title="Remove Mockup"
                           >
                             <X className="size-3.5" />
                           </button>
 
                           <div>
-                            <label className="block text-[10px] font-mono text-slate-500">Desktop View Title</label>
+                            <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">Desktop View Title</label>
                             <input
                               type="text"
                               value={mockup.title}
@@ -1117,12 +1117,12 @@ export default function PublishCaseStudyTab() {
                                 newMockups[idx].title = e.target.value;
                                 setFormData((prev) => ({ ...prev, mockups: newMockups }));
                               }}
-                              className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-mono font-bold text-slate-800 bg-white"
+                              className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-[10px] font-mono text-slate-500">Description</label>
+                            <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">Description</label>
                             <input
                               type="text"
                               value={mockup.description || ""}
@@ -1132,12 +1132,12 @@ export default function PublishCaseStudyTab() {
                                 setFormData((prev) => ({ ...prev, mockups: newMockups }));
                               }}
                               placeholder="Description of desktop dashboard view..."
-                              className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-inter text-slate-800 bg-white"
+                              className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-inter text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-[10px] font-mono text-slate-500">View Type</label>
+                            <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">View Type</label>
                             <select
                               value={mockup.type}
                               onChange={(e) => {
@@ -1145,7 +1145,7 @@ export default function PublishCaseStudyTab() {
                                 newMockups[idx].type = e.target.value;
                                 setFormData((prev) => ({ ...prev, mockups: newMockups }));
                               }}
-                              className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-inter text-slate-800 bg-white"
+                              className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-inter text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700"
                             >
                               <option value="desktop">Desktop Browser View</option>
                               <option value="analytics">Analytics & Admin Panel</option>
@@ -1172,10 +1172,10 @@ export default function PublishCaseStudyTab() {
 
                 {/* 04-B: Mobile Interface Mockups */}
                 <div className="space-y-3 pt-2">
-                  <div className="flex items-center justify-between bg-purple-50/70 p-2.5 rounded-lg border border-purple-100">
+                  <div className="flex items-center justify-between bg-purple-50/70 dark:bg-purple-950/40 p-2.5 rounded-lg border border-purple-100 dark:border-purple-900/50">
                     <div className="flex items-center gap-2">
-                      <Smartphone className="size-4 text-purple-600" />
-                      <h4 className="text-xs font-mono font-bold text-purple-900 uppercase">
+                      <Smartphone className="size-4 text-purple-600 dark:text-purple-400" />
+                      <h4 className="text-xs font-mono font-bold text-purple-900 dark:text-purple-300 uppercase">
                         04-B. Mobile Interface Mockups (Bottom Showcase)
                       </h4>
                     </div>
@@ -1196,7 +1196,7 @@ export default function PublishCaseStudyTab() {
                           ]
                         }))
                       }
-                      className="text-[11px] font-mono text-purple-600 font-semibold flex items-center gap-1 hover:underline"
+                      className="text-[11px] font-mono text-purple-600 dark:text-purple-400 font-semibold flex items-center gap-1 hover:underline"
                     >
                       <Plus className="size-3.5" />
                       <span>Add Mobile Mockup Slot</span>
@@ -1207,7 +1207,7 @@ export default function PublishCaseStudyTab() {
                     {formData.mockups.map((mockup, idx) => {
                       if (mockup.type !== "mobile") return null;
                       return (
-                        <div key={idx} className="p-4 rounded-xl border border-neutral-200 bg-neutral-50 space-y-3 relative">
+                        <div key={idx} className="p-4 rounded-xl border border-neutral-200 dark:border-slate-700 bg-neutral-50 dark:bg-slate-800/60 space-y-3 relative">
                           <button
                             type="button"
                             onClick={() =>
@@ -1216,14 +1216,14 @@ export default function PublishCaseStudyTab() {
                                 mockups: prev.mockups.filter((_, i) => i !== idx)
                               }))
                             }
-                            className="absolute right-2 top-2 text-slate-400 hover:text-red-600 transition"
+                            className="absolute right-2 top-2 text-slate-400 dark:text-slate-500 hover:text-red-600 dark:hover:text-red-400 transition"
                             title="Remove Mockup"
                           >
                             <X className="size-3.5" />
                           </button>
 
                           <div>
-                            <label className="block text-[10px] font-mono text-slate-500">Mobile View Title</label>
+                            <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">Mobile View Title</label>
                             <input
                               type="text"
                               value={mockup.title}
@@ -1232,12 +1232,12 @@ export default function PublishCaseStudyTab() {
                                 newMockups[idx].title = e.target.value;
                                 setFormData((prev) => ({ ...prev, mockups: newMockups }));
                               }}
-                              className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-mono font-bold text-slate-800 bg-white"
+                              className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-[10px] font-mono text-slate-500">Description</label>
+                            <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">Description</label>
                             <input
                               type="text"
                               value={mockup.description || ""}
@@ -1247,12 +1247,12 @@ export default function PublishCaseStudyTab() {
                                 setFormData((prev) => ({ ...prev, mockups: newMockups }));
                               }}
                               placeholder="Description of mobile view..."
-                              className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-inter text-slate-800 bg-white"
+                              className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-inter text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700"
                             />
                           </div>
 
                           <div>
-                            <label className="block text-[10px] font-mono text-slate-500">View Type</label>
+                            <label className="block text-[10px] font-mono text-slate-500 dark:text-slate-400">View Type</label>
                             <select
                               value={mockup.type}
                               onChange={(e) => {
@@ -1260,7 +1260,7 @@ export default function PublishCaseStudyTab() {
                                 newMockups[idx].type = e.target.value;
                                 setFormData((prev) => ({ ...prev, mockups: newMockups }));
                               }}
-                              className="w-full px-2 py-1 rounded border border-neutral-300 text-xs font-inter text-slate-800 bg-white"
+                              className="w-full px-2 py-1 rounded border border-neutral-300 dark:border-slate-600 text-xs font-inter text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-700"
                             >
                               <option value="mobile">Mobile View</option>
                               <option value="desktop">Move to Desktop Section</option>
@@ -1287,12 +1287,12 @@ export default function PublishCaseStudyTab() {
 
               {/* Section 5: Storyline (Challenge, Solution, Outcomes) */}
               <div className="space-y-4">
-                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 border-b border-neutral-200 pb-2">
+                <h3 className="text-xs font-mono font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 border-b border-neutral-200 dark:border-slate-800 pb-2">
                   05. Detailed Storyline & Case Study Content
                 </h3>
 
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     The Challenge (Paragraphs separated by blank lines)
                   </label>
                   <textarea
@@ -1304,12 +1304,12 @@ export default function PublishCaseStudyTab() {
                         challenge: e.target.value.split(/\n\n+/).map((s) => s.trim()).filter(Boolean)
                       }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     The Solution (Paragraphs separated by blank lines)
                   </label>
                   <textarea
@@ -1321,12 +1321,12 @@ export default function PublishCaseStudyTab() {
                         solution: e.target.value.split(/\n\n+/).map((s) => s.trim()).filter(Boolean)
                       }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Outcomes & Measurable Impact (One item per line)
                   </label>
                   <textarea
@@ -1338,14 +1338,14 @@ export default function PublishCaseStudyTab() {
                         results: e.target.value.split("\n").map((s) => s.trim()).filter(Boolean)
                       }))
                     }
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   />
                 </div>
               </div>
 
               {/* Section 6: Tech Stack Tags */}
               <div className="space-y-2">
-                <label className="block text-xs font-mono font-semibold text-slate-700">
+                <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300">
                   Technologies Used (Comma-separated tags)
                 </label>
                 <input
@@ -1357,24 +1357,24 @@ export default function PublishCaseStudyTab() {
                       tags: e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
                     }))
                   }
-                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-mono text-slate-900 focus:outline-none focus:border-blue-600"
+                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   placeholder="Next.js, Tailwind CSS, Supabase, AI Tools"
                 />
               </div>
 
               {/* Submit Buttons */}
-              <div className="pt-4 border-t border-neutral-200 flex items-center justify-end gap-3">
+              <div className="pt-4 border-t border-neutral-200 dark:border-slate-800 flex items-center justify-end gap-3">
                 <button
                   type="button"
                   onClick={() => setIsPublishModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-neutral-300 bg-white hover:bg-neutral-100 text-slate-700 text-xs font-mono font-semibold transition"
+                  className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-neutral-100 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-xs font-mono font-semibold transition min-h-[40px]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSaving}
-                  className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-mono font-bold flex items-center gap-2 transition disabled:opacity-50"
+                  className="px-6 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-mono font-bold flex items-center gap-2 transition disabled:opacity-50 min-h-[40px]"
                 >
                   {isSaving ? (
                     <>
@@ -1397,17 +1397,17 @@ export default function PublishCaseStudyTab() {
       {/* UPLOAD CLIENT PAGE MODAL */}
       {isClientModalOpen && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
-          <div className="bg-white rounded-2xl border border-neutral-200 shadow-2xl max-w-lg w-full flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="px-6 py-4 border-b border-neutral-200 flex items-center justify-between bg-neutral-50">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl border border-neutral-200 dark:border-slate-800 shadow-2xl max-w-lg w-full flex flex-col overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="px-6 py-4 border-b border-neutral-200 dark:border-slate-800 flex items-center justify-between bg-neutral-50 dark:bg-slate-800/70">
               <div className="flex items-center gap-2">
-                <span className="p-2 rounded-lg bg-blue-100 text-blue-700">
+                <span className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400">
                   <Upload className="size-5" />
                 </span>
                 <div>
-                  <h2 className="text-base font-mono font-bold text-slate-900">
+                  <h2 className="text-base font-mono font-bold text-slate-900 dark:text-slate-100">
                     Upload & Provision Client Page
                   </h2>
-                  <p className="text-xs text-slate-500 font-inter">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-inter">
                     Provision a dedicated client tenant portal with active service modules.
                   </p>
                 </div>
@@ -1415,7 +1415,7 @@ export default function PublishCaseStudyTab() {
 
               <button
                 onClick={() => setIsClientModalOpen(false)}
-                className="p-2 rounded-lg hover:bg-neutral-200 text-slate-500 transition"
+                className="p-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 transition"
               >
                 <X className="size-5" />
               </button>
@@ -1426,21 +1426,21 @@ export default function PublishCaseStudyTab() {
                 <div
                   className={`p-3 rounded-xl border text-xs font-mono flex items-center gap-2 ${
                     clientStatusMsg.type === "success"
-                      ? "bg-emerald-50 border-emerald-200 text-emerald-800"
-                      : "bg-red-50 border-red-200 text-red-800"
+                      ? "bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-900/50 text-emerald-800 dark:text-emerald-300"
+                      : "bg-red-50 dark:bg-red-950/40 border-red-200 dark:border-red-900/50 text-red-800 dark:text-red-300"
                   }`}
                 >
                   {clientStatusMsg.type === "success" ? (
-                    <CheckCircle2 className="size-4 text-emerald-600 shrink-0" />
+                    <CheckCircle2 className="size-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
                   ) : (
-                    <AlertCircle className="size-4 text-red-600 shrink-0" />
+                    <AlertCircle className="size-4 text-red-600 dark:text-red-400 shrink-0" />
                   )}
                   <span>{clientStatusMsg.text}</span>
                 </div>
               )}
 
               <div>
-                <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Client Business Name *
                 </label>
                 <input
@@ -1449,12 +1449,12 @@ export default function PublishCaseStudyTab() {
                   placeholder="e.g., Susmita Nursery"
                   value={clientForm.name}
                   onChange={(e) => setClientForm({ ...clientForm, name: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Short Code / Short Name
                 </label>
                 <input
@@ -1462,13 +1462,13 @@ export default function PublishCaseStudyTab() {
                   placeholder="e.g., Susmita"
                   value={clientForm.shortName}
                   onChange={(e) => setClientForm({ ...clientForm, shortName: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                 />
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Client Contact Name *
                   </label>
                   <input
@@ -1477,12 +1477,12 @@ export default function PublishCaseStudyTab() {
                     placeholder="e.g., Susmita Roy"
                     value={clientForm.ownerName}
                     onChange={(e) => setClientForm({ ...clientForm, ownerName: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                  <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                     Client Owner Email *
                   </label>
                   <input
@@ -1491,13 +1491,13 @@ export default function PublishCaseStudyTab() {
                     placeholder="client@company.com"
                     value={clientForm.ownerEmail}
                     onChange={(e) => setClientForm({ ...clientForm, ownerEmail: e.target.value })}
-                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-inter text-slate-900 focus:outline-none focus:border-blue-600"
+                    className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-inter text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-mono font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 mb-1">
                   Initial Portal Password (Optional)
                 </label>
                 <input
@@ -1505,7 +1505,7 @@ export default function PublishCaseStudyTab() {
                   placeholder="Leave blank or enter initial password"
                   value={clientForm.password}
                   onChange={(e) => setClientForm({ ...clientForm, password: e.target.value })}
-                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 text-xs font-mono text-slate-900 focus:outline-none focus:border-blue-600"
+                  className="w-full px-3 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-mono text-slate-900 dark:text-slate-100 focus:outline-none focus:border-blue-600"
                 />
               </div>
 
@@ -1513,14 +1513,14 @@ export default function PublishCaseStudyTab() {
                 <button
                   type="button"
                   onClick={() => setIsClientModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-neutral-300 text-xs font-mono font-semibold text-slate-700 hover:bg-neutral-100"
+                  className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-800 min-h-[40px]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={isSavingClient}
-                  className="px-5 py-2 rounded-lg bg-blue-600 text-white text-xs font-mono font-bold flex items-center gap-2 hover:bg-blue-700 disabled:opacity-50"
+                  className="px-5 py-2 rounded-lg bg-blue-600 text-white text-xs font-mono font-bold flex items-center gap-2 hover:bg-blue-700 dark:hover:bg-blue-500 disabled:opacity-50 min-h-[40px]"
                 >
                   {isSavingClient ? (
                     <>
@@ -1543,19 +1543,19 @@ export default function PublishCaseStudyTab() {
       {/* QUICK PREVIEW DRAWER */}
       {previewProject && (
         <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex justify-end">
-          <div className="bg-white w-full max-w-2xl h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200">
-            <div className="p-6 border-b border-neutral-200 flex items-center justify-between bg-neutral-50">
+          <div className="bg-white dark:bg-slate-900 w-full max-w-2xl h-full flex flex-col shadow-2xl animate-in slide-in-from-right duration-200 border-l border-neutral-200 dark:border-slate-800">
+            <div className="p-6 border-b border-neutral-200 dark:border-slate-800 flex items-center justify-between bg-neutral-50 dark:bg-slate-800/70">
               <div>
-                <span className="text-[10px] font-mono font-bold uppercase text-blue-700 bg-blue-50 border border-blue-200 px-2 py-0.5 rounded">
+                <span className="text-[10px] font-mono font-bold uppercase text-blue-700 dark:text-blue-400 bg-blue-50 dark:bg-blue-950/50 border border-blue-200 dark:border-blue-900/50 px-2 py-0.5 rounded">
                   {previewProject.service}
                 </span>
-                <h2 className="text-xl font-mono font-bold text-slate-900 mt-1">
+                <h2 className="text-xl font-mono font-bold text-slate-900 dark:text-slate-100 mt-1">
                   {previewProject.title}
                 </h2>
               </div>
               <button
                 onClick={() => setPreviewProject(null)}
-                className="p-2 rounded-lg hover:bg-neutral-200 text-slate-500"
+                className="p-2 rounded-lg hover:bg-neutral-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400"
               >
                 <X className="size-5" />
               </button>
@@ -1563,33 +1563,33 @@ export default function PublishCaseStudyTab() {
 
             <div className="flex-1 overflow-y-auto p-6 space-y-6">
               <div>
-                <h4 className="text-xs font-mono font-bold uppercase text-slate-400 mb-1">
+                <h4 className="text-xs font-mono font-bold uppercase text-slate-400 dark:text-slate-500 mb-1">
                   Subtitle
                 </h4>
-                <p className="text-sm font-inter text-slate-800 leading-relaxed">
+                <p className="text-sm font-inter text-slate-800 dark:text-slate-200 leading-relaxed">
                   {previewProject.subtitle}
                 </p>
               </div>
 
               <div>
-                <h4 className="text-xs font-mono font-bold uppercase text-slate-400 mb-1">
+                <h4 className="text-xs font-mono font-bold uppercase text-slate-400 dark:text-slate-500 mb-1">
                   Executive Summary
                 </h4>
-                <p className="text-xs font-inter text-slate-600 leading-relaxed bg-neutral-50 p-3 rounded-lg border border-neutral-200">
+                <p className="text-xs font-inter text-slate-600 dark:text-slate-300 leading-relaxed bg-neutral-50 dark:bg-slate-800/80 p-3 rounded-lg border border-neutral-200 dark:border-slate-700">
                   {previewProject.summary}
                 </p>
               </div>
 
               {previewProject.metrics && (
                 <div>
-                  <h4 className="text-xs font-mono font-bold uppercase text-slate-400 mb-2">
+                  <h4 className="text-xs font-mono font-bold uppercase text-slate-400 dark:text-slate-500 mb-2">
                     Key Outcomes
                   </h4>
                   <div className="grid grid-cols-3 gap-3">
                     {previewProject.metrics.map((m, idx) => (
-                      <div key={idx} className="p-3 bg-blue-50 rounded-lg border border-blue-150 text-center">
-                        <div className="font-mono text-xl font-extrabold text-blue-700">{m.value}</div>
-                        <div className="text-[10px] text-slate-600">{m.label}</div>
+                      <div key={idx} className="p-3 bg-blue-50 dark:bg-blue-950/40 rounded-lg border border-blue-150 dark:border-blue-900/50 text-center">
+                        <div className="font-mono text-xl font-extrabold text-blue-700 dark:text-blue-400">{m.value}</div>
+                        <div className="text-[10px] text-slate-600 dark:text-slate-400">{m.label}</div>
                       </div>
                     ))}
                   </div>
@@ -1598,13 +1598,13 @@ export default function PublishCaseStudyTab() {
 
               {previewProject.results && (
                 <div>
-                  <h4 className="text-xs font-mono font-bold uppercase text-slate-400 mb-2">
+                  <h4 className="text-xs font-mono font-bold uppercase text-slate-400 dark:text-slate-500 mb-2">
                     Delivered Results
                   </h4>
                   <ul className="space-y-2">
                     {previewProject.results.map((res, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-700">
-                        <CheckCircle2 className="size-4 text-blue-600 shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-700 dark:text-slate-300">
+                        <CheckCircle2 className="size-4 text-blue-600 dark:text-blue-400 shrink-0 mt-0.5" />
                         <span>{res}</span>
                       </li>
                     ))}
@@ -1613,11 +1613,11 @@ export default function PublishCaseStudyTab() {
               )}
             </div>
 
-            <div className="p-4 border-t border-neutral-200 bg-neutral-50 flex items-center justify-between">
+            <div className="p-4 border-t border-neutral-200 dark:border-slate-800 bg-neutral-50 dark:bg-slate-800/70 flex items-center justify-between">
               <Link
                 href={`/work/${previewProject.slug}`}
                 target="_blank"
-                className="px-4 py-2 rounded-lg bg-blue-600 text-white text-xs font-mono font-bold flex items-center gap-2 hover:bg-blue-700"
+                className="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 text-white text-xs font-mono font-bold flex items-center gap-2 min-h-[40px]"
               >
                 <span>Open Full Page</span>
                 <ExternalLink className="size-4" />
@@ -1625,7 +1625,7 @@ export default function PublishCaseStudyTab() {
 
               <button
                 onClick={() => setPreviewProject(null)}
-                className="px-4 py-2 rounded-lg border border-neutral-300 text-xs font-mono font-semibold text-slate-700 hover:bg-neutral-100"
+                className="px-4 py-2 rounded-lg border border-neutral-300 dark:border-slate-700 text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 hover:bg-neutral-100 dark:hover:bg-slate-700 min-h-[40px]"
               >
                 Close Preview
               </button>

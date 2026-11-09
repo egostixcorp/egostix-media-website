@@ -56,16 +56,16 @@ const ServiceSection = () => {
                 </div>
               </div>
 
-              {/* Action Link to Dedicated Service Page */}
-              <div className="mt-6 pt-3 border-t border-neutral-100">
-                <Link
-                  href={`/service#${service.contactAnchor}`}
-                  className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors group/link"
-                >
-                  Explore Service Specifications
-                  <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/link:translate-x-1" />
-                </Link>
-              </div>
+                {/* Action Link to Dedicated Service Page */}
+                <div className="mt-6 pt-3 border-t border-neutral-100">
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-blue-600 hover:text-blue-700 transition-colors group/link"
+                  >
+                    Explore Service Specifications
+                    <ArrowRight className="size-3.5 transition-transform duration-200 group-hover/link:translate-x-1" />
+                  </Link>
+                </div>
             </article>
           ))}
         </div>

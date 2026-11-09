@@ -4,9 +4,19 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import BlogList from "@/components/blog/BlogList";
 
 export const metadata = {
-  title: "Blog | Egostix Media",
+  title: "Blog & Engineering Insights | Egostix Media",
   description:
-    "Systems-minded writing on AI-native websites, automation, internal tools, and the new service era.",
+    "Systems-minded writing on AI-native websites, workflow automation, internal tools, and modern software architecture.",
+  alternates: {
+    canonical: "https://media.egostix.com/blog",
+  },
+  openGraph: {
+    title: "Blog & Engineering Insights | Egostix Media",
+    description:
+      "Systems-minded writing on AI-native websites, workflow automation, internal tools, and modern software architecture.",
+    url: "https://media.egostix.com/blog",
+    type: "website",
+  },
 };
 
 export default async function Blog() {
